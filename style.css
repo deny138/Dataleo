@@ -1,0 +1,125 @@
+
+* {
+    padding: 0;
+    margin: 0;
+    text-indent: 0;
+    border: 0;
+}
+
+h1, h2, h3, h4, a img {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+ul, ol { list-style: none  }
+
+table, td, th {
+    border: 0;
+    font-size: 1em;
+    font-weight:normal;
+}
+
+// toto bolo vyresetovanie vsetkych prednastavenych funkcii
+
+
+
+
+
+body {
+    background: #FFB56B;
+    font: normal normal normal 0.7em Tahoma, arial, Verdana, sans-serif;
+    letter-spacing: .1em;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+#all {
+    background: #FFFACD	;
+    border: 0px solid black;
+    height: auto;
+    margin: 0 8px;
+    padding: 8px 0;
+    text-align: left;
+    width: auto;
+}
+#hlava {
+    background: #FFFACD;
+    //border: 1px solid #6f9177;
+    height: 60px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    letter-spacing: 60px;
+}
+
+#administracia{
+    background: #FFFACD;
+    // border: 1px solid #6f90ba;
+    height: 20px;
+    margin: 10px auto;
+    width: auto;
+    text-align: right;
+}
+#menu {
+    background: white;
+    //border: 1px solid #6f90ba;
+    height: 20px;
+    margin: 10px auto;
+    width: 40%;
+    text-align: left;
+
+}
+#obsah{
+    background: #FFFACD	;
+    //  border: 1px solid black;
+    width: auto;
+    min-height: 400px;
+    margin: 5px 15px 0 15px;
+    padding-bottom: 5px;  
+}
+
+#pridanie{
+    background: white;
+    // border: 1px solid black;
+    float:left;
+    width:200px;
+    min-height: 500px;
+    text-align: center;
+    //  margin: 5px 5px 5px 5px;
+}
+
+#ukazka{
+    background: white;
+    //  border: 1px solid black;
+    float:right;
+    width:40%;
+    min-height: 500px;
+    //margin: 5px 5px 5px 5px;
+
+}
+
+#zdroje {
+    background: white;
+    //border: 1px solid black;
+    padding: 0 0 0 0px;
+    min-height: 500px;
+    width:40%;
+    margin-left: 225px;
+    //margin-bottom: 5px;
+    // margin-top: 5px;
+    // margin-right: 5px;
+
+}
+
+#pata {
+    background: #FFFACD;
+    // border: 1px solid #6f90ba;
+    clear: both;
+    width: auto;
+    height: auto;
+    padding: 5px 0;
+    text-align: right;
+}

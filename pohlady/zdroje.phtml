@@ -1,0 +1,19 @@
+<h1>Zoznam zdrojov</h1>
+<table>
+<?php foreach ($zdroje as $zdroj) : ?>
+        <tr>
+                <td>
+                         <br><?= $zdroj['zdroj_id'];?>
+                        <?= $zdroj['druh_zdroja'];?>
+                        <?= $zdroj['nazov'];?>
+                        <?= $zdroj['podnazov'];?>
+                        <?= $zdroj['rok_vydania'];?>
+                        <?= $zdroj['datum_pridania'];?>
+                        <?= $zdroj['hodnotenie'];?>
+                        
+                  
+                </td>
+        </tr>
+<?php endforeach ?>
+</table>
+
