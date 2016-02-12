@@ -51,7 +51,7 @@ body {
     //  border: 1px solid black;
     width: auto;
     min-height: 500px;
-    margin-right:  10px;
+    margin-right:  50px;
     margin-left:   225px;
 
 }
@@ -81,6 +81,7 @@ body {
     padding: 10px 10px 10px 10px;
     min-height: 500px;
     width:50%;
+    float:left;
 }
 
 #pata {
@@ -91,4 +92,23 @@ body {
     height: auto;
     padding: 15px 0;
     text-align: right;
+}
+
+#chyba{
+   background: white;
+    border: 1px solid black;
+    padding: 10px 10px 10px 10px;
+    min-height: 500px;
+    width:100%;
+    float:left; 
+}
+
+#uvod{
+    background: white;
+    border: 1px solid black;
+    padding: 10px 10px 10px 10px;
+    min-height: 500px;
+    width:100%;
+   // float:left; 
+    
 }
