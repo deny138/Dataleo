@@ -1,4 +1,12 @@
+.sprava {
+    border: 1px solid #9DC2F8;
+    background: #DBE8F8;
+    padding: 3px;
+    text-align: center;
+    width: 100%;
+    
 
+}
 body {
     background: #FFB56B;
     font: normal normal normal 0.7em Tahoma, arial, Verdana, sans-serif;
@@ -47,7 +55,7 @@ body {
 
 
 #obsah{
-    background: black	;
+    //background: black	;
     //  border: 1px solid black;
     width: auto;
     min-height: 500px;
@@ -68,7 +76,7 @@ body {
 
 #ukazka{
     background: white;
-    border: 1px solid black;
+    //border: 1px solid black;
     float:right;
     width:45%;
     min-height: 500px;
@@ -77,11 +85,12 @@ body {
 
 #zdroje {
     background: white;
-    border: 1px solid black;
+    //border: 1px solid black;
     padding: 10px 10px 10px 10px;
     min-height: 500px;
     width:50%;
     float:left;
+    text-align: center;
 }
 
 #pata {
@@ -95,12 +104,14 @@ body {
 }
 
 #chyba{
-   background: white;
+    background: white;
     border: 1px solid black;
     padding: 10px 10px 10px 10px;
     min-height: 500px;
     width:100%;
     float:left; 
+    text-align: center;
+
 }
 
 #uvod{
@@ -109,6 +120,6 @@ body {
     padding: 10px 10px 10px 10px;
     min-height: 500px;
     width:100%;
-   // float:left; 
-    
+    // float:left; 
+
 }

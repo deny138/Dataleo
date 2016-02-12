@@ -7,12 +7,12 @@ abstract class Kontroler {
      */
 
     protected $data = array();
-    protected $data_ukazka = array();
+
     /*
      * nazov pohladu ktory sa ma vypisat
      */
     protected $pohlad = "";
-    protected $pohlad_ukazka = "";
+
     /*
      * hlavicka html stranky,tieto atributy ma kazda stranka
      */
@@ -37,13 +37,6 @@ abstract class Kontroler {
         }
     }
 
-    public function vypisPohladZdroj() {
-        if ($this->pohlad_ukazka) {
-            extract($this->data_ukazka);
-            require("pohlady/" . $this->pohlad_ukazka . ".phtml");
-        }
-    }
-
     /*
      * presmerovanie na inu stranku a zastavenie spracovania skriptu
      */
@@ -53,7 +46,26 @@ abstract class Kontroler {
         header("Connection: close");
         exit;
     }
+    
+    public function pridajSpravu($sprava)
+{
+        if (isset($_SESSION['spravy']))
+                $_SESSION['spravy'][] = $sprava;
+        else
+                $_SESSION['spravy'] = array($sprava);
+}
 
-   
+public static function vratSpravy()
+{
+        if (isset($_SESSION['spravy']))
+        {
+                $spravy = $_SESSION['spravy'];
+                unset($_SESSION['spravy']);
+                return $spravy;
+        }
+        else
+                return array();
+}
+
 
 }

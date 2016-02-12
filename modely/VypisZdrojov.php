@@ -7,13 +7,22 @@ class VypisZdrojov {
                         . '`miesto_vydania`, `nakladatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
                         . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka` FROM `zdroj`');
     }
-    
-    public function vratZdroj($id){
+
+    public function vratZdroj($id) {
+        
         return DB::dotazJeden('SELECT `zdroj_id`,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
                         . '`miesto_vydania`, `nakladatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
                         . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka` FROM `zdroj`'
-                . 'WHERE `zdroj_id`=?',array($id));
-         
-        
+                        . 'WHERE `zdroj_id`=?', array($id));
     }
+
+    public function vratZdrojeAutor() {
+        return Db::dotazVsetky('SELECT z.zdroj_id,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
+                        . '`miesto_vydania`, `nakladatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
+                        . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka`, '
+                        . 'a.autor_id, `titul_pred`,`meno`,`priezvisko`,`titul_po` '
+                        . 'FROM `zdroj` AS z  LEFT JOIN autor_zdroj AS az ON az.zdroj_id = z.zdroj_id  '
+                        . 'LEFT JOIN `autor` AS a ON a.autor_id=az.autor_id');
+    }
+
 }

@@ -40,6 +40,7 @@ class Db {
         $vysledok = self::$spojenie->prepare($dotaz); //vlozi sa text dotazu so zastupnymi znakmi?
         $vysledok->execute($parametre); // pripoji sa pole parametrov a dotaz sa vykona
         return $vysledok->fetch(); //fetch vrati 1 riadok
+        
     }
 
     /*

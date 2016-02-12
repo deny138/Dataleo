@@ -29,6 +29,7 @@ class SmerovacKontroler extends Kontroler {
         $this->kontroler->spracuj($naparsovanaURL); //vnoreny kontroler prevedie svoju metodu spracuj 
         
         //nastavenie premennych pre sablonu
+        $this->data['spravy']=  $this->vratSpravy();
         $this->data['titulok'] = $this->kontroler->hlavicka['titulok'];
         $this->data['popis'] = $this->kontroler->hlavicka['popis'];
         $this->data['klucove_slova'] = $this->kontroler->hlavicka['klucove_slova'];
