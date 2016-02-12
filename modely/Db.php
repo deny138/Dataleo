@@ -61,12 +61,40 @@ class Db {
         $vysledok = self::dotazJeden($dotaz, $parametre);
         return $vysledok[0];
     }
+
     /*
      * metoda ktora vrati ovplyvneny pocet riadkov pomocou SQL dotazu
      */
-    public static function dotaz($dotaz,$parametre=array()){
-        $vysledok=self::$spojenie->prepare($dotaz);
+
+    public static function dotaz($dotaz, $parametre = array()) {
+        $vysledok = self::$spojenie->prepare($dotaz);
         $vysledok->execute($parametre);
         return $vysledok->rowCount();
     }
+
+    /*
+     * metoda vlozi novy riadok do tabulke ako data z asociativneho pola
+     */
+
+    public static function vloz($tabulka, $parametre = array()) {
+        return self::dotaz("INSERT INTO `$tabulka`(`" . implode('`,`', array_keys($parametre)) . "`) VALUES (" . str_repeat('?,', sizeOf($parametre) - 1) . "?)", array_values($parametre));
+    }
+
+    /*
+     * zmeni riadok v tabulke tak aby obsahoval data z asocitivneho pola
+     */
+
+    public static function zmen($tabulka, $hodnoty = array(), $podmienka, $parametre = array()) {
+        return self::dotaz("UPDATE `$tabulka` SET `" .
+                        implode('` = ?, `', array_keys($hodnoty)) .
+                        "` = ? " . $podmienka, array_merge(array_values($hodnoty), $parametre));
+    }
+    
+    /*
+     * vrati ID posledneho vlozeneho zaznamu
+     */
+    public static function getLastId(){
+        return self::$spojenie->lastInsertId();
+    }
+
 }

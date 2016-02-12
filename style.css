@@ -1,31 +1,4 @@
 
-* {
-    padding: 0;
-    margin: 0;
-    text-indent: 0;
-    border: 0;
-}
-
-h1, h2, h3, h4, a img {
-    padding: 0;
-    margin: 0;
-    border: 0;
-}
-
-ul, ol { list-style: none  }
-
-table, td, th {
-    border: 0;
-    font-size: 1em;
-    font-weight:normal;
-}
-
-// toto bolo vyresetovanie vsetkych prednastavenych funkcii
-
-
-
-
-
 body {
     background: #FFB56B;
     font: normal normal normal 0.7em Tahoma, arial, Verdana, sans-serif;
@@ -39,79 +12,75 @@ body {
     background: #FFFACD	;
     border: 0px solid black;
     height: auto;
-    margin: 0 8px;
-    padding: 8px 0;
+    // margin: 10px 10px 10px 10px;
     text-align: left;
     width: auto;
 }
 #hlava {
     background: #FFFACD;
-    //border: 1px solid #6f9177;
+    border: 0px solid #6f9177; 
     height: 60px;
-    margin-top: 20px;
+    margin-top: 10px;
     width: 100%;
     text-align: center;
     font-size: 40px;
     letter-spacing: 60px;
 }
 
-#administracia{
-    background: #FFFACD;
-    // border: 1px solid #6f90ba;
+/*#spravy{
+    background: #DBE8F8;
     height: 20px;
     margin: 10px auto;
-    width: auto;
-    text-align: right;
+    width: 60%;
+    text-align: center;
 }
-#menu {
-    background: white;
+*/
+
+#prihlasenie {
+    //background: white;
     //border: 1px solid #6f90ba;
     height: 20px;
     margin: 10px auto;
-    width: 40%;
-    text-align: left;
-
+    width: auto;
+    text-align: center;
 }
+
+
 #obsah{
-    background: #FFFACD	;
+    background: black	;
     //  border: 1px solid black;
     width: auto;
-    min-height: 400px;
-    margin: 5px 15px 0 15px;
-    padding-bottom: 5px;  
+    min-height: 500px;
+    margin-right:  10px;
+    margin-left:   225px;
+
 }
 
 #pridanie{
     background: white;
-    // border: 1px solid black;
     float:left;
-    width:200px;
+    width:180px;
     min-height: 500px;
     text-align: center;
-    //  margin: 5px 5px 5px 5px;
+    margin-left:   10px;
+    padding: 10px 10px 10px 10px;
 }
 
 #ukazka{
     background: white;
-    //  border: 1px solid black;
+    border: 1px solid black;
     float:right;
-    width:40%;
+    width:45%;
     min-height: 500px;
-    //margin: 5px 5px 5px 5px;
-
+    padding: 10px 10px 10px 10px;
 }
 
 #zdroje {
     background: white;
-    //border: 1px solid black;
-    padding: 0 0 0 0px;
+    border: 1px solid black;
+    padding: 10px 10px 10px 10px;
     min-height: 500px;
-    width:40%;
-    margin-left: 225px;
-    //margin-bottom: 5px;
-    // margin-top: 5px;
-    // margin-right: 5px;
-
+    width:50%;
 }
 
 #pata {
@@ -120,6 +89,6 @@ body {
     clear: both;
     width: auto;
     height: auto;
-    padding: 5px 0;
+    padding: 15px 0;
     text-align: right;
 }

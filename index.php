@@ -1,5 +1,8 @@
 <?php
-
+/*
+ * zapnutie session
+ */
+session_start();
 /*
  * nastavenie kodovania
  */

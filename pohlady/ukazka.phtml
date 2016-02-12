@@ -1,21 +1,124 @@
 <h1> <?= $zdroje_ukazka['nazov']; ?></h1>
 
-                
-               <?= $zdroje_ukazka['druh_zdroja']; ?><br> 
-                <?= $zdroje_ukazka['nazov']; ?><br> 
-                <?= $zdroje_ukazka['podnazov']; ?><br> 
-                <?= $zdroje_ukazka['vydanie']; ?><br> 
-                <?= $zdroje_ukazka['miesto_vydania']; ?><br> 
-                <?= $zdroje_ukazka['rok_vydania']; ?><br> 
-                <?= $zdroje_ukazka['isbn']; ?><br> 
-                <?= $zdroje_ukazka['issn']; ?><br> 
-                <?= $zdroje_ukazka['doi']; ?><br> 
-                <?= $zdroje_ukazka['strany']; ?><br> 
-                <?= $zdroje_ukazka['url']; ?><br> 
-                <?= $zdroje_ukazka['datum_aktualizacie']; ?><br> 
-                <?= $zdroje_ukazka['datum_pridania']; ?><br> 
-                <?= $zdroje_ukazka['hodnotenie']; ?><br> 
-                <?= $zdroje_ukazka['poznamka']; ?><br> 
 
-           
- 
+Druh zdroja:  <?php
+if (!$zdroje_ukazka['druh_zdroja']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['druh_zdroja'];
+}
+?><br> 
+
+Nazov:  <?php
+if (!$zdroje_ukazka['nazov']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['nazov'];
+}
+?><br>
+
+Podnazov:  <?php
+if (!$zdroje_ukazka['podnazov']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['podnazov'];
+}
+?><br>
+
+Vydanie:  <?php
+if (!$zdroje_ukazka['vydanie']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['vydanie'];
+}
+?><br>
+
+Miesto vydania:  <?php
+if (!$zdroje_ukazka['miesto_vydania']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['miesto_vydania'];
+}
+?><br>
+
+Rok vydania:  <?php
+if (!$zdroje_ukazka['rok_vydania']) {
+    echo "-";
+} else
+    echo $zdroje_ukazka['rok_vydania'];
+?><br>
+
+ISSN:  <?php
+if (!$zdroje_ukazka['isbn']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['isbn'];
+}
+?><br>
+
+ISSN:  <?php
+if (!$zdroje_ukazka['issn']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['issn'];
+}
+?><br>
+
+DOI:  <?php
+if (!$zdroje_ukazka['doi']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['doi'];
+}
+?><br>
+
+Počet strán:  <?php
+if (!$zdroje_ukazka['strany']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['strany'];
+}
+?><br>
+
+URL adresa:  <?php
+if (!$zdroje_ukazka['url']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['url'];
+}
+?><br>
+
+Dátum aktualizácie: <?php
+if (!$zdroje_ukazka['datum_aktualizacie']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['datum_aktualizacie'];
+}
+?><br> 
+
+Dátum pridania: <?php
+if (!$zdroje_ukazka['datum_pridania']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['datum_pridania'];
+}
+?><br>
+
+Vlastné hodnotenie:  <?php
+if (!$zdroje_ukazka['hodnotenie']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['hodnotenie'];
+}
+?><br>
+
+Poznámka:  <?php
+if (!$zdroje_ukazka['poznamka']) {
+    echo "-";
+} else {
+    echo $zdroje_ukazka['poznamka'];
+}
+?><br>
+
+
+

@@ -8,65 +8,59 @@
         <meta name="keywords" content="<?= $klucove_slova ?>"/>
         <link rel="stylesheet" href="style.css" type="text/css"/>       
     </head>
-
-
-
     <body>
-
         <div id="all">
-
             <div id="hlava">
                 DATALEO
             </div>
 
-            <div id="administracia">
-                Prihlasenie    Registracia
-            </div>
 
-            <div id="menu">
-                Zoradit podla:
-                <a href="clanek/uvod">Nazov</a>
-                <a href="clanek">Autor</a>
-                <a href="kontakt">Rok</a>		
-                <a href="kontakt">Druh</a>		
-            </div>
 
-            <div id="obsah"> 
-
+            <div id="prihlasenie">
+               
+               <form method="post">
+                   
+                    Login <input type="text" name="login" />
+                    Heslo <input type="password" name="heslo" />
+                    <input type="submit" value="Prihlásiť" />
+                </form>
+            </div>  
+            
+             
                 <div id="pridanie">
-                    Pridavanie <br>
-                    Pridavanie <br>
-                    Pridavanie <br>
-                    Pridavanie <br>
-                    Pridavanie <br>
-                    Pridavanie <br>
-                    Pridavanie <br>
-                    Pridavanie <br>
-                </div>
-
-                <div id="ukazka">
-                    <?php $this->kontroler->vypisPohladZdroj(); ?>
-                </div>
-
-                <div id="zdroje">
-
+                    <b> Pridanie noveho zdroja </b> <br> (stred pridavanie prave poznamky k pridavaniu)
+                    <br> <br> <b> Návody a publikácie o citovaní: </b> 
+                     <br> <a onclick="window.open('http://www.vssvalzbety.sk/userfiles/fzsp/Statnice/citovanie-a1.pdf', 'name', 'width=600,height=400')">Citovanie a parafrazovanie</a> 
+                     <br> <a onclick="window.open('https://www.uk.ukf.sk/data/epca/Ako_citovat_-_metodika_popisu.pdf', 'name', 'width=600,height=400')">Ako spravne citovat</a> 
+                    <br>  <a onclick="window.open('http://vili.uniba.sk/AK/citovanie_priklady.pdf', 'name', 'width=600,height=400')">Priklady citovania</a> 
                     
+                    <br> <a onclick="window.open('http://www.starfall.com/', 'name', 'width=600,height=400')">Pokyny pre citovanie</a> 
+                    
+                    <form method="post">
+                       <br> <b>Registrácia</b>
+                   <br> Meno: <input type="text" name="meno_reg" />
+                   <br> Heslo: <input type="password" name="heslo_reg" /> 
+                   <br> Heslo znovu: <input type="password" name="heslo_znovu_reg" /> 
+                   <br> E-mail: <input type="text" name="email" /> <br>
+                    <br> <input type="submit" value="Zaregistrovať" />
+                    </form>
+                    
+                </div>
+            <div id="obsah">
+                <div id="ukazka">
+                    <?php
+                    $this->kontroler->vypisPohladZdroj();
+                    //TODO: vyskusat ze tieto divy nebudu v sablone ale v pohladoch a spojit ukazku so zdrojmi do jedneho :
+                    // vypisPohlad(() potom vypise oba 
+                    ?> 
+                </div>
+                <div id="zdroje">
                     <?php $this->kontroler->vypisPohlad(); ?>
                 </div>
-
-
-
-
             </div>
-
             <div id="pata">
                 © Denisa Starinská, 2016
             </div>
-
         </div>
-
-
-
     </body>
-
 </html>

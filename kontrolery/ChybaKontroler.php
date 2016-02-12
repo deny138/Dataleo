@@ -10,6 +10,7 @@ class ChybaKontroler extends Kontroler {
         //nastavenie sablony
         $this->pohlad = 'chyba';
        
+        
     }
 
 }

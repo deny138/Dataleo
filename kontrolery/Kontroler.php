@@ -54,4 +54,6 @@ abstract class Kontroler {
         exit;
     }
 
+   
+
 }
