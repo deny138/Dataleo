@@ -4,26 +4,26 @@
     padding: 3px;
     text-align: center;
     width: 100%;
-}
+    
 
+}
 body {
-    background: black;
-    font: normal normal normal 0.9em Tahoma, arial, Verdana, sans-serif;
+    background: #FFB56B;
+    font: normal normal normal 0.7em Tahoma, arial, Verdana, sans-serif;
     letter-spacing: .1em;
     line-height: 1.7;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
-
 #all {
-    background: #6f9177	;
+    background: #FFFACD	;
     border: 0px solid black;
     height: auto;
     // margin: 10px 10px 10px 10px;
-    //text-align: left;
+    text-align: left;
     width: auto;
 }
-
 #hlava {
     background: #FFFACD;
     border: 0px solid #6f9177; 
@@ -32,58 +32,65 @@ body {
     width: 100%;
     text-align: center;
     font-size: 40px;
-    letter-spacing: 3em;
+    letter-spacing: 60px;
 }
 
-#obsah{
-    //background: green	;
-    //  border: 1px solid black;
-    width: 100%;
-    min-height: 500px;
+/*#spravy{
+    background: #DBE8F8;
+    height: 20px;
+    margin: 10px auto;
+    width: 60%;
+    text-align: center;
 }
+*/
 
-#administracia {
-    background: white;
+#prihlasenie {
+    //background: white;
     //border: 1px solid #6f90ba;
-    height: 10%;
+    height: 20px;
+    margin: 10px auto;
     width: auto;
     text-align: center;
-    margin: 1% 1% 1% 1%;
-    padding: 1% 1% 1% 1%;
 }
 
 
+#obsah{
+    //background: black	;
+    //  border: 1px solid black;
+    width: auto;
+    min-height: 500px;
+    margin-right:  50px;
+    margin-left:   225px;
 
+}
 
 #pridanie{
     background: white;
     float:left;
-    width:10%;
+    width:180px;
     min-height: 500px;
     text-align: center;
-    margin: 1% 1% 1% 1%;
-    padding: 1% 1% 1% 1%;
-}
-
-#zdroje {
-    background: white;
-    //border: 1px solid black;
-    min-height: 500px;
-    width:43%;
-    float:left;
-    //text-align: center;
-    margin: 1% 1% 1% 1%;
-    padding: 1% 1% 1% 1%;
+    margin-left:   10px;
+    padding: 10px 10px 10px 10px;
 }
 
 #ukazka{
     background: white;
     //border: 1px solid black;
-    float:left;
-    width:35%;
+    float:right;
+    width:45%;
     min-height: 500px;
-    padding: 1% 1% 1% 1%;
-    margin: 1% 1% 1% 1%;
+    padding: 10px 10px 10px 10px;
+}
+
+#zdroje {
+    background: white;
+    //border: 1px solid black;
+    padding: 10px 10px 10px 10px;
+    min-height: 500px;
+    width:50%;
+    float:left;
+    text-align: center;
 }
 
 #pata {
@@ -97,8 +104,8 @@ body {
 }
 
 #chyba{
-    //background: white;
-    //border: 1px solid black;
+    background: white;
+    border: 1px solid black;
     padding: 10px 10px 10px 10px;
     min-height: 500px;
     width:100%;
@@ -107,23 +114,12 @@ body {
 
 }
 
-#registracia{
-    //background: white;
-    //border: 1px solid black;
+#uvod{
+    background: white;
+    border: 1px solid black;
     padding: 10px 10px 10px 10px;
     min-height: 500px;
     width:100%;
-    //float:left; 
-    text-align: center;
-    
-
-}
-
-#uvod{
-    //background: white;
-    //border: 1px solid black;
-    padding: 1% 1% 1% 1%;
-    margin: 1% 1% 1% 1%;
-    min-height: 500px;
+    // float:left; 
 
 }

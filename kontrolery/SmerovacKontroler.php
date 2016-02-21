@@ -3,7 +3,7 @@
 /*
  * smerovac podla url adresy nasmeruje poziadavky na spravny kontroler
  * podla adresy zisti ktory kontroler volame a ulozi ho do premennej $kontroler
- * smerovackontroler vezme URL, spracuje ju a zavola prislusny kontroler napr ZdrojeKontroler
+ * smerovackontroler vezme URL, spracuje ju a zavola prislusny kontroler napr ClanokKontroler
  * oba budu mat pohlad, smerovac ma rozlozenie stranky a vlozeny kontroler ma sablonu s obsahom stranky
  */
 
@@ -16,8 +16,8 @@ class SmerovacKontroler extends Kontroler {
         $naparsovanaURL = $this->parsujURL($parametre[0]);
         //ak nieje zadany ziaden kontroler presmeruje sa na uvodny clanok
         if (empty($naparsovanaURL[0]))
-            $this->presmeruj('uvod');
-
+            $this->presmeruj('uvod');  
+            
         //array_shift-ziskanie .parametra a jeho vymazanie
         $triedaKontroleru = $this->prerobeniePomlciek(array_shift($naparsovanaURL)) . 'Kontroler';
         //cize ak existuje kontroler pozrieme sa ci existuje trieda kontroleru a vytvorime jej instanciu
@@ -25,21 +25,20 @@ class SmerovacKontroler extends Kontroler {
             $this->kontroler = new $triedaKontroleru;
         else
             $this->presmeruj('chyba');
-
+        
         $this->kontroler->spracuj($naparsovanaURL); //vnoreny kontroler prevedie svoju metodu spracuj 
+        
         //nastavenie premennych pre sablonu
-        $this->data['spravy'] = $this->vratSpravy();
-
+        $this->data['spravy']=  $this->vratSpravy();
         $this->data['titulok'] = $this->kontroler->hlavicka['titulok'];
         $this->data['popis'] = $this->kontroler->hlavicka['popis'];
         $this->data['klucove_slova'] = $this->kontroler->hlavicka['klucove_slova'];
-
         $this->pohlad = 'rozlozenie';
     }
 
     private function parsujURL($url) {
         //parse_url oddeli domenu od parametrov 
-        //z www.domena.sk/parameter1/parameter2 dostaneme do $rozdelenaCesta: /parameter1/parameter2
+        //z www.domena.sk/parameter1/parameter2 dostaneme do $path: /parameter1/parameter2
         $naparsovanaURL = parse_url($url);
         //odstranenie lomitka na zaciatku
         $naparsovanaURL["path"] = ltrim($naparsovanaURL["path"], "/");
@@ -50,9 +49,9 @@ class SmerovacKontroler extends Kontroler {
         return $rozdelenaCesta;
     }
 
-    /* co to spravi?
+     /* co to spravi?
      * http://localhost/uvod/zdroje/zdroj1 
-     * ->Array $rozdelenaCesta ( [0] => zdroje [1] => zdroj1 ) UvodKontroler
+     * ->Array ( [0] => zdroje [1] => zdroj1 ) UvodKontroler
      */
 
     /* zistenie nazvu triedy kontrolera

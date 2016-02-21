@@ -3,28 +3,20 @@
 class VypisZdrojov {
 
     public function vratZdroje() {
-        return Db::dotazVsetky('SELECT `zdroj_id`,`pouzivatel_id`,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
+        return Db::dotazVsetky('SELECT `zdroj_id`,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
                         . '`miesto_vydania`, `nakladatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
                         . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka` FROM `zdroj`');
     }
 
-    /*
-     * vrati vsetky zdroje spolu s autorom, budu sa vypisovat ako zoznam pre daneho pouzivatela
-     */
-
-    public function vratZdrojPodlaZdrojId($id) {
-
-        return DB::dotazJeden('SELECT `zdroj_id`,`pouzivatel_id`,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
+    public function vratZdroj($id) {
+        
+        return DB::dotazJeden('SELECT `zdroj_id`,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
                         . '`miesto_vydania`, `nakladatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
                         . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka` FROM `zdroj`'
                         . 'WHERE `zdroj_id`=?', array($id));
     }
 
-    /*
-     *  vrati zdroj ktory sa bude ukazovat po kliknutu nanho, podla parametra zdroj_id
-     */
-
-    public function vratZdrojeSautorom() {
+    public function vratZdrojeAutor() {
         return Db::dotazVsetky('SELECT z.zdroj_id,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
                         . '`miesto_vydania`, `nakladatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
                         . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka`, '
