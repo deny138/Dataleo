@@ -46,26 +46,21 @@ abstract class Kontroler {
         header("Connection: close");
         exit;
     }
-    
-    public function pridajSpravu($sprava)
-{
-        if (isset($_SESSION['spravy']))
-                $_SESSION['spravy'][] = $sprava;
-        else
-                $_SESSION['spravy'] = array($sprava);
-}
 
-public static function vratSpravy()
-{
+    public function pridajSpravu($sprava) {
         if (isset($_SESSION['spravy']))
-        {
-                $spravy = $_SESSION['spravy'];
-                unset($_SESSION['spravy']);
-                return $spravy;
-        }
+            $_SESSION['spravy'][] = $sprava;
         else
-                return array();
-}
+            $_SESSION['spravy'] = array($sprava);
+    }
 
+    public static function vratSpravy() {
+        if (isset($_SESSION['spravy'])) {
+            $spravy = $_SESSION['spravy'];
+            unset($_SESSION['spravy']);
+            return $spravy;
+        } else
+            return array();
+    }
 
 }

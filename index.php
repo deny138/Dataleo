@@ -3,7 +3,6 @@
  * zapnutie session
  */
 session_start();
-$_SESSION['zdroj_na_zobrazenie']= "";
 /*
  * nastavenie kodovania
  */
@@ -36,4 +35,4 @@ $smerovac = new SmerovacKontroler();
 $smerovac->spracuj(array($_SERVER['REQUEST_URI']));
 $smerovac->vypisPohlad();
 
-// siedmy commit
+//skuska pridania textu kvoli druhemu commitu
