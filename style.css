@@ -7,7 +7,9 @@
 }
 
 body {
-    background: black;
+    // background: black;
+    background-image: url("flowers.jpg");
+    background-attachment: fixed;
     font: normal normal normal 0.9em Tahoma, arial, Verdana, sans-serif;
     letter-spacing: .1em;
     line-height: 1.7;
@@ -15,17 +17,9 @@ body {
     padding: 0;
 }
 
-#all {
-    background: #6f9177	;
-    border: 0px solid black;
-    height: auto;
-    // margin: 10px 10px 10px 10px;
-    //text-align: left;
-    width: auto;
-}
-
-#hlava {
-    background: #FFFACD;
+#hlavicka {
+    background-image: url("flowers.jpg");
+    background-attachment: fixed;
     border: 0px solid #6f9177; 
     height: 60px;
     margin-top: 10px;
@@ -35,28 +29,31 @@ body {
     letter-spacing: 3em;
 }
 
-#obsah{
-    //background: green	;
-    //  border: 1px solid black;
-    width: 100%;
-    min-height: 500px;
+#triOkna {
+     background-image: url("flowers.jpg");
+    background-attachment: fixed;
+    //background: black;
+    border: 0px solid black;
+    height: 100%;
+    // margin: 10px 10px 10px 10px;
+    //text-align: left;
+    width: auto;
 }
 
 #administracia {
-    background: white;
-    //border: 1px solid #6f90ba;
-    height: 10%;
+    //background: #FFFACD;
+     background-image: url("flowers.jpg");
+    background-attachment: fixed;
+    border: 0px solid #6f90ba;
+    height: auto;
     width: auto;
     text-align: center;
     margin: 1% 1% 1% 1%;
     padding: 1% 1% 1% 1%;
 }
 
-
-
-
 #pridanie{
-    background: white;
+    background: #FFFACD;
     float:left;
     width:10%;
     min-height: 500px;
@@ -66,7 +63,7 @@ body {
 }
 
 #zdroje {
-    background: white;
+    background: #FFFACD;
     //border: 1px solid black;
     min-height: 500px;
     width:43%;
@@ -77,7 +74,7 @@ body {
 }
 
 #ukazka{
-    background: white;
+    background: #FFFACD;
     //border: 1px solid black;
     float:left;
     width:35%;
@@ -87,8 +84,9 @@ body {
 }
 
 #pata {
-    background: #FFFACD;
-    // border: 1px solid #6f90ba;
+    background-image: url("flowers.jpg");
+    background-attachment: fixed;
+    border: 0px solid #6f90ba;
     clear: both;
     width: auto;
     height: auto;
@@ -115,8 +113,6 @@ body {
     width:100%;
     //float:left; 
     text-align: center;
-    
-
 }
 
 #uvod{

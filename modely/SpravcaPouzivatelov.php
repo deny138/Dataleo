@@ -31,6 +31,8 @@ class SpravcaPouzivatelov {
 
     public function prihlas($meno, $heslo) {
         $pouzivatel = Db::dotazJeden('SELECT pouzivatel_id,meno,heslo,email,registrovany FROM pouzivatelia WHERE meno=? AND heslo=?', array($meno, $this->zasifruj($heslo)));
+        if(!$pouzivatel)
+            throw new ChybaPouzivatela('Neplatné meno alebo heslo.');
         $_SESSION['pouzivatel'] = $pouzivatel;
     }
 

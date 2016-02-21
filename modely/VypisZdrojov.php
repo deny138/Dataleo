@@ -24,13 +24,13 @@ class VypisZdrojov {
      *  vrati zdroj ktory sa bude ukazovat po kliknutu nanho, podla parametra zdroj_id
      */
 
-    public function vratZdrojeSautorom() {
+    public function vratZdrojeSautorom($pouzivatel_id) {
         return Db::dotazVsetky('SELECT z.zdroj_id,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
                         . '`miesto_vydania`, `nakladatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
                         . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka`, '
                         . 'a.autor_id, `titul_pred`,`meno`,`priezvisko`,`titul_po` '
                         . 'FROM `zdroj` AS z  LEFT JOIN autor_zdroj AS az ON az.zdroj_id = z.zdroj_id  '
-                        . 'LEFT JOIN `autor` AS a ON a.autor_id=az.autor_id');
+                        . 'LEFT JOIN `autor` AS a ON a.autor_id=az.autor_id WHERE `pouzivatel_id`=?',array($pouzivatel_id));
     }
 
 }
