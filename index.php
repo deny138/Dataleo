@@ -36,4 +36,4 @@ $smerovac = new SmerovacKontroler();
 $smerovac->spracuj(array($_SERVER['REQUEST_URI']));
 $smerovac->vypisPohlad();
 
-//skuska pridania textu kvoli druhemu commitu
+// siedmy commit
