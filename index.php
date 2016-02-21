@@ -3,7 +3,6 @@
  * zapnutie session
  */
 session_start();
-$_SESSION['zdroj_na_zobrazenie']= "";
 /*
  * nastavenie kodovania
  */
