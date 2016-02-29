@@ -1,6 +1,10 @@
 <?php
 
 class ChybaKontroler extends Kontroler {
+    /*
+     * chybovy kontroler ktory nastavi hlavicku a pohlad na chybu, vola sa ak zadana 
+     * url resp. cesta k volanemu suboru neexistuje v localhoste
+     */
 
     public function spracuj($parametre) {
         //kontroler odosle prehliadacu hlavicku aby vedel ze ide o chybovy strankku
@@ -11,8 +15,6 @@ class ChybaKontroler extends Kontroler {
         $this->hlavicka['klucove_slova'] = 'chyba, chybovy vypis';
         //nastavenie sablony
         $this->pohlad = 'chyba';
-       
-        
     }
 
 }

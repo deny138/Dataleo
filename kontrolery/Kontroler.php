@@ -47,6 +47,12 @@ abstract class Kontroler {
         exit;
     }
 
+    /*
+     * spravy su aktualizovane po kazdom updatovani stranky
+     * pridaj spravu- prida spravu do pola session
+     * vrat spravy- vraci cele pole zo session
+     */
+
     public function pridajSpravu($sprava) {
         if (isset($_SESSION['spravy']))
             $_SESSION['spravy'][] = $sprava;

@@ -2,7 +2,8 @@
 
 class SpravcaPouzivatelov {
     /*
-     * metoda ktora zasifruje heslo 
+     * metoda ktora zasifruje heslo pomocou funkcie hash
+     * hash- jednocestna sifra, do DB sa uklada sifra nie plaintext
      */
 
     public function zasifruj($heslo) {
@@ -26,12 +27,13 @@ class SpravcaPouzivatelov {
             throw new ChybaPouzivatela('Používateľ s týmto menom alebo emailom už existuje.');
         }
 
-//TODO: tabulka este obsahuje atribut "registrovany"
+        //TODO: tabulka este obsahuje atribut "registrovany"
     }
 
     public function prihlas($meno, $heslo) {
-        $pouzivatel = Db::dotazJeden('SELECT pouzivatel_id,meno,heslo,email,registrovany FROM pouzivatelia WHERE meno=? AND heslo=?', array($meno, $this->zasifruj($heslo)));
-        if(!$pouzivatel)
+        $pouzivatel = Db::dotazJeden('SELECT pouzivatel_id,meno,heslo,email,registrovany '
+                        . 'FROM pouzivatelia WHERE meno=? AND heslo=?', array($meno, $this->zasifruj($heslo)));
+        if (!$pouzivatel)
             throw new ChybaPouzivatela('Neplatné meno alebo heslo.');
         $_SESSION['pouzivatel'] = $pouzivatel;
     }
@@ -48,4 +50,5 @@ class SpravcaPouzivatelov {
     }
 
     //todo: metoda na zistenie ci je registrovany ? treba?
+    //todo: emailove overovanie, posielanie hesla na email
 }

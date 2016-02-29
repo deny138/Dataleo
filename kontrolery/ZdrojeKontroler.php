@@ -7,7 +7,6 @@ class ZdrojeKontroler extends Kontroler {
         $spravcaPouzivatelov = new SpravcaPouzivatelov();
         $pouzivatel=$spravcaPouzivatelov->vratPouzivatela();
         $pouzivatelovo_id=$pouzivatel['pouzivatel_id'];
-        
 
         $id = 0;
         if (!empty($_GET['zdroj_id'])) {
@@ -25,9 +24,6 @@ class ZdrojeKontroler extends Kontroler {
         $this->data['zdroje_ukazka'] = $zdroje_ukazka; //aby sa dalo v pohlade pracovat s premennou zdroje
         $this->data['pouzivatel']=$pouzivatel; //prenesie do pohladu zdroje pole pouzivatel ktore obsahuje vsetky udaje z tabulky pouzivatel
         $this->pohlad = 'zdroje';
-        
-        
-        
         
     }
 
