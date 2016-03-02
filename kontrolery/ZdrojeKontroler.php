@@ -6,7 +6,7 @@ class ZdrojeKontroler extends Kontroler {
         //zabezpecenie aby v pohlade zdroje.phtml bol pristup k udajom o pouzivatelovi kvoli vypisu iba JEHO zdrojov
         $spravcaPouzivatelov = new SpravcaPouzivatelov();
         $pouzivatel=$spravcaPouzivatelov->vratPouzivatela();
-        $pouzivatelovo_id=$pouzivatel['pouzivatel_id'];
+       $pouzivatelovo_id=$pouzivatel['pouzivatel_id'];
 
         $id = 0;
         if (!empty($_GET['zdroj_id'])) {
@@ -26,5 +26,6 @@ class ZdrojeKontroler extends Kontroler {
         $this->pohlad = 'zdroje';
         
     }
-
+    
+    
 }

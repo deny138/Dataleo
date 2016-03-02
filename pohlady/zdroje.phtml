@@ -1,17 +1,22 @@
-<div id="pridanie">
-    <b> Pridanie noveho zdroja </b> <br> (stred pridavanie prave poznamky k pridavaniu)
+<div id="administracia" >
+    Prihlásený používateľ: <?php echo $pouzivatel['meno'] ?> 
+    <a class= "tlacidlo_blik" href="uvod/odhlasit"> ODHLÁSIŤ </a>
+</div>
+
+<div id="navigacia">
+   <a class="tlacidlo_blik" href="uvod"> DATALEO </a>  >> Moja knižnica
+</div>
+
+<div id="prveOkno">
+    <a class= "tlacidlo_farebne" href="editor"> Nový záznam </a> <br> 
     <br> <br> <b> Návody a publikácie o citovaní: </b> 
     <br> <a onclick="window.open('http://www.vssvalzbety.sk/userfiles/fzsp/Statnice/citovanie-a1.pdf', 'name', 'width=600,height=400')">Citovanie a parafrazovanie</a> 
     <br> <a onclick="window.open('https://www.uk.ukf.sk/data/epca/Ako_citovat_-_metodika_popisu.pdf', 'name', 'width=600,height=400')">Ako spravne citovat</a> 
     <br>  <a onclick="window.open('http://vili.uniba.sk/AK/citovanie_priklady.pdf', 'name', 'width=600,height=400')">Priklady citovania</a> 
     <br> <a onclick="window.open('http://www.starfall.com/', 'name', 'width=600,height=400')">Pokyny pre citovanie</a> 
-    <br> <br><?php echo $pouzivatel['meno'] ?> 
-    <br> <a href="uvod"> Späť na úvod </a>
-    <br> <a href="uvod/odhlasit"> Odhlásiť </a>
 </div>
-<div id="zdroje">
-    <h1>Zoznam zdrojov <?php echo $pouzivatel['pouzivatel_id'] ?> </h1>
 
+<div id="druheOkno">
     <table border="0">
         <tr>
             <td>
@@ -108,7 +113,7 @@
 
 </div>
 
-<div id="ukazka">
+<div id="tretieOkno">
     <?php if (!empty($_GET['zdroj_id'])): ?> 
         <table border="0">
             <h1> <?= $zdroje_ukazka['nazov']; ?></h1>
@@ -198,11 +203,11 @@
             </tr>
             <tr>
                 <td>Nakladatelstvo: </td> <?php
-                if (!$zdroje_ukazka['nakladatelstvo']) {
+                if (!$zdroje_ukazka['vydavatelstvo']) {
                     echo "<td>-</td>";
                 } else {
                     echo "<td>";
-                    echo $zdroje_ukazka['nakladatelstvo'];
+                    echo $zdroje_ukazka['vydavatelstvo'];
                     echo "</td>";
                 }
                 ?>
@@ -324,23 +329,20 @@
 
 
 <?php elseif (empty($_GET['zdroj_id'])): ?>
-    <H1> Zoradenie </H1>
-    Zoradit zdroje podľa autora<br>
-    Zoradit zdroje podľa názvu<br>
-    Zoradit zdroje podľa roku vydania<br>
-    Zoradit zdroje podľa druhu<br>
-    Zoradit zdroje podľa dátumu pridania<br>
-    Zoradit zdroje podľa hodnotenia<br>
-
-    <H1> Filtrovanie </H1>
-    Filtrovať zdroje podľa autora _________<br>
-    Filtrovať zdroje podľa názvu _________<br>
-    Filtrovať zdroje podľa roku vydania _________<br>
-    Filtrovať zdroje podľa druhu _________<br>
-    Filtrovať zdroje podľa dátumu pridania _________<br>
-    Filtrovať zdroje podľa hodnotenia _________<br>
-
-    <h1> Stiahnuť  zoznam </h1>
+<table border="0" align="justify" >
+    <tr> <td> Filtrovať  podľa autora </td> <td> <input type="password" name="heslo_reg" /><br> </td> </tr>
+    <tr> <td> Filtrovať  podľa názvu </td> <td> <input type="password" name="heslo_reg" /><br> </td> </tr>
+    <tr> <td> Filtrovať  podľa roku vydania </td> <td> <input type="password" name="heslo_reg" /><br> </td> </tr>
+    <tr> <td> Filtrovať  podľa druhu </td> <td> <input type="password" name="heslo_reg" /><br> </td> </tr>
+    <tr> <td> Filtrovať  podľa dátumu pridania </td> <td> <input type="password" name="heslo_reg" /><br> </td> </tr>
+    <tr> <td> Filtrovať  podľa hodnotenia </td> <td> <input type="password" name="heslo_reg" /><br> </td> </tr>
+    <tr> <td> Zoradiť zdroje podľa autora </td> </tr>
+    <tr> <td>Zoradiť zdroje podľa názvu </td> </tr>
+    <tr> <td>Zoradiť zdroje podľa roku vydania </td> </tr>
+    <tr> <td>Zoradiť zdroje podľa druhu </td> </tr>
+    <tr> <td>Zoradiť zdroje podľa dátumu pridania </td> </tr>
+    <tr> <td>Zoradiť zdroje podľa hodnotenia </td> </tr>
+</table>
+    <br>Stiahnuť  zoznam<br> 
     </div>
 <?php endif; ?>
-

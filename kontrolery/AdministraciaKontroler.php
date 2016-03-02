@@ -2,7 +2,7 @@
 
 class AdministraciaKontroler extends Kontroler {
 /*
- * v pohlade uvod je odklik na administraciu s nazvom : Vstup do vlastnej kniznice
+ * v pohlade uvod je odklik na administraciu s nazvom : Prihlasit
  * ak na neho pouzivatel klikne a je prihlaseny-> presmeruje ho na kontroler Zdroje
  * a tym padom sa vypisu vsetky jeho zdroje 
  * ak na neho klikne a nieje prihlaseny-> presmeruje ho na prihlasenie, resp
