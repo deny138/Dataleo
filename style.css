@@ -1,10 +1,11 @@
 .sprava {
     border: 1px solid #9DC2F8;
-    background: #DBE8F8;
+    background: #21abc7;
     // padding: 3px;
     text-align: center;
     width: 100%;
     clear: both;
+    color: white;
 }
 body {
     // background: red; /* For browsers that do not support gradients */
@@ -12,33 +13,28 @@ body {
     //background: -o-linear-gradient(white, black); /* For Opera 11.1 to 12.0 */
     //background: -moz-linear-gradient(white, black); /* For Firefox 3.6 to 15 */
     //background: linear-gradient(white, black); /* Standard syntax */
-    background:  white;
-    font-family: "Comic Sans MS CE", "Arial CE", "Sand CE", "Helvetica CE", "Comic Sans MS", lucida, fantasy;
+    background:  #f6f8f8;
+    //font-family: "Open Sans",Helvetica,Arial,sans-serif;
+    font-family:  Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     letter-spacing: 0.3px;
     margin: 0;
     padding: 0;
+    line-height: 1.42857143;
+    color: #333;
 }
-#domov{
-    //border: 1px solid #6f9177;
-    float:left;
-    width: 7%;
-    height: 70px;
-    padding-top: 10px;
-    background:  #01579B;
 
-}
 #hlavicka {
-    // border: 0px solid #6f9177; 
-    float:right;
-    background:  #01579B;
-    text-shadow: 4px 2px 0 #777;
+    border-bottom: 1px solid #aebdc1; 
+    background:  white;
+    // text-shadow: 4px 2px 0 #777;
     height: 70px;
-    width: 93%;
-    text-align: left;
+    width: 100%;
     font-size: 50px;
-    letter-spacing: 20px;
+    //letter-spacing: 20px;
     padding-top: 10px;
+    padding-bottom:  10px;
+    padding-left: 20px;
 }
 #triOkna {
     //border: 0px solid black;
@@ -46,35 +42,28 @@ body {
     width: auto;
 }
 #administracia {
-    background: white;
+    background: #f6f8f8;
     border: 0px solid black;
     height: auto;
     width: auto;
     text-align: right;
-    padding-bottom: 3px;
     padding-right: 20px;
-    font-weight: bold;
-
 }
 
 #navigacia{
-    background: white;
+    background: #f6f8f8;
     border: 0px solid black;
     height: auto;
     width: auto;
     text-align: left;
-    padding-bottom: 3px;
     padding-left:  20px;
 }
 
 #prveOkno{
-    // background: #C5CAE9;
-    //border-style: outset;
     //tien boxu
     // -webkit-box-shadow: 1px 2px 10px 0px #444444;/* definícia pre webkit jadro Safari a Chrome*/
     // -moz-box-shadow: 1px 2px 10px 0px #444444;/* definícia pre gecko jadro Firefoxu*/
     // box-shadow: 1px 2px 10px 0px #444444;/* CSS3 definícia pre všetky prehliadače */
-
     float:left;
     width:8%;
     min-height: 500px;
@@ -84,32 +73,17 @@ body {
 }
 
 #druheOkno {
-    background: #C5CAE9;
     //border: 1px solid black;
-    border-style: outset;
-    //tien boxu
-    //-webkit-box-shadow: 1px 2px 10px 0px #444444;/* definícia pre webkit jadro Safari a Chrome*/
-    //-moz-box-shadow: 1px 2px 10px 0px #444444;/* definícia pre gecko jadro Firefoxu*/
-    //box-shadow: 1px 2px 10px 0px #444444;/* CSS3 definícia pre všetky prehliadače */
-
+    border-style:   outset;
     min-height: 500px;
     width:46%;
     float:left;
-    //text-align: center;
     margin: 1% 1% 1% 1%;
     padding: 1% 1% 1% 1%;
     text-align: left;
 }
 
 #tretieOkno{
-    // background: #C5CAE9;
-    //border: 1px solid black;
-    // border-style: outset;
-
-    //tien boxu
-    // -webkit-box-shadow: 1px 2px 10px 0px #444444;/* definícia pre webkit jadro Safari a Chrome*/
-    //-moz-box-shadow: 1px 2px 10px 0px #444444;/* definícia pre gecko jadro Firefoxu*/
-    //box-shadow: 1px 2px 10px 0px #444444;/* CSS3 definícia pre všetky prehliadače */
     float:left;
     width:32%;
     min-height: 500px;
@@ -118,24 +92,22 @@ body {
 }
 
 #editor{ 
-    background: #C5CAE9;
+    //background: #C5CAE9;
     //border: 0px solid black;
-    border-style: outset;
+    //border-style: outset;
     padding-top: 15px;
 }
 
 #pata {
     // background: #E8EAF6;
-    border: 0px solid #6f90ba;
+    border: 1px solid #6f90ba;
     clear: both;
     width: auto;
-    height: auto;
-    padding: 15px ;
+    padding: 10px ;
     text-align: right;
 }
 
 #chyba{
-    //background: white;
     //border: 1px solid black;
     padding: 30px 30px 30px 30px;
     min-height: 500px;
@@ -145,73 +117,163 @@ body {
 
 }
 
-#registracia{
-    //background: white;
-    //border: 1px solid black;
+#registracia, prihlasenie{
     padding: 10px 10px 10px 10px;
     min-height: 500px;
     width:100%;
-    //float:left; 
     text-align: center;
+    line-height: 50px;
 }
 
 #uvod{
-    //background: white;
     //border: 1px solid black;
-    padding: 1% 1% 1% 1%;
-    margin: 1% 1% 1% 1%;
-    min-height: 500px;
+    width: 100%; 
+    margin: 0px; 
+    padding: 0px;
+    min-height: 800px;
+    background-repeat: no-repeat;
+    background-image: url(pozadie.jpg);
+    opacity:0.6;
+    background-size:  cover;
+}
+
+.tlacidlo_uvod:link, .tlacidlo_uvod:visited{
+    text-decoration: none;
+    border: 1px solid white;
+    color: white;
+    border-radius: 100px;
+    text-align: center;
+    margin-left:70%;
+    margin-top:5%;
+    letter-spacing: 2px;
+    display: inline-block;
+    //white-space: nowrap;
+    font-size: 180%;
+    line-height: 3;
+    padding: 0 2.5em;
+    font-weight: 200;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    letter-spacing: 1px;
+    //background-color: #21abc7;
+    background-color: #21abc7;
+}
+
+.tlacidlo_uvod:hover{
+    background-color: #1c91a8;
+    text-decoration: none;
+    border: 1px solid white;
+    color: black;
+    border-radius: 100px;
+    text-align: center;
+    margin-left:70%;
+    margin-top:5%;
+    letter-spacing: 2px;
+    display: inline-block;
+    //white-space: nowrap;
+    font-size: 180%;
+    line-height: 3;
+    padding: 0 2.5em;
+    font-weight: 200;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    letter-spacing: 1px;
 
 }
 
-
-a.tlacidlo_blik:link,a.tlacidlo_blik:visited{
+a.tlacidlo_blik:link, a.tlacidlo_blik:visited{
     text-decoration: none;
-    color:black;
+    border: 1px solid #5dbb6c;
+    color: #5dbb6c;
+    border-radius: 100px;
     text-align: center;
     margin: 4px 4px 4px 4px;
-    padding: 3px 3px 3px 3px;
+    font-family: "Open Sans",Helvetica,Arial,sans-serif;
+    letter-spacing: 1px;
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 75%;
+    line-height: 3;
+    padding: 0 2.5em;
+    font-weight: 600;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    letter-spacing: 1px;
+
+
 }
 a.tlacidlo_blik:hover{
     text-decoration: none;
-    background: #8C9EFF;
-    border-radius: 3px;
-    color:white;
+    background-color: #48ac58;
+    border-color: #48ac58;
+    color: #fff;
+    border-radius: 100px;
     text-align: center;
     margin: 4px 4px 4px 4px;
-    padding: 3px 3px 3px 3px;
-    transition: background-color 500ms ease;
+    letter-spacing: 1px;
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 75%;
+    line-height: 3;
+    padding: 0 2.5em;
+    font-weight: 600;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
 }
 
-a.tlacidlo_farebne:link,a.tlacidlo_farebne:visited{
-    text-decoration: none;
-    border-radius: 3px;
-    color:black;
-    background: #C5CAE9;
-    text-align: center;
-    margin: 4px 4px 4px 4px;
-    padding: 3px 3px 3px 3px;
-}
-a.tlacidlo_farebne:hover{
-    text-decoration: none;
-    background: #01579B;
-    border-radius: 3px;
-    color:white;
-    text-align: center;
-    margin: 4px 4px 4px 4px;
-    padding: 3px 3px 3px 3px;
-    transition: background-color 500ms ease;
-}
 
 a.nadpis:link,a.nadpis:visited {
     text-decoration: none; 
-    color:white;
+    color:black;
 }
 
+.formular_vstup{
+    border-radius: 3px;
+    border: 1px solid #aebdc1;
+    box-sizing: border-box;
+    font-size: 1em;
+    padding: 0.625em;
+    -webkit-transition: border-color 0.2s ease-in-out;
+    transition: border-color 0.2s ease-in-out;
+    width: 100%;
+}
 
+.potvrdzovacie_tlacidlo{
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 75%;
+    line-height: 3;
+    padding: 0 2.5em;
+    background-color: #21abc7;
+    border: 1px solid #21abc7;
+    color: #fff;
+    border-radius: 100px;
+    font-family: "Open Sans",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    letter-spacing: 1px;
+}
 
-// farby obycajneho odkazu
-a:link    {color: black}
-a:visited    {color: black}
-a:active    {color: black}
-a:hover    {color: orange} //link cez ktory sa prechadza
+.potvrdzovacie_tlacidlo:hover{
+    background-color: #1c91a8;
+    border-color: #1c91a8;
+    color: #fff;
+
+}
+
+.sive_pismo{
+    color:#aebdc1;
+}
+
+.modry_odkaz{
+    color: #21abc7
+}
+
+.modry_odkaz:hover{
+    color: #167385;
+}

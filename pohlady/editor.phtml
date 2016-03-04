@@ -5,8 +5,8 @@
 </div>
 
 <div id="navigacia">
-   <a class="tlacidlo_blik" href="uvod"> DATALEO </a> >>
-   <a class="tlacidlo_blik" href="zdroje"> Moja knižnica </a> >> Pridanie nového zdroja
+   <a class="modry_odkaz" href="uvod"> DATALEO </a> >>
+   <a class="modry_odkaz" href="zdroje"> Moja knižnica </a> >> Pridanie nového zdroja
 </div>
 
 
@@ -17,30 +17,30 @@
         <input type="hidden" name="pouzivatel_id" value="<?= $zdroj['pouzivatel_id'] ?>"/>
         <input type="hidden" name="datum_pridania" value="<?= $zdroj['datum_pridania'] ?>"/>
         <table border="0" align="center" >
-            <tr> <td> Meno autora: <td><input type="text" name="meno_autora" value="<?= $zdroj['meno_autora'] ?>"/> </td></tr>
-            <tr> <td> Priezvisko autora: <td><input type="text" name="priezvisko_autora" value="<?= $zdroj['priezvisko_autora'] ?>"/> </td>
-                <td> <input type="button" value="Pridať viac autorov" onclick="over();" > </td></tr>
-            <tr> <td> Druh zdroja-navyber: <td><input type="text" name="druh_zdroja" value="<?= $zdroj['druh_zdroja'] ?>" /></td>
-                <td> <input type="button" value="Pridať ďalší okruh" onclick="over();" > </td></tr>
+            <tr> <td> Meno autora: <td><input class="formular_vstup" type="text" name="meno_autora" value="<?= $zdroj['meno_autora'] ?>"/> </td></tr>
+            <tr> <td> Priezvisko autora: <td><input class="formular_vstup" type="text" name="priezvisko_autora" value="<?= $zdroj['priezvisko_autora'] ?>"/> </td>
+                <td> <input class="formular_vstup"  type="button" value="Pridať viac autorov" onclick="over();" > </td></tr>
+            <tr> <td> Druh zdroja-navyber: <td><input class="formular_vstup" type="text" name="druh_zdroja" value="<?= $zdroj['druh_zdroja'] ?>" /></td>
+                <td> <input class="formular_vstup" type="button" value="Pridať ďalší okruh" onclick="over();" > </td></tr>
             <tr> <td> Okruh-navyber: <td><input type="hidden" name="okruh" value="<?= $zdroj['okruh'] ?>"/></td>
-                <td> <input type="button" value="Pridať ďalší okruh" onclick="over();" > </td></tr>
+                <td> <input class="formular_vstup" type="button" value="Pridať ďalší okruh" onclick="over();" > </td></tr>
             <tr> <td> Kľúčové slovo: <td><input type="hidden" name="klucove_slovo" value="<?= $zdroj['klucove_slovo'] ?> "/></td>
-                <td> <input type="button" value="Pridať ďalšie kľúčové slovo" onclick="over();" > </td></tr>
+                <td> <input class="formular_vstup" type="button" value="Pridať ďalšie kľúčové slovo" onclick="over();" > </td></tr>
 
-            <tr> <td> Nazov:  <td><input type="text" name="nazov" value="<?= $zdroj['nazov'] ?> "/> </td></tr>
-            <tr> <td> Podnázov: <td> <input type="text" name="podnazov" value="<?= $zdroj['podnazov'] ?>"/> </td></tr>
-            <tr> <td> Vydanie:  <td><input type="text" name="vydanie" value="<?= $zdroj['vydanie'] ?>"/> </td></tr> 
-            <tr> <td> Miesto vydania:  <td><input type="text" name="miesto_vydania" value="<?= $zdroj['miesto_vydania'] ?>" /> </td></tr> 
-            <tr> <td> Vydavateľstvo:  <td><input type="text" name="vydavatelstvo" value="<?= $zdroj['vydavatelstvo'] ?>"/> </td></tr> 
-            <tr> <td> Rok vydania:  <td><input type="text" name="rok_vydania" value="<?= $zdroj['rok_vydania'] ?>"/> </td></tr> 
-            <tr> <td> ISBN:  <td><input type="text" name="isbn" value="<?= $zdroj['isbn'] ?>"/> </td></tr> 
-            <tr> <td> ISSN:  <td><input type="text" name="issn" value="<?= $zdroj['issn'] ?>"/> </td></tr> 
-            <tr> <td> DOI:  <td><input type="text" name="doi" value="<?= $zdroj['doi'] ?>"/> </td></tr> 
-            <tr> <td> Strany:  <td><input type="text" name="strany" value="<?= $zdroj['strany'] ?>"/> </td></tr> 
-            <tr> <td> URL adresa:  <td><input type="text" name="url" value="<?= $zdroj['url'] ?>"/> </td></tr> 
-            <tr> <td> Dátum aktualizácie:  <td><input type="text" name="datum_aktualizacie" value="<?= $zdroj['datum_aktualizacie'] ?>"/> </td></tr> 
-            <tr> <td> Hodnotenie - vyber:  <td><input type="text" name="hodnotenie" value="<?= $zdroj['hodnotenie'] ?>"/> </td></tr> 
-            <tr> <td> Poznámka: <td><textarea name="poznamka" >value="<?= $zdroj['poznamka'] ?>"</textarea> </td></tr> 
+            <tr> <td> Nazov:  <td><input class="formular_vstup" type="text" name="nazov" value="<?= $zdroj['nazov'] ?> "/> </td></tr>
+            <tr> <td> Podnázov: <td> <input class="formular_vstup" type="text" name="podnazov" value="<?= $zdroj['podnazov'] ?>"/> </td></tr>
+            <tr> <td> Vydanie:  <td><input class="formular_vstup" type="text" name="vydanie" value="<?= $zdroj['vydanie'] ?>"/> </td></tr> 
+            <tr> <td> Miesto vydania:  <td><input class="formular_vstup" type="text" name="miesto_vydania" value="<?= $zdroj['miesto_vydania'] ?>" /> </td></tr> 
+            <tr> <td> Vydavateľstvo:  <td><input class="formular_vstup" type="text" name="vydavatelstvo" value="<?= $zdroj['vydavatelstvo'] ?>"/> </td></tr> 
+            <tr> <td> Rok vydania:  <td><input class="formular_vstup" type="text" name="rok_vydania" value="<?= $zdroj['rok_vydania'] ?>"/> </td></tr> 
+            <tr> <td> ISBN:  <td><input class="formular_vstup" type="text" name="isbn" value="<?= $zdroj['isbn'] ?>"/> </td></tr> 
+            <tr> <td> ISSN:  <td><input class="formular_vstup" type="text" name="issn" value="<?= $zdroj['issn'] ?>"/> </td></tr> 
+            <tr> <td> DOI:  <td><input class="formular_vstup" type="text" name="doi" value="<?= $zdroj['doi'] ?>"/> </td></tr> 
+            <tr> <td> Strany:  <td><input class="formular_vstup" type="text" name="strany" value="<?= $zdroj['strany'] ?>"/> </td></tr> 
+            <tr> <td> URL adresa:  <td><input class="formular_vstup" type="text" name="url" value="<?= $zdroj['url'] ?>"/> </td></tr> 
+            <tr> <td> Dátum aktualizácie:  <td><input class="formular_vstup" type="text" name="datum_aktualizacie" value="<?= $zdroj['datum_aktualizacie'] ?>"/> </td></tr> 
+            <tr> <td> Hodnotenie - vyber:  <td><input class="formular_vstup" type="text" name="hodnotenie" value="<?= $zdroj['hodnotenie'] ?>"/> </td></tr> 
+            <tr> <td> Poznámka: <td><textarea class="formular_vstup" name="poznamka" >value="<?= $zdroj['poznamka'] ?>"</textarea> </td></tr> 
         </table>
         <br> <input type="submit" value="Pridať" /><br>
         <br><input type="reset" value="Zmazať"><br>
