@@ -3,69 +3,47 @@
     <a class= "tlacidlo_blik" href="uvod/odhlasit"> Odhlásiť </a>
 </div>
 
+
 <div id="navigacia">
-   <a class="modry_odkaz" href="uvod"> DATALEO </a>  >> Moja knižnica
+    <a class="modry_odkaz" href="uvod"> DATALEO </a>  >> Moja knižnica
 </div>
+
 
 <div id="prveOkno">
     <a class= "potvrdzovacie_tlacidlo" href="editor"> Nový záznam </a> <br> 
-    <br> <br> <b> Návody a publikácie o citovaní: </b> 
-     <br><br> <a onclick="window.open('http://www.vssvalzbety.sk/userfiles/fzsp/Statnice/citovanie-a1.pdf', 'name', 'width=600,height=400')">Citovanie a parafrazovanie</a> 
-    <br> <br><a onclick="window.open('https://www.uk.ukf.sk/data/epca/Ako_citovat_-_metodika_popisu.pdf', 'name', 'width=600,height=400')">Ako spravne citovat</a> 
-    <br> <br> <a onclick="window.open('http://vili.uniba.sk/AK/citovanie_priklady.pdf', 'name', 'width=600,height=400')">Priklady citovania</a> 
-    <br><br> <a onclick="window.open('http://www.starfall.com/', 'name', 'width=600,height=400')">Pokyny pre citovanie</a> 
 </div>
 
-<div id="druheOkno">
-    <table border="0">
+
+<div style="overflow-x:auto" id="druheOkno">
+    
+    <table>
         <tr>
-            <td>
-                <b>Zdroj ID:</b>
-            </td>
-            <td>
-                <b>Autor ID:</b>
-            </td>
-            <td>
+
+            <th>
                 <b>Nazov diela</b>
-            </td>
-            <td>
+            </th>
+            <th>
                 <b>Meno autora</b>
-            </td>
-            <td>
+            </th>
+            <th>
                 <b>Priezvisko autora</b>
-            </td>
-            <td>
+            </th>
+            <th>
                 <b> Rok vydania</b>
-            </td>
-            <td>
+            </th>
+            <th>
                 <b> Datum pridania</b>
-            </td>
-            <td>
+            </th>
+            <th>
                 <b> Hodnotenie</b>
-        </tr>
+            </th>
 
-        <?php foreach ($zdroje as $zdroj) : ?>
+            <?php foreach ($zdroje as $zdroj) : ?>
             <tr>
-                <td>
-                    <?php
-                    if (!$zdroj['zdroj_id'])
-                        echo"-";
-                    else
-                        echo $zdroj['zdroj_id'];
-                    ?> 
-                </td>
+
 
                 <td>
-                    <?php
-                    if (!$zdroj['autor_id'])
-                        echo"-";
-                    else
-                        echo $zdroj['autor_id'];
-                    ?> 
-                </td>
-
-                <td>
-                    <a href="http://localhost/zdroje?zdroj_id=<?= $zdroj['zdroj_id'] ?>" onclick="<?php $_SESSION['zdroj_na_zobrazenie'] = $zdroj['zdroj_id'] ?>">  <?= $zdroj['nazov']; ?> </a>
+                    <a class="cierny_odkaz_podciarknuty" href="http://localhost/zdroje?zdroj_id=<?= $zdroj['zdroj_id'] ?>" onclick="<?php $_SESSION['zdroj_na_zobrazenie'] = $zdroj['zdroj_id'] ?>">  <?= $zdroj['nazov']; ?> </a>
                 </td>
                 <td>
                     <?php
@@ -116,7 +94,7 @@
 <div id="tretieOkno">
     <?php if (!empty($_GET['zdroj_id'])): ?> 
         <table border="0">
-            <h1> <?= $zdroje_ukazka['nazov']; ?></h1>
+            <tr><th>  <?= $zdroje_ukazka['nazov']; ?></th><th></th> </tr>
 
             <tr>
                 <td>Zdroj ID: </td> <?php
@@ -323,26 +301,21 @@
                 ?>
             </tr>
         </table>
-        <div align="right"> <a href="http://localhost/zdroje"> Späť </a></div>
+        <div align="right"> <a class="sive_pismo" href="http://localhost/zdroje"> Späť </a></div>
     </div>
 
 
 
 <?php elseif (empty($_GET['zdroj_id'])): ?>
-<table border="0" align="justify" >
-    <tr> <td> Filtrovať  podľa autora </td> <td> <input type="password" name="heslo_reg" /><br> </td> </tr>
-    <tr> <td> Filtrovať  podľa názvu </td> <td> <input type="password" name="heslo_reg" /><br> </td> </tr>
-    <tr> <td> Filtrovať  podľa roku vydania </td> <td> <input type="password" name="heslo_reg" /><br> </td> </tr>
-    <tr> <td> Filtrovať  podľa druhu </td> <td> <input type="password" name="heslo_reg" /><br> </td> </tr>
-    <tr> <td> Filtrovať  podľa dátumu pridania </td> <td> <input type="password" name="heslo_reg" /><br> </td> </tr>
-    <tr> <td> Filtrovať  podľa hodnotenia </td> <td> <input type="password" name="heslo_reg" /><br> </td> </tr>
-    <tr> <td> Zoradiť zdroje podľa autora </td> </tr>
-    <tr> <td>Zoradiť zdroje podľa názvu </td> </tr>
-    <tr> <td>Zoradiť zdroje podľa roku vydania </td> </tr>
-    <tr> <td>Zoradiť zdroje podľa druhu </td> </tr>
-    <tr> <td>Zoradiť zdroje podľa dátumu pridania </td> </tr>
-    <tr> <td>Zoradiť zdroje podľa hodnotenia </td> </tr>
-</table>
-    <br>Stiahnuť  zoznam<br> 
+    <table border="0" align="justify" >
+        <tr> <td> Filtrovať  podľa autora </td> <td> <input class="formular_vstup" type="text" name="heslo_reg" /><br> </td> </tr>
+        <tr> <td> Filtrovať  podľa názvu </td> <td> <input class="formular_vstup" type="text" name="heslo_reg" /><br> </td> </tr>
+        <tr> <td> Filtrovať  podľa roku vydania </td> <td> <input  class="formular_vstup" type="text" name="heslo_reg" /><br> </td> </tr>
+        <tr> <td> Filtrovať  podľa druhu </td> <td> <input class="formular_vstup" type="text" name="heslo_reg" /><br> </td> </tr>
+        <tr> <td> Filtrovať  podľa dátumu pridania </td> <td> <input class="formular_vstup" type="text" name="heslo_reg" /><br> </td> </tr>
+        <tr> <td> Filtrovať  podľa hodnotenia </td> <td> <input class="formular_vstup" type="text" name="heslo_reg" /><br> </td> </tr>
+        <tr><td></td> <td> <input class="potvrdzovacie_tlacidlo" type="submit" value="Filtrovať zoznam"></td></tr>
+    </table>
+
     </div>
 <?php endif; ?>

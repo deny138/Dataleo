@@ -41,7 +41,7 @@ class EditorKontroler extends Kontroler {
             $zdroj= array_intersect_key($_POST,  array_flip($kluce));
             //ulozenie clanku do db
             $vypisZdrojov->ulozZdroj($_POST['zdroj_id'], $zdroj);
-            $this->pridajSpravu('Clanok bol uspesne ulozeny');
+            $this->pridajSpravu('Záznam bol uložený.');
             $this->presmeruj('zdroje');
         }
         else if (!empty($parametre[0])){
@@ -49,7 +49,7 @@ class EditorKontroler extends Kontroler {
             if($nacitanyZdroj)
                 $zdroj=$nacitanyZdroj;
             else
-                $this->pridajSpravu ('Zdroj nenajdeny');
+                $this->pridajSpravu ('Záznam nenájdený.');
         }
 
         $this->data['pouzivatel'] = $pouzivatel;

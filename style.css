@@ -27,36 +27,35 @@ body {
 #hlavicka {
     border-bottom: 1px solid #aebdc1; 
     background: #f6f8f8;
-    // text-shadow: 4px 2px 0 #777;
     height: 70px;
     width: 100%;
     font-size: 50px;
-    //letter-spacing: 20px;
+    padding-left: 1%;
     padding-top: 10px;
     padding-bottom:  10px;
-    
+
 }
 #triOkna {
-    //border: 0px solid black;
+    border: 0px solid black;
     height: 100%;
-    width: auto;
+    width: 100%;
+    clear: both;
 }
 #administracia {
-    background: white;
     border: 0px solid black;
     height: auto;
-    width: auto;
+    width: 50%;
     text-align: right;
-    padding-right: 20px;
+    float:right;
 }
 
 #navigacia{
-    background: white;
     border: 0px solid black;
     height: auto;
-    width: auto;
+    width: 49%;
     text-align: left;
-    padding-left:  20px;
+    padding-left:  1%;
+    float:left;
 }
 
 #prveOkno{
@@ -74,7 +73,7 @@ body {
 
 #druheOkno {
     //border: 1px solid black;
-    border-style:   outset;
+    //border-style:   outset;
     min-height: 500px;
     width:46%;
     float:left;
@@ -85,6 +84,7 @@ body {
 
 #tretieOkno{
     float:left;
+    //border: 1px solid black;
     width:32%;
     min-height: 500px;
     padding: 1% 1% 1% 1%;
@@ -92,10 +92,7 @@ body {
 }
 
 #editor{ 
-    //background: #C5CAE9;
-    //border: 0px solid black;
-    //border-style: outset;
-    padding-top: 15px;
+    padding-top: 100px;
     text-align: center;
 }
 
@@ -136,7 +133,7 @@ body {
     background-image: url(pozadie.jpg);
     opacity:0.8;
     background-size:  cover;
-   //background-attachment:  fixed;
+    //background-attachment:  fixed;
 }
 
 .tlacidlo_uvod:link, .tlacidlo_uvod:visited{
@@ -220,8 +217,9 @@ a.tlacidlo_blik:hover{
     text-align: center;
     white-space: nowrap;
     font-size: 75%;
-    line-height: 3;
+    line-height:3;
     padding: 0 2.5em;
+    margin: 20px 4px 4px 4px;
     background-color: #21abc7;
     border: 1px solid #21abc7;
     color: #fff;
@@ -242,16 +240,36 @@ a.tlacidlo_blik:hover{
 
 .sive_pismo{
     color:#aebdc1;
-   
+
 }
 
 .modry_odkaz{
     color: #21abc7;
-     background: none;
-     border: none;
-    
+    background: none;
+    border: none;
+    margin: 5px 5px 5px 0px;
+
 }
 
 .modry_odkaz:hover{
     color: #167385;
+}
+
+.cierny_odkaz_podciarknuty{
+    color:black;
+}
+
+tr:nth-child(even) 
+{
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #21abc7;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
 }
