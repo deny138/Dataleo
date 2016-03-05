@@ -13,7 +13,7 @@ body {
     //background: -o-linear-gradient(white, black); /* For Opera 11.1 to 12.0 */
     //background: -moz-linear-gradient(white, black); /* For Firefox 3.6 to 15 */
     //background: linear-gradient(white, black); /* Standard syntax */
-    background:  #f6f8f8;
+    background:  white;
     //font-family: "Open Sans",Helvetica,Arial,sans-serif;
     font-family:  Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
@@ -26,7 +26,7 @@ body {
 
 #hlavicka {
     border-bottom: 1px solid #aebdc1; 
-    background:  white;
+    background: #f6f8f8;
     // text-shadow: 4px 2px 0 #777;
     height: 70px;
     width: 100%;
@@ -34,7 +34,7 @@ body {
     //letter-spacing: 20px;
     padding-top: 10px;
     padding-bottom:  10px;
-    padding-left: 20px;
+    
 }
 #triOkna {
     //border: 0px solid black;
@@ -42,7 +42,7 @@ body {
     width: auto;
 }
 #administracia {
-    background: #f6f8f8;
+    background: white;
     border: 0px solid black;
     height: auto;
     width: auto;
@@ -51,7 +51,7 @@ body {
 }
 
 #navigacia{
-    background: #f6f8f8;
+    background: white;
     border: 0px solid black;
     height: auto;
     width: auto;
@@ -96,14 +96,14 @@ body {
     //border: 0px solid black;
     //border-style: outset;
     padding-top: 15px;
+    text-align: center;
 }
 
 #pata {
-    // background: #E8EAF6;
-    border: 1px solid #6f90ba;
+    border: 0px solid #6f90ba;
     clear: both;
-    width: auto;
-    padding: 10px ;
+    //width: 100%;
+    //padding: 10px ;
     text-align: right;
 }
 
@@ -117,12 +117,13 @@ body {
 
 }
 
-#registracia, prihlasenie{
+#registracia, #prihlasenie{
     padding: 10px 10px 10px 10px;
     min-height: 500px;
     width:100%;
     text-align: center;
     line-height: 50px;
+    background: white;
 }
 
 #uvod{
@@ -130,54 +131,33 @@ body {
     width: 100%; 
     margin: 0px; 
     padding: 0px;
-    min-height: 800px;
+    min-height: 1000px;
     background-repeat: no-repeat;
     background-image: url(pozadie.jpg);
-    opacity:0.6;
+    opacity:0.8;
     background-size:  cover;
+   //background-attachment:  fixed;
 }
 
 .tlacidlo_uvod:link, .tlacidlo_uvod:visited{
     text-decoration: none;
-    border: 1px solid white;
+    border: 0px solid white;
     color: white;
     border-radius: 100px;
-    text-align: center;
     margin-left:70%;
     margin-top:5%;
-    letter-spacing: 2px;
     display: inline-block;
-    //white-space: nowrap;
-    font-size: 180%;
+    font-size: 120%;
     line-height: 3;
     padding: 0 2.5em;
-    font-weight: 200;
-    -webkit-transition: 0.2s ease-in-out;
-    transition: 0.2s ease-in-out;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
     letter-spacing: 1px;
-    //background-color: #21abc7;
-    background-color: #21abc7;
+    background-color: #333;
 }
 
 .tlacidlo_uvod:hover{
     background-color: #1c91a8;
-    text-decoration: none;
-    border: 1px solid white;
-    color: black;
-    border-radius: 100px;
-    text-align: center;
-    margin-left:70%;
-    margin-top:5%;
-    letter-spacing: 2px;
-    display: inline-block;
-    //white-space: nowrap;
-    font-size: 180%;
-    line-height: 3;
-    padding: 0 2.5em;
-    font-weight: 200;
-    -webkit-transition: 0.2s ease-in-out;
-    transition: 0.2s ease-in-out;
-    letter-spacing: 1px;
 
 }
 
@@ -221,12 +201,6 @@ a.tlacidlo_blik:hover{
     transition: 0.2s ease-in-out;
 }
 
-
-a.nadpis:link,a.nadpis:visited {
-    text-decoration: none; 
-    color:black;
-}
-
 .formular_vstup{
     border-radius: 3px;
     border: 1px solid #aebdc1;
@@ -268,10 +242,14 @@ a.nadpis:link,a.nadpis:visited {
 
 .sive_pismo{
     color:#aebdc1;
+   
 }
 
 .modry_odkaz{
-    color: #21abc7
+    color: #21abc7;
+     background: none;
+     border: none;
+    
 }
 
 .modry_odkaz:hover{
