@@ -29,6 +29,7 @@ class Db {
             self::$spojenie = @new PDO(
                     "mysql:host=$host;dbname=$databaza", $uzivatel, $heslo, self::$nastavenia
             );
+            
         }
     }
 

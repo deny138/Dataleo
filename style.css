@@ -1,6 +1,16 @@
+::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #333;
+
+}
+
 .sprava {
-    border: 1px solid #9DC2F8;
-    background: #21abc7;
+    //border: 1px solid #9DC2F8;
+    background: #008080;
     // padding: 3px;
     text-align: center;
     width: 100%;
@@ -25,10 +35,16 @@ body {
 }
 
 #hlavicka {
-    border-bottom: 1px solid #aebdc1; 
-    background: #f6f8f8;
+    background: #008080; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(bottom,#008080, white); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom,#008080, white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom,#008080, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom,#008080, white); /* Standard syntax */
+    // border: 1px solid #aebdc1; 
+    // background: #f6f8f8;
+
     height: 70px;
-    width: 100%;
+    width:  99%;
     font-size: 50px;
     padding-left: 1%;
     padding-top: 10px;
@@ -97,7 +113,11 @@ body {
 }
 
 #pata {
-    border: 0px solid #6f90ba;
+    background: #008080; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(top,#008080, white); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(top,#008080, white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(top,#008080, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to top,#008080, white); /* Standard syntax */
     clear: both;
     //width: 100%;
     //padding: 10px ;
@@ -115,7 +135,6 @@ body {
 }
 
 #registracia, #prihlasenie{
-    padding: 10px 10px 10px 10px;
     min-height: 500px;
     width:100%;
     text-align: center;
@@ -124,38 +143,40 @@ body {
 }
 
 #uvod{
-    //border: 1px solid black;
+   // border-top: 1px solid black;
+    border-top-style:  inset;
+    border-bottom-style:  outset;
     width: 100%; 
     margin: 0px; 
     padding: 0px;
-    min-height: 1000px;
+    min-height:1000px;
     background-repeat: no-repeat;
     background-image: url(pozadie.jpg);
     opacity:0.8;
-    background-size:  cover;
-    //background-attachment:  fixed;
+    background-size:   cover;
 }
-
 .tlacidlo_uvod:link, .tlacidlo_uvod:visited{
     text-decoration: none;
-    border: 0px solid white;
-    color: white;
+    // border: 3px solid #f6f8f8;
+    color: #333;
     border-radius: 100px;
     margin-left:70%;
-    margin-top:5%;
+    margin-top:3%;
+    margin-bottom: 3%;
     display: inline-block;
     font-size: 120%;
+    font-weight: bold;
     line-height: 3;
     padding: 0 2.5em;
     -webkit-transition: 0.3s ease-in-out;
     transition: 0.3s ease-in-out;
     letter-spacing: 1px;
-    background-color: #333;
+    background-color: #f6f8f8;
 }
 
 .tlacidlo_uvod:hover{
-    background-color: #1c91a8;
-
+    color:#008080;
+   // background-color: #aebdc1;
 }
 
 a.tlacidlo_blik:link, a.tlacidlo_blik:visited{
@@ -165,7 +186,6 @@ a.tlacidlo_blik:link, a.tlacidlo_blik:visited{
     border-radius: 100px;
     text-align: center;
     margin: 4px 4px 4px 4px;
-    font-family: "Open Sans",Helvetica,Arial,sans-serif;
     letter-spacing: 1px;
     display: inline-block;
     white-space: nowrap;
@@ -176,9 +196,8 @@ a.tlacidlo_blik:link, a.tlacidlo_blik:visited{
     -webkit-transition: 0.2s ease-in-out;
     transition: 0.2s ease-in-out;
     letter-spacing: 1px;
-
-
 }
+
 a.tlacidlo_blik:hover{
     text-decoration: none;
     background-color: #48ac58;
@@ -220,8 +239,8 @@ a.tlacidlo_blik:hover{
     line-height:3;
     padding: 0 2.5em;
     margin: 20px 4px 4px 4px;
-    background-color: #21abc7;
-    border: 1px solid #21abc7;
+    background-color: #008080;
+    // border: 1px solid #21abc7;
     color: #fff;
     border-radius: 100px;
     font-family: "Open Sans",Helvetica,Arial,sans-serif;
@@ -235,16 +254,41 @@ a.tlacidlo_blik:hover{
     background-color: #1c91a8;
     border-color: #1c91a8;
     color: #fff;
+}
 
+.plus{
+    text-decoration: none; 
+    // border: 3px solid #333;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #008080;
+    border-radius: 100%;
+    color:white;
+    font-size: 150%;
+    padding: 5px 15px 5px 15px;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.5s ease-in-out;
+}
+.plus:hover{
+    background:#333;
 }
 
 .sive_pismo{
     color:#aebdc1;
+}
 
+.odhlasit{
+    color:#aebdc1;
+    text-decoration: none;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+}
+.odhlasit:hover{
+    color: #333;
 }
 
 .modry_odkaz{
-    color: #21abc7;
+    color: #008080;
     background: none;
     border: none;
     margin: 5px 5px 5px 0px;
@@ -259,14 +303,16 @@ a.tlacidlo_blik:hover{
     color:black;
 }
 
-tr:nth-child(even) 
-{
-    background-color: #f2f2f2;
+.biely_odkaz_bez_podciarknutia{
+    text-decoration: none;
+    color: white;
 }
 
 th {
-    background-color: #21abc7;
+    text-align: center;
+    background-color: #333;
     color: white;
+    font-size: 75%;
 }
 
 th, td {

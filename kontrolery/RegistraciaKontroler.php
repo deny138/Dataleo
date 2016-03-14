@@ -10,13 +10,14 @@ class RegistraciaKontroler extends Kontroler {
         if ($_POST) {
             try {
                 $spravcaPouzivatelov = new SpravcaPouzivatelov();
-                $spravcaPouzivatelov->registruj($_POST['meno_reg'], $_POST['heslo_reg'], $_POST['heslo_znovu_reg'], $_POST['email']);
+              
+                $spravcaPouzivatelov->registruj($_POST['zaskrtavatko'],$_POST['meno_reg'], $_POST['heslo_reg'], $_POST['heslo_znovu_reg'], $_POST['email']);
                 $spravcaPouzivatelov->prihlas($_POST['meno_reg'], $_POST['heslo_reg']);
                 $pouzivatel = $spravcaPouzivatelov->vratPouzivatela(); //kvoli vypisu
                 $this->pridajSpravu('Registrácia prebehla úspešne. Vitajte v svojej knižnici ' .
                         $pouzivatel['meno'] . '.');
                 $this->presmeruj('zdroje');
-            } catch (ChybaPouzivatela $chyba) {
+             }catch (ChybaPouzivatela $chyba) {
                 $this->pridajSpravu($chyba->getMessage());
             }
         }

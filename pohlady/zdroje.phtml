@@ -1,6 +1,6 @@
 <div id="administracia" >
-    Prihlásený používateľ: <?php echo $pouzivatel['meno'] ?> 
-    <a class= "tlacidlo_blik" href="uvod/odhlasit"> Odhlásiť </a>
+    Používateľ: <?php echo $pouzivatel['meno'] ?> 
+    <a  class= "modry_odkaz" href="uvod/odhlasit"> Odhlásiť </a>
 </div>
 
 
@@ -10,40 +10,40 @@
 
 
 <div id="prveOkno">
-    <a class= "potvrdzovacie_tlacidlo" href="editor"> Nový záznam </a> <br> 
+    <a class= "plus" href="editor"> + </a> <br> 
 </div>
 
 
 <div style="overflow-x:auto" id="druheOkno">
-    
+
     <table>
         <tr>
 
             <th>
-                <b>Nazov diela</b>
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=nazov">  Názov diela</b </a>
             </th>
             <th>
-                <b>Meno autora</b>
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=meno">  Meno autora</b </a>
+
             </th>
             <th>
-                <b>Priezvisko autora</b>
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=priezvisko">  Priezvisko autora</b </a>
+
             </th>
             <th>
-                <b> Rok vydania</b>
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=priezvisko">  Rok vydania</b </a>
             </th>
             <th>
-                <b> Datum pridania</b>
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=datum_pridania"> Dátum pridania</b </a>
             </th>
             <th>
-                <b> Hodnotenie</b>
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=hodnotenie">  Hodnotenie</b </a>
             </th>
 
             <?php foreach ($zdroje as $zdroj) : ?>
             <tr>
-
-
                 <td>
-                    <a class="cierny_odkaz_podciarknuty" href="http://localhost/zdroje?zdroj_id=<?= $zdroj['zdroj_id'] ?>" onclick="<?php $_SESSION['zdroj_na_zobrazenie'] = $zdroj['zdroj_id'] ?>">  <?= $zdroj['nazov']; ?> </a>
+                    <a class="cierny_odkaz_podciarknuty" href="http://localhost/zdroje?zdroj_id=<?= $zdroj['zdroj_id'] ?>">  <?= $zdroj['nazov']; ?> </a>
                 </td>
                 <td>
                     <?php
@@ -91,7 +91,7 @@
 
 </div>
 
-<div id="tretieOkno">
+<div style="overflow-x:auto" id="tretieOkno">
     <?php if (!empty($_GET['zdroj_id'])): ?> 
         <table border="0">
             <tr><th>  <?= $zdroje_ukazka['nazov']; ?></th><th></th> </tr>
@@ -299,6 +299,10 @@
                     echo "</td>";
                 }
                 ?>
+            </tr>
+            
+            <tr>
+                <td>Klucove slovo: <td> dorobit-pole</td></td> 
             </tr>
         </table>
         <div align="right"> <a class="sive_pismo" href="http://localhost/zdroje"> Späť </a></div>

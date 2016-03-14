@@ -36,6 +36,8 @@ abstract class Kontroler {
             require("pohlady/" . $this->pohlad . ".phtml");
         }
     }
+    
+    
 
     /*
      * presmerovanie na inu stranku a zastavenie spracovania skriptu

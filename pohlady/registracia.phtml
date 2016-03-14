@@ -8,7 +8,8 @@
             <tr> <td> Heslo znovu: <td> <input class="formular_vstup" type="password" name="heslo_znovu_reg" /> </td></tr>
             <tr> <td> E-mail:  <td><input class="formular_vstup" type="text" name="email" /> </td></tr>
         </table>
-        <p class="sive_pismo"> * Súhlasím so spracovaním mojich údajov.</p>
+        <input type="hidden" name="zaskrtavatko" value="0" > <!-- je potrebne skryty formular a nastavena defaultna hodnota lebo pisalo undefined index zaskrtavatko stale ked to pri registracii nebolo zaskrtnute  -->
+        <input  type="checkbox" name="zaskrtavatko" value="ano" >  Súhlasím so spracovaním mojich údajov.
         <br> <input class="potvrdzovacie_tlacidlo" type="submit" value="Zaregistrovať" /><br>
     </form>
 </div>

@@ -15,7 +15,9 @@ class SpravcaPouzivatelov {
      * zaregistrovanie pouzivatela 
      */
 
-    public function registruj($meno, $heslo, $hesloZnovu, $email) {
+    public function registruj($zaskrtavatko,$meno, $heslo, $hesloZnovu, $email) {
+        if (!$zaskrtavatko)
+            throw new ChybaPouzivatela('Pri registrácii musíte súhlasiť so spracovaním údajov.');
         if ($heslo != $hesloZnovu)
             throw new ChybaPouzivatela('Heslá sa nezhodujú.');
         if ((empty($meno)) OR ( empty($heslo)) OR ( empty($hesloZnovu)) OR ( empty($email)))
