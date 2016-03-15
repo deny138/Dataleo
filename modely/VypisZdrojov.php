@@ -38,13 +38,29 @@ class VypisZdrojov {
     }
     
     /*
-     * zatial nepouzita metoda, ktoru chcem pouzit na vypis  klucovych slov, pri danom zdroji- neviem ci je dotaz napisany spravne!!!!
+     *metoda na vypis autorov,kedze ich moze byt viac
+     */
+    public function vratAutorov($id) {
+        return Db::dotazVsetky('SELECT `titul_pred`,`meno`,`priezvisko`, `titul_po` FROM `autor` AS a'
+                . ' JOIN `autor_zdroj` AS az ON a.autor_id = az.autor_id WHERE `zdroj_id`=?', array($id) );
+    }
+    
+    /*
+     *metoda na vypis klucovych slov,kedze ich moze byt viac 
      */
     public function vratKlucoveSlova($id) {
-        return Db::dotazJeden('SELECT `klucove_slovo` FROM `klucove_slova` AS k'
+        return Db::dotazVsetky('SELECT `klucove_slovo` FROM `klucove_slova` AS k'
                 . ' JOIN `zdroj_klucove_slovo` AS zk ON k.klucove_slovo_id = zk.klucove_slovo_id WHERE `zdroj_id`=?', array($id) );
     }
-
+    
+    /*
+     *metoda na vypis okruhov ,kedze ich moze byt viac
+     */
+    public function vratOkruhy($id) {
+        return Db::dotazVsetky('SELECT `nazov_okruhu` FROM `okruh` AS o'
+                . ' JOIN `zdroj_okruh` AS zo ON o.okruh_id = zo.okruh_id WHERE `zdroj_id`=?', array($id) );
+    }
+    
 
     /*
      * ak nieje zadane ID zdroja tak vlozime zdroj ako novy s nasledujucim id/autoincrement
@@ -65,30 +81,14 @@ class VypisZdrojov {
      * prepojovacie udaje je pole uchovava vsetky udaje do tabulke autor zdroj
      */
 
-    public function ulozAutora($autor_id, $autor, $prepojovacie_udaje) { //treti parameter
+    public function ulozAutora($autor_id, $autor) {
         if (!$autor_id) {
             Db::vloz('autor', $autor);
-            Db::vloz('autor_zdroj', $prepojovacie_udaje);
         } else {
-            Db::zmen('autor', $autor, 'WHERE autor_id=?', array($autor));
+            Db::zmen('autor', $autor, 'WHERE autor_id=?', array($autor_id));
         }
     }
-
-    /*
-     * funkcia ulozi okruh
-     * okruh je pole
-     * prepojovacie udaje je pole co ulzi vsetky udaje do tabulky zdroj okruh
-     */
-
-    public function ulozOkruh($okruh_id, $okruh, $prepojovacie_udaje) {
-        if (!$okruh_id) {
-            Db::vloz('okruh', $okruh);
-            Db::vloz('zdroj_okruh', $prepojovacie_udaje);
-        } else {
-            Db::zmen('okruh', $okruh, 'WHERE okruh_id=?', array($okruh));
-        }
-    }
-
+    
     /*
      * funkcia ulozi klucove_slovo
      * $klucove slovo id je parameter
@@ -103,11 +103,41 @@ class VypisZdrojov {
             Db::zmen('klucove_slova', $klucove_slovo, 'WHERE klucove_slovo_id=?', array($klucove_slovo_id));
         }
     }
+
+    /*
+     * funkcia ulozi okruh
+     * okruh je pole
+     */
+
+   public function ulozOkruh($okruh_id, $nazov_okruhu) {
+        if (!$okruh_id) {
+            Db::vloz('okruh', $nazov_okruhu);
+        } else {
+            Db::zmen('okruh', $nazov_okruhu, 'WHERE okruh_id=?', array($okruh_id));
+        }
+    }
+
+    
     /*
      * metoda ulozi do prepojovvacej tabulky udaje o zdroji a klucovom slove
      */
      public function ulozZdrojKlucoveSlovo($zdroj_klucove_slovo){
             Db::vloz('zdroj_klucove_slovo', $zdroj_klucove_slovo);
+    }
+    
+    
+    /*
+     * metoda ulozi do prepojovvacej tabulky udaje o zdroji a klucovom slove
+     */
+     public function ulozZdrojAutor($autor_zdroj){
+            Db::vloz('autor_zdroj', $autor_zdroj);
+    }
+    
+    /*
+     * metoda ulozi do prepojovvacej tabulky udaje o zdroji a klucovom slove
+     */
+     public function ulozZdrojOkruh($zdroj_okruh){
+            Db::vloz('zdroj_okruh', $zdroj_okruh);
     }
 
     /*

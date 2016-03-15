@@ -14,19 +14,28 @@
 <div id="editor">
     <form method="post">
         <input type="hidden" name="zdroj_id" value="<?= $zdroj['zdroj_id'] ?>"/>
+        <input type="hidden" name="zdroj_id" value="<?= $autor['autor_id'] ?>"/>
+        <input type="hidden" name="klucove_slovo_id" value="<?= $klucove_slovo['klucove_slovo_id'] ?>"/>
+        <input type="hidden" name="okruh_id" value="<?= $okruh['okruh_id'] ?>"/>
         <input type="hidden" name="pouzivatel_id" value="<?= $zdroj['pouzivatel_id'] ?>"/>
         <input type="hidden" name="datum_pridania" value="<?= $zdroj['datum_pridania'] ?>"/>
-        
-        
 
-        <table border="0" align="center" >
+
+
+        <table border="1" align="center" >
+            <tr> <td> Titul pred menom autora:  </td>
+                <td><input class="formular_vstup" type="text" name="titul_pred" value="<?= $autor['titul_pred'] ?>" autofocus/> </td></tr>
+
             <tr> <td> Meno autora:  
                 <td><input class="formular_vstup" type="text" name="meno" value="<?= $autor['meno'] ?>" autofocus/> </td></tr>
 
             <tr> <td> Priezvisko autora: 
-                <td><input class="formular_vstup" type="text" name="priezvisko" value="<?= $autor['priezvisko'] ?>"/> </td>
+                <td><input class="formular_vstup" type="text" name="priezvisko" value="<?= $autor['priezvisko'] ?>"/> </td></tr>
+           
+            <tr> <td> Titul za  menom autora:  
+                <td><input class="formular_vstup" type="text" name="titul_po" value="<?= $autor['titul_po'] ?>" autofocus/> </td>
 
-                <td> <input class="formular_vstup"  type="button" value="Pridať viac autorov" onclick="over();" > </td></tr>
+            <td> <input class="formular_vstup"  type="button" value="Pridať viac autorov" onclick="over();" > </td></tr>
 
             <tr> <td> Druh zdroja-navyber: 
                 <td><input class="formular_vstup" type="text" name="druh_zdroja" value="<?= $zdroj['druh_zdroja'] ?>" /></td>
@@ -34,7 +43,7 @@
                 <td> <input class="formular_vstup" type="button" value="Pridať ďalší okruh" onclick="over();" > </td></tr>
 
             <tr> <td> Okruh-navyber:
-                <td><input class="formular_vstup" type="text" name="okruh" value="<?= $okruh['nazov_okruhu'] ?>"/></td>
+                <td><input class="formular_vstup" type="text" name="nazov_okruhu" value="<?= $okruh['nazov_okruhu'] ?>"/></td>
 
                 <td> <input class="formular_vstup" type="button" value="Pridať ďalší okruh" onclick="over();" > </td></tr>
 
@@ -85,7 +94,7 @@
             <tr> <td> Poznámka:
                 <td><textarea class="formular_vstup" name="poznamka"><?= $zdroj['poznamka'] ?></textarea> </td></tr> 
         </table>
-        
+
         <input class= "potvrdzovacie_tlacidlo" type="submit" value="Pridať" />
         <input class= "modry_odkaz"  type="reset" value="Zmazať">
     </form>

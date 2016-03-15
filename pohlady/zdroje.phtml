@@ -97,6 +97,32 @@
             <tr><th>  <?= $zdroje_ukazka['nazov']; ?></th><th></th> </tr>
 
             <tr>
+                <td>Autor/i: </td> <?php
+                if (!$autori) {
+                    echo "<td>-</td>";
+                } else {
+                    echo "<td>";
+                }
+                foreach ($autori as $autor):
+                    ?>
+                    <?= $autor['titul_pred'] ." ".$autor['meno'] ." ".$autor['priezvisko']." ".$autor['titul_po']. "<br>"; ?>
+                    <?php endforeach ?>
+            </tr>
+            
+             <tr>
+                <td>Okruh/y: </td> <?php
+                if (!$okruhy) {
+                    echo "<td>-</td>";
+                } else {
+                    echo "<td>";
+                }
+                foreach ($okruhy as $okruh):
+                    ?>
+                    <?= $okruh['nazov_okruhu']; ?>
+                    <?php endforeach ?>
+            </tr>
+            
+            <tr>
                 <td>Zdroj ID: </td> <?php
                 if (!$zdroje_ukazka['zdroj_id']) {
                     echo "<td>-</td>";
@@ -300,24 +326,25 @@
                 }
                 ?>
             </tr>
-             <tr>
-                <td>Slovicka: </td> <?php
-                if (!$slovicka['klucove_slovo']) {
+
+            <tr>
+                <td>Klucove slova: </td> <?php
+                if (!$slovicka) {
                     echo "<td>-</td>";
                 } else {
                     echo "<td>";
-                    echo $slovicka['klucove_slovo'];
-                    echo "</td>";
                 }
-                ?>
-                
-                
-                
+                foreach ($slovicka as $slovicko):
+                    ?>
+                    <?= $slovicko['klucove_slovo']; ?>
+                    <?php endforeach ?>
             </tr>
+
+
+
             
-            <tr>
-                <td>Klucove slovo: <td> dorobit-pole</td></td> 
-            </tr>
+
+
         </table>
         <div align="right"> <a class="sive_pismo" href="http://localhost/zdroje"> Späť </a></div>
     </div>

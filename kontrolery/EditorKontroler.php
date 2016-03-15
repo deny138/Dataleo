@@ -42,7 +42,7 @@ class EditorKontroler extends Kontroler {
             'klucove_slovo_id' => '',
         );
 
-        //TODO
+        
         $autor = array(
             'autor_id' => '',
             'titul_pred' => '',
@@ -50,11 +50,23 @@ class EditorKontroler extends Kontroler {
             'priezvisko' => '',
             'titul_po' => ''
         );
+        
+        $autor_zdroj=array(
+            'id'=>null,
+            'autor_id'=>'',
+            'zdroj_id'=>'',
+        );
 
-        //TODO
+        
         $okruh = array(
             'okruh_id' => '',
             'nazov_okruhu' => '',
+        );
+        
+        $zdroj_okruh=array(
+            'zdroj_okruh_id'=>null,
+            'zdroj_id'=>'',
+            'okruh_id'=>'',
         );
 
         //ak je odoslany formular
@@ -75,6 +87,31 @@ class EditorKontroler extends Kontroler {
             //ziskania posledneho ID kvoli vlozeniu do prepajacej tabulky
             $idPoslednehoVlozenehoZdroja = $vypisZdrojov->posledneId();
 
+            
+            /*
+             *vlozenie autora do tabulky autorov 
+             *TODO: rozklik na viac autorov
+             */
+            //vytvorenie klucov, ktore sa zhodouju s udajmi ktora ziskame z $_POST,potom sa priradia k sebe
+            $kluce_autor = array('titul_pred','meno','priezvisko','titul_po');
+            //zlucenie klucov s hodnotami s post- a ich priradenie
+            $autor = array_intersect_key($_POST, array_flip($kluce_autor));
+            //ulozenie klucoveho slova do db
+            $vypisZdrojov->ulozAutora($_POST['autor_id'], $autor);
+            //ziskania posledneho ID kvoli vlozeniu do prepajacej tabulky
+            $idPoslednehoVlozenehoAutora = $vypisZdrojov->posledneId();
+            
+             /*
+             * vlozenie udajov do prepajacej tabulky autor_zdroj
+             */
+            
+            //priradenie hodnoty posledneho vlozeneho zdroja
+            $autor_zdroj['autor_id'] = $idPoslednehoVlozenehoAutora;
+            //priradenie hodnoty posledneho vlozeneho klucoveho slova
+            $autor_zdroj['zdroj_id'] = $idPoslednehoVlozenehoZdroja;
+            //ulozenie udajov do databazy, pricom prvy udaj zdroj_klucove_slovo_id je nastavene hore v poli na null
+            $vypisZdrojov->ulozZdrojAutor($autor_zdroj);
+            
             /*
              * vlozenie klucoveho slova do tabulky klucove_slova
              */
@@ -98,6 +135,29 @@ class EditorKontroler extends Kontroler {
             $zdroj_klucove_slovo['klucove_slovo_id'] = $idPoslednehoVlozenehoSlova;
             //ulozenie udajov do databazy, pricom prvy udaj zdroj_klucove_slovo_id je nastavene hore v poli na null
             $vypisZdrojov->ulozZdrojKlucoveSlovo($zdroj_klucove_slovo);
+            
+            /*
+             * vlozenie okruhu do tabulky okruh
+             */
+             //vytvorenie klucov, ktore sa zhodouju s udajmi ktora ziskame z $_POST,potom sa priradia k sebe
+            $kluce_okruh = array('nazov_okruhu');
+            //zlucenie klucov s hodnotami s post- a ich priradenie
+            $okruh = array_intersect_key($_POST, array_flip($kluce_okruh));
+            //ulozenie klucoveho slova do db
+            $vypisZdrojov->ulozOkruh($_POST['okruh_id'], $okruh);
+            //ziskania posledneho ID kvoli vlozeniu do prepajacej tabulky
+            $idPoslednehoVlozenehoOkruhu = $vypisZdrojov->posledneId();
+            
+            /*
+             * vlozenie udajov do prepajacej tabulky zdroj_okruh
+             */
+            
+             //priradenie hodnoty posledneho vlozeneho zdroja
+            $zdroj_okruh['okruh_id'] = $idPoslednehoVlozenehoOkruhu;
+            //priradenie hodnoty posledneho vlozeneho klucoveho slova
+            $zdroj_okruh['zdroj_id'] = $idPoslednehoVlozenehoZdroja;
+            //ulozenie udajov do databazy, pricom prvy udaj zdroj_klucove_slovo_id je nastavene hore v poli na null
+            $vypisZdrojov->ulozZdrojOkruh($zdroj_okruh);
 
             $this->pridajSpravu('Záznam bol uložený: <br>zdrojid:' . $idPoslednehoVlozenehoZdroja . '<br>klucoveslovo:' . $idPoslednehoVlozenehoSlova);
             $this->presmeruj('zdroje');
