@@ -41,7 +41,7 @@ class VypisZdrojov {
      * zatial nepouzita metoda, ktoru chcem pouzit na vypis  klucovych slov, pri danom zdroji- neviem ci je dotaz napisany spravne!!!!
      */
     public function vratKlucoveSlova($id) {
-        return Db::dotazVsetky('SELECT `klucove_slovo` FROM `klucove_slova` AS k'
+        return Db::dotazJeden('SELECT `klucove_slovo` FROM `klucove_slova` AS k'
                 . ' JOIN `zdroj_klucove_slovo` AS zk ON k.klucove_slovo_id = zk.klucove_slovo_id WHERE `zdroj_id`=?', array($id) );
     }
 
@@ -103,21 +103,10 @@ class VypisZdrojov {
             Db::zmen('klucove_slova', $klucove_slovo, 'WHERE klucove_slovo_id=?', array($klucove_slovo_id));
         }
     }
-    
-    
     /*
-    public function ulozZdrojKlucoveSlovo($zdroj_klucove_slovo_id,$zdroj_klucove_slovo){
-      // Db::vloz('zdroj_klucove_slovo', $zdroj_klucove_slovo); 
-        if (!$zdroj_klucove_slovo_id) {
-            Db::vloz('zdroj_klucove_slovo', $zdroj_klucove_slovo);
-        } else {
-            Db::zmen('zdroj_klucove_slovo', $zdroj_klucove_slovo, 'WHERE klucove_slovo_id=?', array($zdroj_klucove_slovo_id));
-        }
-    
-    }
-     * */
+     * metoda ulozi do prepojovvacej tabulky udaje o zdroji a klucovom slove
+     */
      public function ulozZdrojKlucoveSlovo($zdroj_klucove_slovo){
-      // Db::vloz('zdroj_klucove_slovo', $zdroj_klucove_slovo); 
             Db::vloz('zdroj_klucove_slovo', $zdroj_klucove_slovo);
     }
 

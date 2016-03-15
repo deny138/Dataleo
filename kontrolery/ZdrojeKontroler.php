@@ -30,11 +30,15 @@ class ZdrojeKontroler extends Kontroler {
         $zdroje = $vypisZdrojov->vratZdrojeSautorom($pouzivatelovo_id,$zoradit);
         //metoda ktora vrati zdroj podla zdroj_id a podla toho zobrazi ukazku
         $zdroje_ukazka = $vypisZdrojov->vratZdrojPodlaZdrojId($id);
+        $slovicka=$vypisZdrojov->vratKlucoveSlova($id);
+        $this->pridajSpravu(print_r($slovicka));
+       
+                
         
-
         if (empty($zdroje)) {
             $this->presmeruj('Prazdno');
         }
+        $this->data['slovicka'] = $slovicka; //aby sa dalo v pohlade pracovat s premennou zdroje
         $this->data['zdroje'] = $zdroje; //aby sa dalo v pohlade pracovat s premennou zdroje
         $this->data['zdroje_ukazka'] = $zdroje_ukazka; //aby sa dalo v pohlade pracovat s premennou zdroje
         $this->data['pouzivatel'] = $pouzivatel; //prenesie do pohladu zdroje pole pouzivatel ktore obsahuje vsetky udaje z tabulky pouzivatel

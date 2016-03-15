@@ -235,7 +235,7 @@
                 ?>
             </tr>
             <tr>
-                <td>POcet stran: </td> <?php
+                <td>Pocet stran: </td> <?php
                 if (!$zdroje_ukazka['strany']) {
                     echo "<td>-</td>";
                 } else {
@@ -299,6 +299,20 @@
                     echo "</td>";
                 }
                 ?>
+            </tr>
+             <tr>
+                <td>Slovicka: </td> <?php
+                if (!$slovicka['klucove_slovo']) {
+                    echo "<td>-</td>";
+                } else {
+                    echo "<td>";
+                    echo $slovicka['klucove_slovo'];
+                    echo "</td>";
+                }
+                ?>
+                
+                
+                
             </tr>
             
             <tr>
