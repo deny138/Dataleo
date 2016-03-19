@@ -35,11 +35,11 @@ body {
 }
 
 #hlavicka {
-    background: #008080; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(bottom,#008080, white); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom,#008080, white); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom,#008080, white); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom,#008080, white); /* Standard syntax */
+   background: #333; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(bottom,black, #333); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom,black, #333); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom,black, #333); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom,black, #333); /* Standard syntax */
     // border: 1px solid #aebdc1; 
     // background: #f6f8f8;
 
@@ -52,10 +52,12 @@ body {
 
 }
 #triOkna {
-    border: 0px solid black;
+   // border: 0px solid black;
     height: 100%;
     width: 100%;
     clear: both;
+   
+   
 }
 #administracia {
     border: 0px solid black;
@@ -113,15 +115,16 @@ body {
 }
 
 #pata {
-    background: #008080; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(top,#008080, white); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(top,#008080, white); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(top,#008080, white); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to top,#008080, white); /* Standard syntax */
+    background: #333; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(top,black, #333); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(top,black, #333); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(top,black, #333); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to top,black, #333); /* Standard syntax */
     clear: both;
     //width: 100%;
     //padding: 10px ;
     text-align: right;
+    color: #EDEC90;
 }
 
 #chyba{
@@ -144,16 +147,18 @@ body {
 
 #uvod{
    // border-top: 1px solid black;
-    border-top-style:  inset;
-    border-bottom-style:  outset;
+   // border-top-style:  inset;
+  //  border-bottom-style:  outset;
     width: 100%; 
     margin: 0px; 
     padding: 0px;
     min-height:1000px;
-    background-repeat: no-repeat;
-    background-image: url(pozadie.jpg);
+     background-repeat: no-repeat;
+    //background-attachment: fixed;
+    background-image: url(pozadie3.jpg);
+    background-size: cover;
     opacity:0.8;
-    background-size:   cover;
+   
 }
 .tlacidlo_uvod:link, .tlacidlo_uvod:visited{
     text-decoration: none;

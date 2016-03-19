@@ -28,12 +28,13 @@ class ZdrojeKontroler extends Kontroler {
         $vypisZdrojov = new VypisZdrojov();
         //metoda ktora vrati zdroje pre vypis  zoznamu vsetkych zdrojov pouzivatela, ktory je proihlaseny
         $zdroje = $vypisZdrojov->vratZdrojeSautorom($pouzivatelovo_id,$zoradit);
-        //metoda ktora vrati zdroj podla zdroj_id a podla toho zobrazi ukazku
         $zdroje_ukazka = $vypisZdrojov->vratZdrojPodlaZdrojId($id);
         $autori=$vypisZdrojov->vratAutorov($id);
         $slovicka=$vypisZdrojov->vratKlucoveSlova($id);
         $okruhy=$vypisZdrojov->vratOkruhy($id);
-        print_r($okruhy);
+       // print_r($zdroje);
+       // echo ('<br><br>');
+       //echo count($zdroje);
        
        
                 

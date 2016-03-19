@@ -1,3 +1,86 @@
+<head>
+    <script type="text/javascript">
+        /*
+         * prva moznost
+         function novy_radek() {
+         var radku = document.getElementById('tabulka').rows.length;
+         var radek = document.getElementById('tabulka').insertRow(radku);
+         var bunka = radek.insertCell(0);
+         bunka.innerHTML = "<input class=formular_vstup type=text name=cosi[] value=xyz>";
+         return false;
+         }
+         */
+
+        /*druha moznost
+         var prvniPolozka = document.getElementById('sablona');
+         var sablona = prvniPolozka.cloneNode(true);
+         
+         function pridaj2() {
+         var kopie = sablona.cloneNode(true);
+         document.getElementById('polozky').appendChild(kopie);
+         kopie.getElementsByTagName("input")[0].focus();
+         }
+         
+         function odstran2(el) {
+         var polozka = el.parentNode;
+         polozka.parentNode.removeChild(polozka);
+         }
+         */
+
+
+        function addMember()
+        {
+            try {
+                var elm = document.getElementById('members').getElementsByTagName('tr')[0];
+                var emn = elm.cloneNode(true);
+                document.getElementById('members').appendChild(emn);
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+
+
+
+        function pridajSlovo() {
+            var radku = document.getElementById('slova').rows.length;
+            var radek = document.getElementById('slova').insertRow(radku);
+            var bunka = radek.insertCell(0);
+            bunka.innerHTML = "<input class=formular_vstup type=text name=cosi[] value=>";
+            return false;
+        }
+
+        function odstranSlovo(el) {
+            var polozka = el.parentNode;
+            polozka.parentNode.removeChild(polozka);
+        }
+
+        function pridajOkruh() {
+            var radku = document.getElementById('okruhy').rows.length;
+            var radek = document.getElementById('okruhy').insertRow(radku);
+            var bunka = radek.insertCell(0);
+            bunka.innerHTML = "<input class=formular_vstup type=text name=cosi[] value=>";
+            return false;
+        }
+        function pridajDruh() {
+            var radku = document.getElementById('druhy').rows.length;
+            var radek = document.getElementById('druhy').insertRow(radku);
+            var bunka = radek.insertCell(0);
+            bunka.innerHTML = "<input class=formular_vstup type=text name=cosi[] value=>";
+            return false;
+        }
+        function pridajAutora() {
+            var radku = document.getElementById('autor').rows.length;
+            var radek = document.getElementById('autor').insertRow(radku);
+            var bunka = radek.insertCell(0);
+            bunka.innerHTML = "<input class=formular_vstup type=text name=cosi[] value=>";
+            return false;
+        }
+
+
+    </script>
+</head>
+
+
 <div id="administracia" >
     Používateľ: <?php echo $pouzivatel['meno'] ?>
     <a  class= "modry_odkaz" href="uvod/odhlasit"> Odhlásiť </a>
@@ -12,9 +95,11 @@
 
 
 <div id="editor">
+
+
     <form method="post">
         <input type="hidden" name="zdroj_id" value="<?= $zdroj['zdroj_id'] ?>"/>
-        <input type="hidden" name="zdroj_id" value="<?= $autor['autor_id'] ?>"/>
+        <input type="hidden" name="autor_id" value="<?= $autor['autor_id'] ?>"/>
         <input type="hidden" name="klucove_slovo_id" value="<?= $klucove_slovo['klucove_slovo_id'] ?>"/>
         <input type="hidden" name="okruh_id" value="<?= $okruh['okruh_id'] ?>"/>
         <input type="hidden" name="pouzivatel_id" value="<?= $zdroj['pouzivatel_id'] ?>"/>
@@ -22,77 +107,82 @@
 
 
 
-        <table border="1" align="center" >
-            <tr> <td> Titul pred menom autora:  </td>
-                <td><input class="formular_vstup" type="text" name="titul_pred" value="<?= $autor['titul_pred'] ?>" autofocus/> </td></tr>
+        <table id= "autor" border="0" align="justify" >
+            <tr> <td> Autor:  <td></tr>
+            <tr>     <td><input class="formular_vstup" placeholder="titul" type="text" name="titul_pred" value="<?= $autor['titul_pred'] ?>" autofocus/> </td>
+                <td><input class="formular_vstup" placeholder="meno" type="text" name="meno" value="<?= $autor['meno'] ?>" autofocus/> </td>
+                <td><input class="formular_vstup" type="text" placeholder="priezvisko" name="priezvisko" value="<?= $autor['priezvisko'] ?>"/> </td>
+                <td><input class="formular_vstup" type="text" placeholder="titul" name="titul_po" value="<?= $autor['titul_po'] ?>" autofocus/> </td>
+                <td> <input type="button" onclick="pridajAutora()" value="+"  />    </td>           
+                <td> <input type="button" onclick="pridajAutora(this)" value="x"  />    </td></tr>
+        </table>
 
-            <tr> <td> Meno autora:  
-                <td><input class="formular_vstup" type="text" name="meno" value="<?= $autor['meno'] ?>" autofocus/> </td></tr>
+        <table id="druhy" border="0" align="justify" >
+            <tr> <td> Druh zdroja-navyber:</td> </tr>
+            <tr> <td><input class="formular_vstup" type="text" name="druh_zdroja" value="<?= $zdroj['druh_zdroja'] ?>" /></td>
+                <td> <input type="button" onclick="pridajDruh()" value="+"  />    </td>           
+                <td> <input type="button" onclick="odstranDruh(this)" value="x"/>    </td>       </tr>
+        </table>
 
-            <tr> <td> Priezvisko autora: 
-                <td><input class="formular_vstup" type="text" name="priezvisko" value="<?= $autor['priezvisko'] ?>"/> </td></tr>
-           
-            <tr> <td> Titul za  menom autora:  
-                <td><input class="formular_vstup" type="text" name="titul_po" value="<?= $autor['titul_po'] ?>" autofocus/> </td>
+        <table id="okruhy" border="0"align="justify">
+            <tr> <td> Okruh-navyber:  </td></tr>
+            <tr><td><input class="formular_vstup" type="text" name="nazov_okruhu" value="<?= $okruh['nazov_okruhu'] ?>"/></td>
+                <td> <input type="button" onclick="pridajOkruh()" value="+" />    </td>           
+                <td> <input type="button" onclick="odstranOkruh(this)" value="x"  />    </td>   </tr>    
+        </table>
 
-            <td> <input class="formular_vstup"  type="button" value="Pridať viac autorov" onclick="over();" > </td></tr>
+        <table id="slova" border="0" align="justify" >
+            <tr> <td>Kľúčové slová:</td>  </tr>
+            <tr> <td>      <input class="formular_vstup" type="text" value="<?= $klucove_slovo['klucove_slovo'] ?> "/></td>  
+                <td> <input type="button" onclick="pridajSlovo()" value="+"  />    </td>           
+                <td> <input type="button" onclick="odstranSlovo(this)" value="x"  />    </td>  </tr>         
+        </table>
 
-            <tr> <td> Druh zdroja-navyber: 
-                <td><input class="formular_vstup" type="text" name="druh_zdroja" value="<?= $zdroj['druh_zdroja'] ?>" /></td>
 
-                <td> <input class="formular_vstup" type="button" value="Pridať ďalší okruh" onclick="over();" > </td></tr>
+        <table align="left" border="0" align="justify">
 
-            <tr> <td> Okruh-navyber:
-                <td><input class="formular_vstup" type="text" name="nazov_okruhu" value="<?= $okruh['nazov_okruhu'] ?>"/></td>
 
-                <td> <input class="formular_vstup" type="button" value="Pridať ďalší okruh" onclick="over();" > </td></tr>
+            <tr> <td> Nazov:</td></tr>
+            <td><input class="formular_vstup" type="text" name="nazov" value="<?= $zdroj['nazov'] ?> "/> </td></tr>
 
-            <tr> <td> Kľúčové slovo: 
-                <td><input class="formular_vstup" type="text" name="klucove_slovo" value="<?= $klucove_slovo['klucove_slovo'] ?> "/></td>
+            <tr><td> Podnázov:</td></tr>
+            <td> <input class="formular_vstup" type="text" name="podnazov" value="<?= $zdroj['podnazov'] ?>"/> </td></tr>
 
-                <td> <input class="formular_vstup" type="button" value="Pridať ďalšie kľúčové slovo" onclick="over();" > </td></tr>
+            <tr> <td> Vydanie:</td></tr>
+            <td><input class="formular_vstup" type="text" name="vydanie" value="<?= $zdroj['vydanie'] ?>"/> </td></tr> 
 
-            <tr> <td> Nazov: 
-                <td><input class="formular_vstup" type="text" name="nazov" value="<?= $zdroj['nazov'] ?> "/> </td></tr>
+            <tr> <td> Miesto vydania:</td></tr>
+            <td><input class="formular_vstup" type="text" name="miesto_vydania" value="<?= $zdroj['miesto_vydania'] ?>" /> </td></tr> 
 
-            <tr> <td> Podnázov:
-                <td> <input class="formular_vstup" type="text" name="podnazov" value="<?= $zdroj['podnazov'] ?>"/> </td></tr>
+            <tr> <td> Vydavateľstvo:</td></tr>
+            <td><input class="formular_vstup" type="text" name="vydavatelstvo" value="<?= $zdroj['vydavatelstvo'] ?>"/> </td></tr> 
 
-            <tr> <td> Vydanie:
-                <td><input class="formular_vstup" type="text" name="vydanie" value="<?= $zdroj['vydanie'] ?>"/> </td></tr> 
+            <tr> <td> Rok vydania: </td></tr>
+            <td><input class="formular_vstup" type="text" name="rok_vydania" value="<?= $zdroj['rok_vydania'] ?>"/> </td></tr> 
 
-            <tr> <td> Miesto vydania:
-                <td><input class="formular_vstup" type="text" name="miesto_vydania" value="<?= $zdroj['miesto_vydania'] ?>" /> </td></tr> 
+            <tr> <td> ISBN:</td></tr>
+            <td><input class="formular_vstup" type="text" name="isbn" value="<?= $zdroj['isbn'] ?>"/> </td></tr> 
 
-            <tr> <td> Vydavateľstvo:
-                <td><input class="formular_vstup" type="text" name="vydavatelstvo" value="<?= $zdroj['vydavatelstvo'] ?>"/> </td></tr> 
+            <tr> <td> ISSN:</td></tr>
+            <td><input class="formular_vstup" type="text" name="issn" value="<?= $zdroj['issn'] ?>"/> </td></tr> 
 
-            <tr> <td> Rok vydania: 
-                <td><input class="formular_vstup" type="text" name="rok_vydania" value="<?= $zdroj['rok_vydania'] ?>"/> </td></tr> 
+            <tr> <td> DOI: </td></tr>
+            <td><input class="formular_vstup" type="text" name="doi" value="<?= $zdroj['doi'] ?>"/> </td></tr> 
 
-            <tr> <td> ISBN:
-                <td><input class="formular_vstup" type="text" name="isbn" value="<?= $zdroj['isbn'] ?>"/> </td></tr> 
+            <tr> <td> Strany:</td></tr>
+            <td><input class="formular_vstup" type="text" name="strany" value="<?= $zdroj['strany'] ?>"/> </td></tr> 
 
-            <tr> <td> ISSN:
-                <td><input class="formular_vstup" type="text" name="issn" value="<?= $zdroj['issn'] ?>"/> </td></tr> 
+            <tr> <td> URL adresa:</td></tr>
+            <td><input class="formular_vstup" type="text" name="url" value="<?= $zdroj['url'] ?>"/> </td></tr> 
 
-            <tr> <td> DOI: 
-                <td><input class="formular_vstup" type="text" name="doi" value="<?= $zdroj['doi'] ?>"/> </td></tr> 
+            <tr> <td> Dátum aktualizácie:</td></tr> 
+            <td><input class="formular_vstup" type="text" name="datum_aktualizacie" value="<?= $zdroj['datum_aktualizacie'] ?>"/> </td></tr> 
 
-            <tr> <td> Strany:
-                <td><input class="formular_vstup" type="text" name="strany" value="<?= $zdroj['strany'] ?>"/> </td></tr> 
+            <tr> <td> Hodnotenie - vyber:</td></tr>
+            <td><input class="formular_vstup" type="text" name="hodnotenie" value="<?= $zdroj['hodnotenie'] ?>"/> </td></tr> 
 
-            <tr> <td> URL adresa:
-                <td><input class="formular_vstup" type="text" name="url" value="<?= $zdroj['url'] ?>"/> </td></tr> 
-
-            <tr> <td> Dátum aktualizácie: 
-                <td><input class="formular_vstup" type="text" name="datum_aktualizacie" value="<?= $zdroj['datum_aktualizacie'] ?>"/> </td></tr> 
-
-            <tr> <td> Hodnotenie - vyber:
-                <td><input class="formular_vstup" type="text" name="hodnotenie" value="<?= $zdroj['hodnotenie'] ?>"/> </td></tr> 
-
-            <tr> <td> Poznámka:
-                <td><textarea class="formular_vstup" name="poznamka"><?= $zdroj['poznamka'] ?></textarea> </td></tr> 
+            <tr> <td> Poznámka:</td></tr>
+            <td><textarea class="formular_vstup" name="poznamka"><?= $zdroj['poznamka'] ?></textarea> </td></tr> 
         </table>
 
         <input class= "potvrdzovacie_tlacidlo" type="submit" value="Pridať" />
