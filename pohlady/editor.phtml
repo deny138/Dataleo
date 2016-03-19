@@ -1,11 +1,12 @@
 <head>
     <script type="text/javascript">
-        
+
         function pridajSlovo() {
             var radku = document.getElementById('slova').rows.length;
             var radek = document.getElementById('slova').insertRow(radku);
             var bunka = radek.insertCell(0);
-            bunka.innerHTML = "<input class=formular_vstup type=text name=cosi[] value=>";
+            bunka.innerHTML = " <input class=formular_vstup type=text name=klucove_slovo value=<?= $klucove_slovo['klucove_slovo'] ?> >  ";
+
             return false;
         }
         function odstranSlovo(el) {
@@ -38,8 +39,9 @@
 
 
 <div id="administracia" >
-    Používateľ: <?php echo $pouzivatel['meno'] ?>
-    <a  class= "modry_odkaz" href="uvod/odhlasit"> Odhlásiť </a>
+    <img src="user.png"> <?php echo $pouzivatel['meno'] ?> 
+    <a  class= "modry_odkaz" href="uvod/odhlasit"> <img src="exit.png"> </a>
+
 </div>
 
 
@@ -61,7 +63,7 @@
 
 
 
-         <table id= "autor" border="0" align="justify" >
+        <table id= "autor" border="0" align="justify" >
             <tr> <td> Autor:  <td></tr>
             <tr>     <td><input class="formular_vstup" placeholder="titul" type="text" name="titul_pred" value="<?= $autor['titul_pred'] ?>" autofocus/> </td>
                 <td><input class="formular_vstup" placeholder="meno" type="text" name="meno" value="<?= $autor['meno'] ?>" autofocus/> </td>
@@ -70,29 +72,29 @@
                 <td> <input type="button" onclick="pridajAutora()" value="+"  />    </td>           
                 <td> <input type="button" onclick="pridajAutora(this)" value="x"  />    </td></tr>
         </table>
-        
+
         <table id="druhy" border="0" align="justify" >
             <tr> <td> Druh zdroja-navyber:</td> </tr>
             <tr> <td><input class="formular_vstup" type="text" name="druh_zdroja" value="<?= $zdroj['druh_zdroja'] ?>" /></td>
                 <td> <input type="button" onclick="pridajDruh()" value="+"  />    </td>           
                 <td> <input type="button" onclick="odstranDruh(this)" value="x"/>    </td>       </tr>
         </table>
-        
-         <table id="okruhy" border="0"align="justify">
+
+        <table id="okruhy" border="0" align="justify">
             <tr> <td> Okruh-navyber:  </td></tr>
             <tr><td><input class="formular_vstup" type="text" name="nazov_okruhu" value="<?= $okruh['nazov_okruhu'] ?>"/></td>
                 <td> <input type="button" onclick="pridajOkruh()" value="+" />    </td>           
                 <td> <input type="button" onclick="odstranOkruh(this)" value="x"  />    </td>   </tr>    
         </table>
-        
-         <table id="slova" border="0" align="justify" >
+
+        <table id="slova" border="0" align="justify" >
             <tr> <td>Kľúčové slová:</td>  </tr>
             <tr> <td>      <input class="formular_vstup" type="text" name="klucove_slovo" value="<?= $klucove_slovo['klucove_slovo'] ?> "/></td>  
                 <td> <input type="button" onclick="pridajSlovo()" value="+"  />    </td>           
                 <td> <input type="button" onclick="odstranSlovo(this)" value="x"  />    </td>  </tr>         
         </table>
-        
-         <table align="left" border="0" align="justify">
+
+        <table  border="0" align="justify">
 
 
             <tr> <td> Nazov:</td></tr>
@@ -132,13 +134,57 @@
             <td><input class="formular_vstup" type="text" name="datum_aktualizacie" value="<?= $zdroj['datum_aktualizacie'] ?>"/> </td></tr> 
 
             <tr> <td> Hodnotenie - vyber:</td></tr>
-            <td><input class="formular_vstup" type="text" name="hodnotenie" value="<?= $zdroj['hodnotenie'] ?>"/> </td></tr> 
+            <td> <select name="hodnotenie" >
+                    <?php if (($zdroj['hodnotenie']) == 1): ?>
+                        <option value="1" selected> 1 - výborné </option>
+                        <option value="2" > 2 - veľmi dobré </option>
+                        <option value="3" > 3 - dobré </option>
+                        <option value="4" >4 - uspokojivé </option>
+                        <option value="5" > 5 - zlé </option>
+
+                    <?php elseif (($zdroj['hodnotenie']) == 2): ?>
+                        <option value="2" selected> 2 - veľmi dobré </option>
+                        <option value="1" > 1 - výborné </option>
+                        <option value="3" > 3 - dobré </option>
+                        <option value="4" >4 - uspokojivé </option>
+                        <option value="5" > 5 - zlé </option>
+
+                    <?php elseif (($zdroj['hodnotenie']) == 3): ?>
+                        <option value="3" selected> 3 - dobré </option>
+                        <option value="1" > 1 - výborné </option>
+                        <option value="2" > 2 - veľmi dobré </option>
+                        <option value="4" >4 - uspokojivé </option>
+                        <option value="5" > 5 - zlé </option>
+
+                    <?php elseif (($zdroj['hodnotenie']) == 4): ?>
+                        <option value="4" selected>4 - uspokojivé </option>
+                        <option value="1" > 1 - výborné </option>
+                        <option value="2" > 2 - veľmi dobré </option>
+                        <option value="3" > 3 - dobré </option>
+                        <option value="5" > 5 - zlé </option>
+
+                    <?php elseif (($zdroj['hodnotenie']) == 5): ?>
+                        <option value="1" > 1 - výborné </option>
+                        <option value="2" > 2 - veľmi dobré </option>
+                        <option value="3" > 3 - dobré </option>
+                        <option value="4" >4 - uspokojivé </option>
+                        <option value="5" selected> 5 - zlé </option>
+
+                    <?php else: ?>
+                        <option value="1" > 1 - výborné </option>
+                        <option value="2" > 2 - veľmi dobré </option>
+                        <option value="3" > 3 - dobré </option>
+                        <option value="4" >4 - uspokojivé </option>
+                        <option value="5" > 5 - zlé </option>
+                    <?php endif ?>
+                </select>
+            </td></tr> 
 
             <tr> <td> Poznámka:</td></tr>
             <td><textarea class="formular_vstup" name="poznamka"><?= $zdroj['poznamka'] ?></textarea> </td></tr> 
-        </table>
 
-        <input class= "potvrdzovacie_tlacidlo" type="submit" value="Pridať" />
-        <input class= "modry_odkaz"  type="reset" value="Zmazať">
+            <tr>  <td><input class= "potvrdzovacie_tlacidlo" type="submit" value="Pridať" /></td></tr>
+            <tr><td><input class= "modry_odkaz"  type="reset" value="Zmazať"></td></tr>
+        </table>
     </form>
 </div>

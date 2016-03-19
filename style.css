@@ -56,6 +56,7 @@ body {
     height: 100%;
     width: 100%;
     clear: both;
+    padding-top: 5px;
    
    
 }
@@ -112,6 +113,7 @@ body {
 #editor{ 
     padding-top: 100px;
     text-align: center;
+    padding-left: 15%;
 }
 
 #pata {
@@ -261,22 +263,6 @@ a.tlacidlo_blik:hover{
     color: #fff;
 }
 
-.plus{
-    text-decoration: none; 
-    // border: 3px solid #333;
-    cursor: pointer;
-    display: inline-block;
-    background-color: #008080;
-    border-radius: 100%;
-    color:white;
-    font-size: 150%;
-    padding: 5px 15px 5px 15px;
-    -webkit-transition: 0.2s ease-in-out;
-    transition: 0.5s ease-in-out;
-}
-.plus:hover{
-    background:#333;
-}
 
 .sive_pismo{
     color:#aebdc1;
@@ -313,14 +299,44 @@ a.tlacidlo_blik:hover{
     color: white;
 }
 
-th {
+table.zdroje{
+  
+}
+
+th.zdroje{
     text-align: center;
     background-color: #333;
     color: white;
-    font-size: 75%;
+    font-size:100%;
+    padding: 10px;
 }
 
-th, td {
-    padding: 10px;
+tr, td {
     text-align: left;
+    padding: 5px;
+}
+
+
+table.ukazka{
+          //background-color: #008080;
+          padding: 10px;
+         border: 1px solid #008080;
+
+}
+
+th.ukazka_nadpis{
+    color: #333;
+    font-size: 130%;
+}
+
+th.ikonka_close{
+    text-align: right;
+}
+
+
+    
+
+
+#close_ikonka{
+    text-align: right;
 }

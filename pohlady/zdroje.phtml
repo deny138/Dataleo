@@ -1,7 +1,7 @@
 <div id="administracia" >
-    Používateľ: <?php echo $pouzivatel['meno'] ?> 
-    <a  class= "modry_odkaz" href="uvod/odhlasit"> Odhlásiť </a>
-     
+    <img src="user.png"> <?php echo $pouzivatel['meno'] ?> 
+    <a  class= "modry_odkaz" href="uvod/odhlasit"> <img src="exit.png"> </a>
+
 </div>
 
 
@@ -11,40 +11,47 @@
 
 
 <div id="prveOkno">
-    <a class= "plus" href="editor"> + </a> <br> 
+    <a href="editor"> <img src="add.png"></a> <br> 
 </div>
 
 
 <div style="overflow-x:auto" id="druheOkno">
 
-    <table>
+    <table class="zdroje">
         <tr>
+            <td>
+            </td>
 
-            <th>
+            <th class="zdroje">
                 <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=nazov">  Názov diela</b </a>
             </th>
-            <th>
+           <th class="zdroje">
                 <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=meno">  Meno autora</b </a>
 
             </th>
-            <th>
+            <th class="zdroje">
                 <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=priezvisko">  Priezvisko autora</b </a>
 
             </th>
-            <th>
+           <th class="zdroje">
                 <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=priezvisko">  Rok vydania</b </a>
             </th>
-            <th>
+            <th class="zdroje">
                 <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=datum_pridania"> Dátum pridania</b </a>
             </th>
-            <th>
+             <th class="zdroje">
                 <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=hodnotenie">  Hodnotenie</b </a>
             </th>
 
             <?php foreach ($zdroje as $zdroj) : ?>
             <tr>
                 <td>
-                    <a class="cierny_odkaz_podciarknuty" href="http://localhost/zdroje?zdroj_id=<?= $zdroj['zdroj_id'] ?>">  <?= $zdroj['nazov']; ?> </a>
+                    <a href="http://localhost/zdroje?zdroj_id=<?= $zdroj['zdroj_id']; ?>"><img src="show.png"></a>
+                    <a href="http://localhost/editor/<?= $zdroj['zdroj_id']; ?>/edituj"><img src="edit.png"></a>
+                    <a href="http://localhost/editor/<?= $zdroj['zdroj_id']; ?>/odstranit"><img src="delete.png"></a>
+                </td>
+                <td>
+                    <a class="cierny_odkaz_podciarknuty" href="http://localhost/zdroje?zdroj_id=<?= $zdroj['zdroj_id']; ?>"> <?= $zdroj['nazov']; ?></a>
                 </td>
                 <td>
                     <?php
@@ -94,8 +101,9 @@
 
 <div style="overflow-x:auto" id="tretieOkno">
     <?php if (!empty($_GET['zdroj_id'])): ?> 
-        <table border="0">
-            <tr><th>  <?= $zdroje_ukazka['nazov']; ?></th><th></th> </tr>
+        <table class="ukazka" border="0">
+            <th class="ukazka_nadpis"> <?= $zdroje_ukazka['nazov']; ?> </th><th class="ikonka_close">  <a  href="http://localhost/zdroje"> <img class="close_ikonka" src="close.png"> </a>
+            </th>
 
             <tr>
                 <td>Autor/i: </td> <?php
@@ -106,11 +114,11 @@
                 }
                 foreach ($autori as $autor):
                     ?>
-                    <?= $autor['titul_pred'] ." ".$autor['meno'] ." ".$autor['priezvisko']." ".$autor['titul_po']. "<br>"; ?>
-                    <?php endforeach ?>
+                    <?= $autor['titul_pred'] . " " . $autor['meno'] . " " . $autor['priezvisko'] . " " . $autor['titul_po'] . "<br>"; ?>
+                <?php endforeach ?>
             </tr>
-            
-             <tr>
+
+            <tr>
                 <td>Okruh/y: </td> <?php
                 if (!$okruhy) {
                     echo "<td>-</td>";
@@ -120,9 +128,9 @@
                 foreach ($okruhy as $okruh):
                     ?>
                     <?= $okruh['nazov_okruhu']; ?>
-                    <?php endforeach ?>
+                <?php endforeach ?>
             </tr>
-            
+
             <tr>
                 <td>Zdroj ID: </td> <?php
                 if (!$zdroje_ukazka['zdroj_id']) {
@@ -338,30 +346,23 @@
                 foreach ($slovicka as $slovicko):
                     ?>
                     <?= $slovicko['klucove_slovo']; ?>
-                    <?php endforeach ?>
+                <?php endforeach ?>
             </tr>
 
 
 
-            
+
 
 
         </table>
-        <div align="right"> <a class="sive_pismo" href="http://localhost/zdroje"> Späť </a></div>
+        <a class="potvrdzovacie_tlacidlo" href="http://localhost/editor/<?= $_GET['zdroj_id'] ?>"> Editovať</a>
+        <a class="potvrdzovacie_tlacidlo" href="http://localhost/editor/<?= $_GET['zdroj_id'] ?>/odstranit"> Vymazať </a>
+
     </div>
 
 
 
 <?php elseif (empty($_GET['zdroj_id'])): ?>
-    <table border="0" align="justify" >
-        <tr> <td> Filtrovať  podľa autora </td> <td> <input class="formular_vstup" type="text" name="heslo_reg" /><br> </td> </tr>
-        <tr> <td> Filtrovať  podľa názvu </td> <td> <input class="formular_vstup" type="text" name="heslo_reg" /><br> </td> </tr>
-        <tr> <td> Filtrovať  podľa roku vydania </td> <td> <input  class="formular_vstup" type="text" name="heslo_reg" /><br> </td> </tr>
-        <tr> <td> Filtrovať  podľa druhu </td> <td> <input class="formular_vstup" type="text" name="heslo_reg" /><br> </td> </tr>
-        <tr> <td> Filtrovať  podľa dátumu pridania </td> <td> <input class="formular_vstup" type="text" name="heslo_reg" /><br> </td> </tr>
-        <tr> <td> Filtrovať  podľa hodnotenia </td> <td> <input class="formular_vstup" type="text" name="heslo_reg" /><br> </td> </tr>
-        <tr><td></td> <td> <input class="potvrdzovacie_tlacidlo" type="submit" value="Filtrovať zoznam"></td></tr>
-    </table>
 
-    </div>
+
 <?php endif; ?>
