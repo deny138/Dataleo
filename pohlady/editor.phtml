@@ -1,46 +1,6 @@
 <head>
     <script type="text/javascript">
-        /*
-         * prva moznost
-         function novy_radek() {
-         var radku = document.getElementById('tabulka').rows.length;
-         var radek = document.getElementById('tabulka').insertRow(radku);
-         var bunka = radek.insertCell(0);
-         bunka.innerHTML = "<input class=formular_vstup type=text name=cosi[] value=xyz>";
-         return false;
-         }
-         */
-
-        /*druha moznost
-         var prvniPolozka = document.getElementById('sablona');
-         var sablona = prvniPolozka.cloneNode(true);
-         
-         function pridaj2() {
-         var kopie = sablona.cloneNode(true);
-         document.getElementById('polozky').appendChild(kopie);
-         kopie.getElementsByTagName("input")[0].focus();
-         }
-         
-         function odstran2(el) {
-         var polozka = el.parentNode;
-         polozka.parentNode.removeChild(polozka);
-         }
-         */
-
-
-        function addMember()
-        {
-            try {
-                var elm = document.getElementById('members').getElementsByTagName('tr')[0];
-                var emn = elm.cloneNode(true);
-                document.getElementById('members').appendChild(emn);
-            } catch (e) {
-                alert(e.message);
-            }
-        }
-
-
-
+        
         function pridajSlovo() {
             var radku = document.getElementById('slova').rows.length;
             var radek = document.getElementById('slova').insertRow(radku);
@@ -48,12 +8,10 @@
             bunka.innerHTML = "<input class=formular_vstup type=text name=cosi[] value=>";
             return false;
         }
-
         function odstranSlovo(el) {
             var polozka = el.parentNode;
             polozka.parentNode.removeChild(polozka);
         }
-
         function pridajOkruh() {
             var radku = document.getElementById('okruhy').rows.length;
             var radek = document.getElementById('okruhy').insertRow(radku);
@@ -75,8 +33,6 @@
             bunka.innerHTML = "<input class=formular_vstup type=text name=cosi[] value=>";
             return false;
         }
-
-
     </script>
 </head>
 
@@ -95,8 +51,6 @@
 
 
 <div id="editor">
-
-
     <form method="post">
         <input type="hidden" name="zdroj_id" value="<?= $zdroj['zdroj_id'] ?>"/>
         <input type="hidden" name="autor_id" value="<?= $autor['autor_id'] ?>"/>
@@ -107,7 +61,7 @@
 
 
 
-        <table id= "autor" border="0" align="justify" >
+         <table id= "autor" border="0" align="justify" >
             <tr> <td> Autor:  <td></tr>
             <tr>     <td><input class="formular_vstup" placeholder="titul" type="text" name="titul_pred" value="<?= $autor['titul_pred'] ?>" autofocus/> </td>
                 <td><input class="formular_vstup" placeholder="meno" type="text" name="meno" value="<?= $autor['meno'] ?>" autofocus/> </td>
@@ -116,30 +70,29 @@
                 <td> <input type="button" onclick="pridajAutora()" value="+"  />    </td>           
                 <td> <input type="button" onclick="pridajAutora(this)" value="x"  />    </td></tr>
         </table>
-
+        
         <table id="druhy" border="0" align="justify" >
             <tr> <td> Druh zdroja-navyber:</td> </tr>
             <tr> <td><input class="formular_vstup" type="text" name="druh_zdroja" value="<?= $zdroj['druh_zdroja'] ?>" /></td>
                 <td> <input type="button" onclick="pridajDruh()" value="+"  />    </td>           
                 <td> <input type="button" onclick="odstranDruh(this)" value="x"/>    </td>       </tr>
         </table>
-
-        <table id="okruhy" border="0"align="justify">
+        
+         <table id="okruhy" border="0"align="justify">
             <tr> <td> Okruh-navyber:  </td></tr>
             <tr><td><input class="formular_vstup" type="text" name="nazov_okruhu" value="<?= $okruh['nazov_okruhu'] ?>"/></td>
                 <td> <input type="button" onclick="pridajOkruh()" value="+" />    </td>           
                 <td> <input type="button" onclick="odstranOkruh(this)" value="x"  />    </td>   </tr>    
         </table>
-
-        <table id="slova" border="0" align="justify" >
+        
+         <table id="slova" border="0" align="justify" >
             <tr> <td>Kľúčové slová:</td>  </tr>
-            <tr> <td>      <input class="formular_vstup" type="text" value="<?= $klucove_slovo['klucove_slovo'] ?> "/></td>  
+            <tr> <td>      <input class="formular_vstup" type="text" name="klucove_slovo" value="<?= $klucove_slovo['klucove_slovo'] ?> "/></td>  
                 <td> <input type="button" onclick="pridajSlovo()" value="+"  />    </td>           
                 <td> <input type="button" onclick="odstranSlovo(this)" value="x"  />    </td>  </tr>         
         </table>
-
-
-        <table align="left" border="0" align="justify">
+        
+         <table align="left" border="0" align="justify">
 
 
             <tr> <td> Nazov:</td></tr>
@@ -189,6 +142,3 @@
         <input class= "modry_odkaz"  type="reset" value="Zmazať">
     </form>
 </div>
-
-
-
