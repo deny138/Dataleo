@@ -1,0 +1,106 @@
+/* #menu div {padding-left: 10px; margin-left: 0px; background-color: #CFCFCF;} */
+/* #menu div:hover {background-image: url('../images/bg_16_green.png');} */
+/* #menu a {color: gray; text-decoration: none;} */
+/* #menu a:hover {color: black; text-decoration: none;} */
+/* #menu a:visited {color: green;} */
+/* #menu #plus {font-weight: bold;} /* sekce s min. 1 podsekcí */
+/* #menu #minus {font-weight: bold; font-style: italic;} /* sekce s min.1 podsekcí z aktuální (vybrané) cesty */
+/* #menu #last {} /* koneèná sekce, žádná podpoložka */
+/* #menu #blank {} /* nepoužito */
+/* #menu #selected {color: white; font-style: italic;} */
+/* #menu .selected {background-repeat: repeat-x; background-image: url('../images/bg_16.png');} */
+/* #menu li.img {margin: 0px; padding: 0px;}*/
+/* .menu.level1 {color: #AFA0A0;} */
+
+form {margin: 0px; padding: 0px;}
+
+.form {width: 90%; padding: 10px; text-align: left; font-size: 12px; font-weight: bold; border: 1px solid black;}
+.form form {margin: 0px;}
+.form input {width: 100%;}
+.form select {width: 100%;}
+.form textarea {width: 100%;}
+.form input.radio {width: 18px;}
+.form input.medium {width: 200px;}
+.form input.small {width: 30px;}
+
+.form_hidden {display: none;}
+.form_hidden a {color: yellow;}
+
+/* .message {text-align: center;} */
+/* .message div {text-align: left; width: 80%; background-color: blue; color: white; padding: 4px; border: 1px solid black;} */
+
+.tree_section, .tree_content, .tree_plugin {list-style-type: none; /* žádné odrážky u stromeèku */
+											padding: 4px; 
+											margin: 4px 4px 4px 8px; 
+											border: 1px solid black;
+											font-size: 12px; 
+											text-align: left;
+											color: #000000;} 
+.tree_section {background-color: #968eff;}
+.tree_section_highlight {color: #665ecf; font-weight: bold;}
+
+.tree_content {background-color: #8effa1;}
+.tree_content_highlight {color: #5ecf71; font-weight: bold;}
+
+.tree_plugin {background-color: #ff8e8e;}
+.tree_plugin_highlight {color: #cf5e5e; font-weight: bold;}
+
+.tree_options {font-size: 10px;}
+/*.tree_one_option {color: black;}*/
+.tree_one_option:link {color: black;}
+
+.info_activator {text-decoration: underline; cursor: help;}
+.info_box {position: absolute;
+		   top: 16px;
+		   left: -45px;
+		   width: 300px;
+		   border: 1px solid black;
+		   background-color: #bbbbbb;
+		   color: black;
+		   padding: 4px;}
+		   
+/*plugin NAV -> sub_sections_links.php */
+.subcontents_nav, .subsections_nav a {text-decoration: none; color: #D6D300; font-size: 12px; font-weight: bold;}
+
+/*=============================================*/
+#menu {width: 240px; margin: 0px; font: normal 14px 'Play', Tahoma, Arial;} /* hlavní div generovaného menu */
+#menu .menu {display: block; background-color: #000000;}
+/* #menu .menu:hover {background-image: url('../images/bg_16_green.png');} */
+/* #menu .menu:visited {color: gray;} */
+#menu .plus {font-weight: bold;}
+#menu .selected {background-repeat: repeat-x; background-image: url('../images/bg_16.png'); color: #FFFFFF;}
+#menu .level0 {font-size: 14px;} /* styl 0. úrovnì */
+#menu .level1 {font-size: 13px;} /* styl 1. úrovnì */
+#menu .level2 {font-size: 12px;} /* styl 2. úrovnì */
+#menu .level3 {font-size: 11px;} /* styl 3. úrovnì */
+#menu .img_level0 {margin: 0px 4px 0px 4px;} /* styl symbolu 0. úrovnì */
+#menu .img_level1 {margin: 0px 4px 0px 14px;} /* styl symbolu 1. úrovnì */
+#menu .img_level2 {margin: 0px 4px 0px 24px;} /* styl symbolu 2. úrovnì */
+#menu .img_level3 {margin: 0px 4px 0px 34px;} /* styl symbolu 3. úrovnì */
+#menu a {color: white; text-decoration: none;}
+/*=============================================*/
+.span_dotnav a {color: green; text-decoration: none;}
+.span_dotnav a:link {color: green;}
+.span_dotnav a:visited {color: #FF11FF;}
+.span_dotnav_last {}
+.span_dotnav_text {font-weight: bold;}
+
+.div_comment_insert {border: 1px solid #000000; padding: 10px; text-align: left;}
+.div_comment_insert input {background-color: black; color: white; font-family: Verdana;}
+.div_comment_insert textarea {width: 100%; background-color: black; color: white; font-family: Verdana; height: 100px; font-size: 12px; padding: 4px;}
+.div_comment_display {border: 2px solid #000000; padding: 4px; text-align: left;}
+.div_comment_display  {}
+
+.message_info {background-color: #CCDFE6; border: 2px solid #4C7A8A; width: 80%; margin-top: 6px; margin-bottom: 6px; color: black;}
+.message_info td.title {font-size: 12px; font-weight: bold; background-color: #BCCFD6; padding: 2px 0px 2px 6px;}
+.message_info td.text {font-size: 10px; padding: 4px 8px 4px 12px; text-align: left; font-weight: bold;}
+.message_info td.text a {color: darkblue;}
+.message_info td.text a:hover {color: blue;}
+.message_info td.icon {width: 56px; text-align: center; padding: 6px;}
+
+.message_error {background-color: #FFC2C2; border: 2px solid #8A4C4C; width: 80%; margin-top: 6px; margin-bottom: 6px; color: black;}
+.message_error td.title {font-size: 12px; font-weight: bold; background-color: #F08181; padding: 2px 0px 2px 6px;}
+.message_error td.text {font-size: 10px; padding: 4px 8px 4px 12px; text-align: left; font-weight: bold;}
+.message_error td.text a {color: darkred;}
+.message_error td.text a:hover {color: red;}
+.message_error td.icon {width: 56px; text-align: center; padding: 6px;}

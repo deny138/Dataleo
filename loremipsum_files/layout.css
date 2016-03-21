@@ -1,0 +1,76 @@
+/* layout styles */
+body, html
+{
+	margin: 0px;
+	padding: 0px;
+	background: #505050;
+	text-align: center;
+	/* font: 12px sans-serif, Tahoma; */
+  font: 13px 'Roboto';
+  /* font-family: 'Doppio One', sans-serif; */
+  /*
+  font-family: 'Play', sans-serif;
+  font-size: 12px;
+  */
+  background: #34383e url('../images/bgGrad.png') repeat-x top; 
+}
+
+table {
+  font: 13px 'Roboto';
+}
+
+#header
+{
+	padding: 10px;
+	background: #000000;
+}
+
+#content_container{
+	width: 980px;
+	margin: 1em auto;
+	text-align: left;
+	background-color: transparent;
+	color: #CCCCCC;
+	border: none;
+}
+
+#content{
+	width: 980px;
+	/* margin: 1em auto; */
+	text-align: left;
+	background-color: #000000;
+	color: #CCCCCC;
+	border: 1px solid gray;
+}
+
+#left_panel{
+	float: left;
+	width: 240px;
+	margin: 0px;
+	padding: 0px;
+	clear: both;
+	border: none;
+}
+
+#left_panel_content{
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+}
+
+#main_panel{
+	margin: 0px 0px 0px 240px;
+	padding: 0px;
+}
+
+#main_panel_content{
+	margin: 0px;
+	padding: 0.5em 3em;
+	border-left: 1px solid gray;
+}
+
+#footer{
+	clear: both;
+	padding: 10px;
+	background: #000000;
+}

@@ -22,7 +22,11 @@ class VypisZdrojov {
                         . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka` FROM `zdroj`'
                         . 'WHERE `zdroj_id`=?', array($id));
     }
+    
+    
+    
 
+   
     /*
      * vrati vsetky zdroje spolu s autorom, budu sa vypisovat ako zoznam pre daneho pouzivatela
      * podmienkou je ze partia danemu pouzivatelovi

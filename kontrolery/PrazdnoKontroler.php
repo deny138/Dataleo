@@ -6,6 +6,9 @@ class PrazdnoKontroler extends Kontroler{
 
         $spravcaPouzivatelov = new SpravcaPouzivatelov();
         $pouzivatel = $spravcaPouzivatelov->vratPouzivatela();
+        
+        if (!$pouzivatel)
+            $this->presmeruj('prihlasenie');
       
         $this->data['pouzivatel'] = $pouzivatel;
         $this->pohlad='prazdno';

@@ -39,8 +39,8 @@
 
 
 <div id="administracia" >
-    <img src="user.png"> <?php echo $pouzivatel['meno'] ?> 
-    <a  class= "modry_odkaz" href="uvod/odhlasit"> <img src="exit.png"> </a>
+    <img src="resources/ikony/user.png"> <?php echo $pouzivatel['meno'] ?> 
+    <a  class= "modry_odkaz" href="uvod/odhlasit"> <img src="resources/ikony/exit.png"> </a>
 
 </div>
 
@@ -73,22 +73,458 @@
                 <td> <input type="button" onclick="pridajAutora(this)" value="x"  />    </td></tr>
         </table>
 
+
+
+
+
+
         <table id="druhy" border="0" align="justify" >
             <tr> <td> Druh zdroja-navyber:</td> </tr>
-            <tr> <td><input class="formular_vstup" type="text" name="druh_zdroja" value="<?= $zdroj['druh_zdroja'] ?>" /></td>
-                <td> <input type="button" onclick="pridajDruh()" value="+"  />    </td>           
-                <td> <input type="button" onclick="odstranDruh(this)" value="x"/>    </td>       </tr>
+            <td> <select name="druh_zdroja" class="formular_vstup"  >
+
+                    <?php if (($zdroj['druh_zdroja']) == "kniha"): ?>
+                        <option value="kniha" selected> Kniha </option>
+                        <option value="cast_klihy" > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "cast_knihy"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy" selected > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "periodikum"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" selected> Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "clanok"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum"  > Periodikum </option>
+                        <option value="clanok" selected> Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "zbornik"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" selected> Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "prispevok_v_zborniku"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" selected> Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "akademicka_praca"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" selected> Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "elektronicka_kniha"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" selected> Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "cast_elektronickej_knihy"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" selected> Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "elektronicke_periodikum"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" selected> Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "elektronicky_clanok"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" selected> Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "elektronicky_zbornik"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" selected> Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "elektronicka_akademicka_praca"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" selected> Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "elektronicky_prispevok_v_zborniku"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" selected> Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "web"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" selected> Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "webova_stranka"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" selected> Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "prispevok_na_webe"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" selected> Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "iny_dokument"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" selected> Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+
+                    <?php elseif (($zdroj['druh_zdroja']) == "nepublikovany_dokument"): ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="prispevok_na_webe" > Príspevok na webe </option>
+                        <option value="iny_dokument" > Iný dokument </option>
+                        <option value="nepublikovany_dokument" selected> Nepublikovaný dokument </option>
+
+
+
+                    <?php else: ?>
+                        <option value="kniha" > Kniha </option>
+                        <option value="cast_klihy"  > Časť knihy </option>
+                        <option value="periodikum" > Periodikum </option>
+                        <option value="clanok" > Článok </option>
+                        <option value="zbornik" > Zborník </option>
+                        <option value="prispevok_v_zborniku" > Príspevok v zborníku </option>
+                        <option value="akademicka_praca" > Akademická práca </option>
+                        <option value="elektronicka_kniha" > Elektronická kniha </option>
+                        <option value="cast_elektronickej_knihy" > Časť elektronickej knihy </option>
+                        <option value="elektronicke_periodikum" > Elektronické periodikum </option>
+                        <option value="elektronicky_clanok" > Elektronický článok</option>
+                        <option value="elektronicky_zbornik" > Elektronický zborník </option>
+                        <option value="elektronicka_akademicka_praca" > Elektronická akademická práca </option>
+                        <option value="elektronicky_prispevok_v_zborniku" > Elektronický príspevok v zborníku </option>
+                        <option value="web" > Web </option>
+                        <option value="webova_stranka" > Webová stránka </option>
+                        <option value="iny_dokument" selected> Iný dokument </option>
+                        <option value="nepublikovany_dokument" > Nepublikovaný dokument </option>
+                    <?php endif ?>
+                </select>
+            </td></tr> 
         </table>
 
+
+
+
+
         <table id="okruhy" border="0" align="justify">
-            <tr> <td> Okruh-navyber:  </td></tr>
+            <tr> <td> Okruh- TODO to co s autorom:  </td></tr>
             <tr><td><input class="formular_vstup" type="text" name="nazov_okruhu" value="<?= $okruh['nazov_okruhu'] ?>"/></td>
                 <td> <input type="button" onclick="pridajOkruh()" value="+" />    </td>           
                 <td> <input type="button" onclick="odstranOkruh(this)" value="x"  />    </td>   </tr>    
         </table>
 
         <table id="slova" border="0" align="justify" >
-            <tr> <td>Kľúčové slová:</td>  </tr>
+            <tr> <td>Kľúčové slová- TODO to co s autorom:</td>  </tr>
             <tr> <td>      <input class="formular_vstup" type="text" name="klucove_slovo" value="<?= $klucove_slovo['klucove_slovo'] ?> "/></td>  
                 <td> <input type="button" onclick="pridajSlovo()" value="+"  />    </td>           
                 <td> <input type="button" onclick="odstranSlovo(this)" value="x"  />    </td>  </tr>         
@@ -134,7 +570,7 @@
             <td><input class="formular_vstup" type="text" name="datum_aktualizacie" value="<?= $zdroj['datum_aktualizacie'] ?>"/> </td></tr> 
 
             <tr> <td> Hodnotenie - vyber:</td></tr>
-            <td> <select name="hodnotenie" >
+            <td> <select name="hodnotenie" class="formular_vstup">
                     <?php if (($zdroj['hodnotenie']) == 1): ?>
                         <option value="1" selected> 1 - výborné </option>
                         <option value="2" > 2 - veľmi dobré </option>
@@ -180,11 +616,22 @@
                 </select>
             </td></tr> 
 
+
+
             <tr> <td> Poznámka:</td></tr>
             <td><textarea class="formular_vstup" name="poznamka"><?= $zdroj['poznamka'] ?></textarea> </td></tr> 
 
+            <tr> <td>
+                    Select image to upload:
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <input type="button" onclick="pridajSlovo()" value="Upload image"  />
+                </td></tr> 
+
             <tr>  <td><input class= "potvrdzovacie_tlacidlo" type="submit" value="Pridať" /></td></tr>
             <tr><td><input class= "modry_odkaz"  type="reset" value="Zmazať"></td></tr>
-        </table>
+
+
+        </table>  
     </form>
+
 </div>

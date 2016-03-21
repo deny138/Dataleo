@@ -1,0 +1,49 @@
+/* nadpisy */
+h1 {font-family: 'Russo One', sans-serif; font-size: 20px; text-align: center;}
+h2 {font-family: 'Russo One', sans-serif; font-size: 18px; text-align: left; margin-bottom: 6px;}
+h3 {font-family: 'Russo One', sans-serif; font-size: 16px; text-align: left; margin-bottom: 4px;}
+h4 {font-family: 'Russo One', sans-serif; font-size: 14px; text-align: left; margin-bottom: 2px;}
+h5 {font-family: 'Russo One', sans-serif; font-size: 12px; text-align: left; margin-bottom: 0px;}
+		   
+/* tabulky */
+table	{
+	color: #FFFFFF;
+	padding: 4px; 
+	border-collapse: collapse; 
+	font-size: 12px;
+}
+tr.tr_even {background-color: #111111;}
+td	{padding: 4px; border: 1px solid gray;}
+
+/*  odkazy */
+a		{color: #D6D300;}
+/* a:link		{color: #D6D300;} */
+a:visited	{color: #B4B200;}
+a:active	{color: #FFFC00;}
+a:hover		{color: #FFFC00;}
+
+code {background-color: #111111;}
+code.code_block {display: block; padding: 8px; border: 1px dashed #333333}
+
+div.col3 {
+  /*-------------------------------------------*/
+  -moz-column-count: 3; /* Firefox */
+  -webkit-column-count: 3; /* Safari and Chrome */
+  column-count: 3;
+  /*-------------------------------------------*/
+  -moz-column-gap: 30px; /* Firefox */
+  -webkit-column-gap: 30px; /* Safari and Chrome */
+  column-gap: 30px;
+  /*-------------------------------------------*/
+} 
+div.col5 {
+  /*-------------------------------------------*/
+  -moz-column-count: 5; /* Firefox */
+  -webkit-column-count: 5; /* Safari and Chrome */
+  column-count: 5;
+  /*-------------------------------------------*/
+  -moz-column-gap: 30px; /* Firefox */
+  -webkit-column-gap: 30px; /* Safari and Chrome */
+  column-gap: 30px;
+  /*-------------------------------------------*/
+} 

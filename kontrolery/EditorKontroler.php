@@ -7,6 +7,9 @@ class EditorKontroler extends Kontroler {
 
         $spravcaPouzivatelov = new SpravcaPouzivatelov();
         $pouzivatel = $spravcaPouzivatelov->vratPouzivatela();
+        
+         if (!$pouzivatel)
+            $this->presmeruj('prihlasenie');
 
         $vypisZdrojov = new VypisZdrojov();
 
@@ -83,6 +86,7 @@ class EditorKontroler extends Kontroler {
             //zlucenie klucov s hodnotami s post- a ich priradenie
             $zdroj = array_intersect_key($_POST, array_flip($kluce_zdroj));
             //ulozenie clanku do db
+            $this->pridajSpravu("zdrojid z postu je:".$_POST['zdroj_id']);
             $vypisZdrojov->ulozZdroj($_POST['zdroj_id'], $zdroj);
             //ziskania posledneho ID kvoli vlozeniu do prepajacej tabulky
             $idPoslednehoVlozenehoZdroja = $vypisZdrojov->posledneId();
@@ -95,30 +99,31 @@ class EditorKontroler extends Kontroler {
             $idAutoraPodlaTitulPred = $vypisZdrojov->vratIdAutoraPodlaTitulPred($_POST['titul_pred']);
             //$this->pridajSpravu(print_r($idAutoraPodlaTitulPred));
             $idAutoraPodlaMena = $vypisZdrojov->vratIdAutoraPodlaMena($_POST['meno']);
-          //  $this->pridajSpravu(print_r($idAutoraPodlaTitulPred));
+            //  $this->pridajSpravu(print_r($idAutoraPodlaTitulPred));
             $idAutoraPodlaPriezviska = $vypisZdrojov->vratIdAutoraPodlaPriezviska($_POST['priezvisko']);
-         //   $this->pridajSpravu(print_r($idAutoraPodlaTitulPred));
+            //   $this->pridajSpravu(print_r($idAutoraPodlaTitulPred));
             $idAutoraPodlaTitulPo = $vypisZdrojov->vratIdAutoraPodlaTitulPo($_POST['titul_po']);
-          // $this->pridajSpravu(print_r($idAutoraPodlaTitulPred));
+            // $this->pridajSpravu(print_r($idAutoraPodlaTitulPred));
 
+
+            /* prehladanie vsetkych autorov a zistenie ci dany autor uz exituje v tabulke autor
+             * ak autor exsituje tak sa iba priradi jeho id k novemu zdroju
+             * ak autor neexistuje tak sa vytvori a priradi sa jeho id k zdroju
+             */
             foreach ($idAutoraPodlaMena as $meno) {
                 foreach ($idAutoraPodlaPriezviska as $priezvisko) {
                     foreach ($idAutoraPodlaTitulPo as $po) {
                         foreach ($idAutoraPodlaTitulPred as $pred) {
-                            if ((($meno['autor_id'] == $priezvisko['autor_id']) == $pred['autor_id']) == $po['autor_id'])
-                               { $jeAutorVdatabaze = 1;
-                            $rovnakeid= $meno['autor_id'];
-                        }
-                            else
+                            if ((($meno['autor_id'] == $priezvisko['autor_id']) == $pred['autor_id']) == $po['autor_id']) {
+                                $jeAutorVdatabaze = 1;
+                                $rovnakeid = $meno['autor_id'];
+                            } else
                                 $jeAutorVdatabaze = 0;
                         }
                     }
                 }
             };
-            echo "je v databaze:";
-            echo $jeAutorVdatabaze;
-            echo "<br> IDautora:";
-            echo $rovnakeid;
+            $this->pridajSpravu("autor je v databaze:" . $jeAutorVdatabaze . "<br> IDautora:" . $rovnakeid);
 
             //ak sa klucove slovo nenaslo  tak sa vytvori nove a ulozi sa do tabulky
             if ($jeAutorVdatabaze == 0) {
@@ -131,7 +136,7 @@ class EditorKontroler extends Kontroler {
                 //ziskania posledneho ID kvoli vlozeniu do prepajacej tabulky
                 $idPoslednehoVlozenehoAutora = $vypisZdrojov->posledneId();
             } else {
-                $idPoslednehoVlozenehoAutora = $idAutoraPodlaMena['autor_id'];
+                $idPoslednehoVlozenehoAutora = $rovnakeid = $meno['autor_id'];
                 echo"id posledneho vlozeneho autorA:";
                 echo $idPoslednehoVlozenehoAutora;
             }

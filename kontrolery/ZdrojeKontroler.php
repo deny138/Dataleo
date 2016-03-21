@@ -8,6 +8,9 @@ class ZdrojeKontroler extends Kontroler {
         $pouzivatel = $spravcaPouzivatelov->vratPouzivatela();
         $pouzivatelovo_id = $pouzivatel['pouzivatel_id'];
        
+        if (!$pouzivatel)
+            $this->presmeruj('prihlasenie');
+        
         $zoradit = 'nazov';
         if (empty($_GET['zoradit'])) {
             //echo 'zoradit je prazdne';
@@ -23,7 +26,7 @@ class ZdrojeKontroler extends Kontroler {
 
 
 
-        $this->hlavicka['titulok'] = 'Moje zdroje';
+        
         //vytvorenie novej instancie ktora nam umozni vypis zdrojov
         $vypisZdrojov = new VypisZdrojov();
         //metoda ktora vrati zdroje pre vypis  zoznamu vsetkych zdrojov pouzivatela, ktory je proihlaseny
@@ -42,6 +45,9 @@ class ZdrojeKontroler extends Kontroler {
         if (empty($zdroje)) {
             $this->presmeruj('Prazdno');
         }
+        
+        $this->hlavicka['titulok'] = 'Moje zdroje';
+        
         $this->data['zdroje'] = $zdroje; //aby sa dalo v pohlade pracovat s premennou zdroje
         $this->data['zdroje_ukazka'] = $zdroje_ukazka; //aby sa dalo v pohlade pracovat s premennou zdroje
         $this->data['autori'] = $autori; //aby sa dalo v pohlade pracovat s premennou zdroje
