@@ -7,8 +7,8 @@ class EditorKontroler extends Kontroler {
 
         $spravcaPouzivatelov = new SpravcaPouzivatelov();
         $pouzivatel = $spravcaPouzivatelov->vratPouzivatela();
-        
-         if (!$pouzivatel)
+
+        if (!$pouzivatel)
             $this->presmeruj('prihlasenie');
 
         $vypisZdrojov = new VypisZdrojov();
@@ -72,8 +72,13 @@ class EditorKontroler extends Kontroler {
             'okruh_id' => '',
         );
 
+
+
+
+
         //ak je odoslany formular
         if ($_POST) {
+
 
             /*
              * vlozenie zdroja do tabuky zdroj
@@ -86,10 +91,49 @@ class EditorKontroler extends Kontroler {
             //zlucenie klucov s hodnotami s post- a ich priradenie
             $zdroj = array_intersect_key($_POST, array_flip($kluce_zdroj));
             //ulozenie clanku do db
-            $this->pridajSpravu("zdrojid z postu je:".$_POST['zdroj_id']);
+            $this->pridajSpravu("zdrojid z postu je:" . $_POST['zdroj_id']);
             $vypisZdrojov->ulozZdroj($_POST['zdroj_id'], $zdroj);
             //ziskania posledneho ID kvoli vlozeniu do prepajacej tabulky
             $idPoslednehoVlozenehoZdroja = $vypisZdrojov->posledneId();
+
+
+            /* ulozenie nahraneho suboru na server pod menom ktore sa rovna id posledneho zdroja ktory bol vlozeny
+             * to znamena ze sa ulozi pod zdroj_id aktualneho zdroja ktory ukladame
+             * toto ulozenie sa musi vykonat az po ulozeni zdroja do databazy aby sme vedeli jeho zdroj_id
+             */
+
+            //ak do pohladu editor pouzivatel  nahral subor FILE, nastavi sa premenna file na tento subor, je to pole
+            if (isset($_FILES['file'])) {
+                $file = $_FILES['file'];
+
+                //vlastnosti pridaneho suboru, ulozenie do premennych
+                $file_name = $file['name'];
+                $file_tmp = $file['tmp_name'];
+                $file_size = $file['size'];
+                $file_error = $file['error'];
+
+                //rozdelenie nazvu pridaneho suboru
+                $file_ext = explode('.', $file_name);
+                $file_ext = strtolower(end($file_ext));
+                //ocakavane pripony
+                $allowed = array('txt', 'jpg', 'pdf');
+
+                //ak su pripony ocakavane zhodne s tou ktoru pouzivatel pridal, a neprejavila sa chyba, ani nepridal vacsi subor ako mal
+                //tak sa vytvori novy nazov suboru ktory je zhodny s premennou zdroj_id a ulozi sa na server do priecinka uploads 
+                if (in_array($file_ext, $allowed)) {
+                    if ($file_error === 0) {
+                        if ($file_size <= 2097152) {
+
+                            $file_name_new = $idPoslednehoVlozenehoZdroja . '.' . $file_ext;
+                            $file_destination = 'uploads/' . $file_name_new;
+                            if (move_uploaded_file($file_tmp, $file_destination)) {
+                                
+                            }
+                        }
+                    }
+                }
+            }
+
 
             /*
              * vlozenie autora do tabulky autorov 
@@ -229,6 +273,13 @@ class EditorKontroler extends Kontroler {
 
             $this->pridajSpravu('Záznam bol uložený: <br>zdrojid:' . $idPoslednehoVlozenehoZdroja . '<br>klucoveslovo:' . $idPoslednehoVlozenehoSlova
                     . '<br>' . print_r($autor));
+
+
+
+
+
+
+
             $this->presmeruj('zdroje');
         }
         //ak je zadane url clanku pre zmazanie

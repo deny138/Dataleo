@@ -11,12 +11,13 @@ class ZobrazenieKontroler extends Kontroler {
         if (!$pouzivatel)
             $this->presmeruj('prihlasenie');
 
-        
-         $id = 0;
+
+        $id = 0;
         if (!empty($_GET['zdroj_id'])) {
             $id = $_GET['zdroj_id'];
         }
         
+
         //vytvorenie novej instancie ktora nam umozni vypis zdrojov
         $vypisZdrojov = new VypisZdrojov();
 
@@ -25,18 +26,21 @@ class ZobrazenieKontroler extends Kontroler {
         $slovicka = $vypisZdrojov->vratKlucoveSlova($id);
         $okruhy = $vypisZdrojov->vratOkruhy($id);
 
+        
 
-        $this->hlavicka['titulok'] = 'Zobrazenie';
-        $this->hlavicka['klucove_slova'] = 'DATALEO';
-        $this->hlavicka['popis'] = 'DATALEO';
 
-        $this->data['zdroje_ukazka'] = $zdroje_ukazka; //aby sa dalo v pohlade pracovat s premennou zdroje
-        $this->data['autori'] = $autori; //aby sa dalo v pohlade pracovat s premennou zdroje
-        $this->data['slovicka'] = $slovicka; //aby sa dalo v pohlade pracovat s premennou zdroje
-        $this->data['okruhy'] = $okruhy; //aby sa dalo v pohlade pracovat s premennou zdroje
-        $this->data['pouzivatel'] = $pouzivatel; //prenesie do pohladu zdroje pole pouzivatel ktore obsahuje vsetky udaje z tabulky pouzivatel
+            $this->hlavicka['titulok'] = 'Zobrazenie';
+            $this->hlavicka['klucove_slova'] = 'DATALEO';
+            $this->hlavicka['popis'] = 'DATALEO';
 
-        $this->pohlad = 'zobrazenie';
+            $this->data['zdroje_ukazka'] = $zdroje_ukazka; //aby sa dalo v pohlade pracovat s premennou zdroje
+            $this->data['autori'] = $autori; //aby sa dalo v pohlade pracovat s premennou zdroje
+            $this->data['slovicka'] = $slovicka; //aby sa dalo v pohlade pracovat s premennou zdroje
+            $this->data['okruhy'] = $okruhy; //aby sa dalo v pohlade pracovat s premennou zdroje
+            $this->data['pouzivatel'] = $pouzivatel; //prenesie do pohladu zdroje pole pouzivatel ktore obsahuje vsetky udaje z tabulky pouzivatel
+
+            $this->pohlad = 'zobrazenie';
+        }
     }
 
-}
+

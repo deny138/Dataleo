@@ -14,16 +14,33 @@
 
 
 
-<div id="prveOkno">
-    <a href="editor"> <img src="resources/ikony/add.png"></a> <br> 
+
+<div id="pdf">
+    <?php $cesta_k_suboru = 'uploads/' . $zdroje_ukazka['zdroj_id'] . '.pdf'; ?>
+    <?php if (file_exists($cesta_k_suboru)): ?>
+        <object  data=<?= $cesta_k_suboru ?> width="650" height="800" >
+            <p>Tento webový prehliadač nepodporuje PDF plugin.  <a href="http://localhost/<?= $cesta_k_suboru ?>">Kliknite sem pre externé zobrazenie.</a>
+        </object>
+
+
+    <?php elseif ($zdroje_ukazka['url']): ?>
+        <object  data="<?= $zdroje_ukazka['url'] ?>" width="650" height="800" >
+
+            <p>Problém s načítaním ukážky zdroja. Skontrolujte, či ste zdroj pridali.</a></p>
+        </object>
+
+    <?php else: ?>
+        Ukážka zdroja neexistuje.
+    <?php endif; ?>
+
 </div>
+
 
 
 
 <div id="ukazkaZdroja">
     <table  border="0">
-        <th class="ukazka_nadpis"> <?= $zdroje_ukazka['nazov']; ?> </th><th class="ikonka_close">  <a  href="http://localhost/zdroje"> <img class="close_ikonka" src="resources/ikony/close.png"> </a>
-        </th>
+
 
         <tr>
             <td>Autor/i: </td> <?php
@@ -271,24 +288,13 @@
 
 
 
-
-
-
     </table>
     <a class="potvrdzovacie_tlacidlo" href="http://localhost/editor/<?= $_GET['zdroj_id'] ?>"> Editovať</a>
     <a class="potvrdzovacie_tlacidlo" href="http://localhost/editor/<?= $_GET['zdroj_id'] ?>/odstranit"> Vymazať </a>
-
-</div>
-
-<div id="pdf">
- <?php if($zdroje_ukazka['url']): ?>
-    <object  data="<?= $zdroje_ukazka['url'] ?>" width="650" height="800" >
- 
-  <p>It appears you don't have a PDF plugin for this browser.
-  No biggie... you can <a href="myfile.pdf">click here to
-  download the PDF file.</a></p>
-  <?php endif;?>
-</object>
+    
+    <?php if (file_exists($cesta_k_suboru)): ?>
+        <a class="potvrdzovacie_tlacidlo" href="http://localhost/<?= $cesta_k_suboru ?>"> Stiahnuť </a>
+    <?php endif ?>
 </div>
 
 

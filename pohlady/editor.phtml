@@ -53,7 +53,7 @@
 
 
 <div id="editor">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="zdroj_id" value="<?= $zdroj['zdroj_id'] ?>"/>
         <input type="hidden" name="autor_id" value="<?= $autor['autor_id'] ?>"/>
         <input type="hidden" name="klucove_slovo_id" value="<?= $klucove_slovo['klucove_slovo_id'] ?>"/>
@@ -616,22 +616,16 @@
                 </select>
             </td></tr> 
 
-
-
             <tr> <td> Poznámka:</td></tr>
             <td><textarea class="formular_vstup" name="poznamka"><?= $zdroj['poznamka'] ?></textarea> </td></tr> 
 
             <tr> <td>
-                    Select image to upload:
-                    <input type="file" name="fileToUpload" id="fileToUpload">
-                    <input type="button" onclick="pridajSlovo()" value="Upload image"  />
+                    Pridať PDF:
+                    <input  type="file" name="file">
                 </td></tr> 
 
             <tr>  <td><input class= "potvrdzovacie_tlacidlo" type="submit" value="Pridať" /></td></tr>
             <tr><td><input class= "modry_odkaz"  type="reset" value="Zmazať"></td></tr>
-
-
         </table>  
     </form>
-
 </div>
