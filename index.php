@@ -2,6 +2,8 @@
 /*
  * zapnutie session
  */
+date_default_timezone_set('UTC');
+
 session_start();
 /*
  * nastavenie kodovania

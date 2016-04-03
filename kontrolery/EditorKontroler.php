@@ -29,7 +29,7 @@ class EditorKontroler extends Kontroler {
             'strany' => '',
             'url' => '',
             'datum_aktualizacie' => null,
-            'datum_pridania' => '2016-03-13',
+            'datum_pridania' => date("Y-m-d"), 
             'hodnotenie' => '',
             'poznamka' => '',
         );
@@ -55,7 +55,7 @@ class EditorKontroler extends Kontroler {
         );
 
         $autor_zdroj = array(
-            'id' => null,
+            'id' => '',
             'autor_id' => '',
             'zdroj_id' => '',
         );
@@ -79,7 +79,6 @@ class EditorKontroler extends Kontroler {
         //ak je odoslany formular
         if ($_POST) {
 
-
             /*
              * vlozenie zdroja do tabuky zdroj
              */
@@ -91,13 +90,19 @@ class EditorKontroler extends Kontroler {
             //zlucenie klucov s hodnotami s post- a ich priradenie
             $zdroj = array_intersect_key($_POST, array_flip($kluce_zdroj));
             //ulozenie clanku do db
-            $this->pridajSpravu("zdrojid z postu je:" . $_POST['zdroj_id']);
             $vypisZdrojov->ulozZdroj($_POST['zdroj_id'], $zdroj);
             //ziskania posledneho ID kvoli vlozeniu do prepajacej tabulky
             $idPoslednehoVlozenehoZdroja = $vypisZdrojov->posledneId();
+            if ($idPoslednehoVlozenehoZdroja == 0)
+                $idPoslednehoVlozenehoZdroja = $_POST['zdroj_id'];
+
+            $this->pridajSpravu('ulozil sa zdroj pod id= ' . $idPoslednehoVlozenehoZdroja);
+            echo 'ulozil sa zdroj pod id=' . $idPoslednehoVlozenehoZdroja;
+            echo 'ulozil sa zdroj pod id=' . $_POST['zdroj_id'];
 
 
-            /* ulozenie nahraneho suboru na server pod menom ktore sa rovna id posledneho zdroja ktory bol vlozeny
+            /* 
+             * ulozenie nahraneho suboru na server pod menom ktore sa rovna id posledneho zdroja ktory bol vlozeny
              * to znamena ze sa ulozi pod zdroj_id aktualneho zdroja ktory ukladame
              * toto ulozenie sa musi vykonat az po ulozeni zdroja do databazy aby sme vedeli jeho zdroj_id
              */
@@ -134,71 +139,52 @@ class EditorKontroler extends Kontroler {
                 }
             }
 
-
             /*
              * vlozenie autora do tabulky autorov 
              */
 
-            //najdeme id autora ktore sme zadali v editore
-            $idAutoraPodlaTitulPred = $vypisZdrojov->vratIdAutoraPodlaTitulPred($_POST['titul_pred']);
-            //$this->pridajSpravu(print_r($idAutoraPodlaTitulPred));
-            $idAutoraPodlaMena = $vypisZdrojov->vratIdAutoraPodlaMena($_POST['meno']);
-            //  $this->pridajSpravu(print_r($idAutoraPodlaTitulPred));
-            $idAutoraPodlaPriezviska = $vypisZdrojov->vratIdAutoraPodlaPriezviska($_POST['priezvisko']);
-            //   $this->pridajSpravu(print_r($idAutoraPodlaTitulPred));
-            $idAutoraPodlaTitulPo = $vypisZdrojov->vratIdAutoraPodlaTitulPo($_POST['titul_po']);
-            // $this->pridajSpravu(print_r($idAutoraPodlaTitulPred));
 
-
-            /* prehladanie vsetkych autorov a zistenie ci dany autor uz exituje v tabulke autor
-             * ak autor exsituje tak sa iba priradi jeho id k novemu zdroju
-             * ak autor neexistuje tak sa vytvori a priradi sa jeho id k zdroju
-             */
-            foreach ($idAutoraPodlaMena as $meno) {
-                foreach ($idAutoraPodlaPriezviska as $priezvisko) {
-                    foreach ($idAutoraPodlaTitulPo as $po) {
-                        foreach ($idAutoraPodlaTitulPred as $pred) {
-                            if ((($meno['autor_id'] == $priezvisko['autor_id']) == $pred['autor_id']) == $po['autor_id']) {
-                                $jeAutorVdatabaze = 1;
-                                $rovnakeid = $meno['autor_id'];
-                            } else
-                                $jeAutorVdatabaze = 0;
-                        }
-                    }
-                }
-            };
-            $this->pridajSpravu("autor je v databaze:" . $jeAutorVdatabaze . "<br> IDautora:" . $rovnakeid);
-
-            //ak sa klucove slovo nenaslo  tak sa vytvori nove a ulozi sa do tabulky
-            if ($jeAutorVdatabaze == 0) {
+            $idAutorovPodlaUdajov = $vypisZdrojov->vratIdAutora($_POST['titul_pred'], $_POST['meno'], $_POST['priezvisko'], $_POST['titul_po']);
+            $idAutorovPodlaUdajov = $idAutorovPodlaUdajov[0];
+            if (!$idAutorovPodlaUdajov) {
                 //vytvorenie klucov, ktore sa zhodouju s udajmi ktora ziskame z $_POST,potom sa priradia k sebe
                 $kluce_autor = array('titul_pred', 'meno', 'priezvisko', 'titul_po');
                 //zlucenie klucov s hodnotami s post- a ich priradenie
                 $autor = array_intersect_key($_POST, array_flip($kluce_autor));
-                //ulozenie klucoveho slova do db
-                $vypisZdrojov->ulozAutora($_POST['autor_id'], $autor);
+                //ulozenie autora do db
+                $vypisZdrojov->ulozAutora('', $autor); //tu sa predpoklada ze autor este neexistuje
                 //ziskania posledneho ID kvoli vlozeniu do prepajacej tabulky
                 $idPoslednehoVlozenehoAutora = $vypisZdrojov->posledneId();
+                           
+
+                $this->pridajSpravu('ulozil sa autor ktory este neexistoval pod id= ' . $idPoslednehoVlozenehoAutora);
+                echo 'ulozil sa autor ktory este neexistoval pod id=' . $idPoslednehoVlozenehoAutora;
             } else {
-                $idPoslednehoVlozenehoAutora = $rovnakeid = $meno['autor_id'];
-                echo"id posledneho vlozeneho autorA:";
-                echo $idPoslednehoVlozenehoAutora;
-            }
-
-
-
-
-
+                $idPoslednehoVlozenehoAutora = $idAutorovPodlaUdajov;
+                echo 'autor uz existoval takze sa neukladal iba sa ulozilo jeho id=' . $idPoslednehoVlozenehoAutora;
+                $this->pridajSpravu('autor uz existoval takze sa neukladal iba sa ulozilo jeho id== ' . $idPoslednehoVlozenehoAutora);
+            };
             /*
              * vlozenie udajov do prepajacej tabulky autor_zdroj
              */
 
-            //priradenie hodnoty posledneho vlozeneho zdroja
-            $autor_zdroj['autor_id'] = $idPoslednehoVlozenehoAutora;
-            //priradenie hodnoty posledneho vlozeneho klucoveho slova
-            $autor_zdroj['zdroj_id'] = $idPoslednehoVlozenehoZdroja;
-            //ulozenie udajov do databazy, pricom prvy udaj zdroj_klucove_slovo_id je nastavene hore v poli na null
-            $vypisZdrojov->ulozZdrojAutor($autor_zdroj);
+            $idPodlaUdajov = $vypisZdrojov->vratIdZdrojAutorPodlaUdajov($idPoslednehoVlozenehoAutora, $idPoslednehoVlozenehoZdroja);
+
+            if (!$idPodlaUdajov) {
+                $idPodlaUdajov = '';
+                $this->pridajSpravu('id z prepajacej tabulky sa nenaslo, malo by sa ulozit ako prazdny retazec=' . $idPodlaUdajov);
+
+                $kluce_autor_zdroj = array('autor_id', 'zdroj_id');
+                //zlucenie klucov s hodnotami s post- a ich priradenie
+                $pomocne = array('autor_id' => $idPoslednehoVlozenehoAutora, 'zdroj_id' => $idPoslednehoVlozenehoZdroja);
+
+                $autor_zdroj = array_intersect_key($pomocne, array_flip($kluce_autor_zdroj));
+                //ulozenie autora do db
+                $vypisZdrojov->ulozZdrojAutor($idPodlaUdajov, $autor_zdroj);
+            }
+
+
+
 
             /*
              * ulozenie klucoveho slova - ale iba ak uz nieje ulozene
@@ -209,20 +195,27 @@ class EditorKontroler extends Kontroler {
             //najdeme id klucoveho slova ktore sme zadali v editore
             $idSlova = $vypisZdrojov->vratIdKlucovehoSlova($_POST['klucove_slovo']);
             //ak sa klucove slovo nenaslo  tak sa vytvori nove a ulozi sa do tabulky
-            if ($idSlova['klucove_slovo_id'] == '') {
+            if (!$idSlova) {
                 //vytvorenie klucov, ktore sa zhodouju s udajmi ktora ziskame z $_POST,potom sa priradia k sebe
                 $kluce_klucove_slovo = array('klucove_slovo');
                 //zlucenie klucov s hodnotami s post- a ich priradenie
                 $klucove_slovo = array_intersect_key($_POST, array_flip($kluce_klucove_slovo));
                 //ulozenie klucoveho slova do db
 
-                $vypisZdrojov->ulozKlucoveSlovo($_POST['klucove_slovo_id'], $klucove_slovo);
+                $vypisZdrojov->ulozKlucoveSlovo('', $klucove_slovo);
                 //ziskania posledneho ID kvoli vlozeniu do prepajacej tabulky
                 $idPoslednehoVlozenehoSlova = $vypisZdrojov->posledneId();
                 //ak sa klucove slovo naslo tak sa iba ulozi jeho id pre dalsie pouzitie na vkladanie do medzitabulky
+                
+                echo 'slovo este neexistovalo takze sa ulozil pod id=' . $idPoslednehoVlozenehoSlova;
+                $this->pridajSpravu('slovo este neexistovalo takze sa ulozil pod id= ' . $idPoslednehoVlozenehoSlova);
+           
             } else {
                 $idPoslednehoVlozenehoSlova = $idSlova['klucove_slovo_id'];
                 echo $idPoslednehoVlozenehoSlova;
+                
+                  echo 'slovo uz existovalo takze sa neukladalo vratilo sa len jeho id' . $idPoslednehoVlozenehoSlova;
+                $this->pridajSpravu('slovo uz existovalo takze sa neukladalo vratilo sa len jeho id ' . $idPoslednehoVlozenehoSlova);
             }
 
             /*
@@ -244,19 +237,27 @@ class EditorKontroler extends Kontroler {
             //najdeme id ookruhu ktore sme zadali v editore
             $idOkruhu = $vypisZdrojov->vratIdOkruhu($_POST['nazov_okruhu']);
             //ak sa klucove slovo nenaslo  tak sa vytvori nove a ulozi sa do tabulky
-            if ($idOkruhu['okruh_id'] == '') {
+            if (!$idOkruhu) {
                 //vytvorenie klucov, ktore sa zhodouju s udajmi ktora ziskame z $_POST,potom sa priradia k sebe
                 $kluce_okruh = array('nazov_okruhu');
                 //zlucenie klucov s hodnotami s post- a ich priradenie
                 $okruh = array_intersect_key($_POST, array_flip($kluce_okruh));
                 //ulozenie klucoveho slova do db
-                $vypisZdrojov->ulozOkruh($_POST['okruh_id'], $okruh);
+                $vypisZdrojov->ulozOkruh('', $okruh);
                 //ziskania posledneho ID kvoli vlozeniu do prepajacej tabulky
                 $idPoslednehoVlozenehoOkruhu = $vypisZdrojov->posledneId();
                 //ak sa okruh nasiel tak sa iba ulozi jeho id pre dalsie pouzitie na vkladanie do medzitabulky
+                
+                 echo 'okruh este neexistoval takze sa ulozil pod id=' . $idPoslednehoVlozenehoOkruhu;
+                $this->pridajSpravu('okruh este neexistoval takze sa ulozil pod id= ' . $idPoslednehoVlozenehoOkruhu);
+                
             } else {
                 $idPoslednehoVlozenehoOkruhu = $idOkruhu['okruh_id'];
                 echo $idPoslednehoVlozenehoOkruhu;
+                
+                echo 'okruh uz existoval takze sa neukladal vratilo sa len jeho id' . $idPoslednehoVlozenehoSlova;
+                $this->pridajSpravu('okruh uz existoval takze sa neukladal vratilo sa len jeho id ' . $idPoslednehoVlozenehoSlova);
+         
             }
 
 
@@ -271,24 +272,15 @@ class EditorKontroler extends Kontroler {
             //ulozenie udajov do databazy, pricom prvy udaj zdroj_klucove_slovo_id je nastavene hore v poli na null
             $vypisZdrojov->ulozZdrojOkruh($zdroj_okruh);
 
-            $this->pridajSpravu('Záznam bol uložený: <br>zdrojid:' . $idPoslednehoVlozenehoZdroja . '<br>klucoveslovo:' . $idPoslednehoVlozenehoSlova
-                    . '<br>' . print_r($autor));
-
-
-
-
-
-
-
             $this->presmeruj('zdroje');
         }
         //ak je zadane url clanku pre zmazanie
         if (!empty($parametre[1]) && $parametre[1] == 'odstranit') {
             $vypisZdrojov->odstranZdroj($parametre[0]);
-            $this->pridajSpravu('Článek byl úspěšně odstraněn');
+            $this->pridajSpravu('Zdroj bol úspešne odstránený.');
             $this->presmeruj('zdroje');
         }
-        //ak je zadane url clanku k editacii zdroja TODO: po kliknuti na zdroj a tlacidlo editovat: urovit z url localhost//zdroje/124  co je zdroj id
+        //ak je zadane url clanku k editacii zdroja 
         else if (!empty($parametre[0])) {
             $nacitanyZdroj = $vypisZdrojov->vratZdrojPodlaZdrojId($parametre[0]); //tu parameter podla url
             $nacitatAutorov = $vypisZdrojov->vratAutorov($parametre[0]); // TODO
@@ -313,6 +305,7 @@ class EditorKontroler extends Kontroler {
         $this->data['pouzivatel'] = $pouzivatel;
         $this->data['zdroj'] = $zdroj;
         $this->data['autor'] = $autor;
+        $this->data['autor_zdroj'] = $autor_zdroj;
         $this->data['okruh'] = $okruh;
         $this->data['klucove_slovo'] = $klucove_slovo; //pozor : aj v hlavicke sa spominaju klucove slova
         $this->pohlad = 'editor';

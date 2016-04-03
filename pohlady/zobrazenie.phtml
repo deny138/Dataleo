@@ -2,18 +2,13 @@
 
 <div id="administracia" >
     <img src="resources/ikony/user.png"> <?php echo $pouzivatel['meno'] ?> 
-    <a  class= "modry_odkaz" href="uvod/odhlasit"> <img src="resources/ikony/exit.png"> </a>
-
-
+    <a  class= "tucny_odkaz" href="uvod/odhlasit"> <img src="resources/ikony/exit.png"> </a>
 </div>
 
 
 <div id="navigacia">
-    <a class="modry_odkaz" href="uvod"> DATALEO </a>  >> <a class="modry_odkaz" href="zdroje">Moja knižnica </a>>> <?= $zdroje_ukazka['nazov']; ?>
+    <a class="tucny_odkaz" href="uvod"> DATALEO </a>  >> <a class="tucny_odkaz" href="zdroje">Moja knižnica </a>>> <?= $zdroje_ukazka['nazov']; ?>
 </div>
-
-
-
 
 <div id="pdf">
     <?php $cesta_k_suboru = 'uploads/' . $zdroje_ukazka['zdroj_id'] . '.pdf'; ?>

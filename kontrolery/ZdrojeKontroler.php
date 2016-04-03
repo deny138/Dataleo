@@ -7,10 +7,10 @@ class ZdrojeKontroler extends Kontroler {
         $spravcaPouzivatelov = new SpravcaPouzivatelov();
         $pouzivatel = $spravcaPouzivatelov->vratPouzivatela();
         $pouzivatelovo_id = $pouzivatel['pouzivatel_id'];
-       
+
         if (!$pouzivatel)
             $this->presmeruj('prihlasenie');
-        
+
         $zoradit = 'nazov';
         if (empty($_GET['zoradit'])) {
             //echo 'zoradit je prazdne';
@@ -18,7 +18,7 @@ class ZdrojeKontroler extends Kontroler {
             $zoradit = $_GET['zoradit'];
             echo $zoradit;
         }
-        
+
         $id = 0;
         if (!empty($_GET['zdroj_id'])) {
             $id = $_GET['zdroj_id'];
@@ -26,28 +26,26 @@ class ZdrojeKontroler extends Kontroler {
 
 
 
-        
+
         //vytvorenie novej instancie ktora nam umozni vypis zdrojov
         $vypisZdrojov = new VypisZdrojov();
         //metoda ktora vrati zdroje pre vypis  zoznamu vsetkych zdrojov pouzivatela, ktory je proihlaseny
-        $zdroje = $vypisZdrojov->vratZdrojeSautorom($pouzivatelovo_id,$zoradit);
+        $zdroje = $vypisZdrojov->vratZdrojeSautorom($pouzivatelovo_id, $zoradit);
         $zdroje_ukazka = $vypisZdrojov->vratZdrojPodlaZdrojId($id);
-        $autori=$vypisZdrojov->vratAutorov($id);
-        $slovicka=$vypisZdrojov->vratKlucoveSlova($id);
-        $okruhy=$vypisZdrojov->vratOkruhy($id);
-       // print_r($zdroje);
-       // echo ('<br><br>');
-       //echo count($zdroje);
-       
-       
-                
+        $autori = $vypisZdrojov->vratAutorov($id);
+        $slovicka = $vypisZdrojov->vratKlucoveSlova($id);
+        $okruhy = $vypisZdrojov->vratOkruhy($id);
+        // echo ('<br><br>');
+        //echo count($zdroje);
+
+      
         
         if (empty($zdroje)) {
             $this->presmeruj('Prazdno');
         }
-        
+
         $this->hlavicka['titulok'] = 'Moje zdroje';
-        
+
         $this->data['zdroje'] = $zdroje; //aby sa dalo v pohlade pracovat s premennou zdroje
         $this->data['zdroje_ukazka'] = $zdroje_ukazka; //aby sa dalo v pohlade pracovat s premennou zdroje
         $this->data['autori'] = $autori; //aby sa dalo v pohlade pracovat s premennou zdroje

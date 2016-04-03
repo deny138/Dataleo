@@ -5,7 +5,7 @@
             var radku = document.getElementById('slova').rows.length;
             var radek = document.getElementById('slova').insertRow(radku);
             var bunka = radek.insertCell(0);
-            bunka.innerHTML = " <input class=formular_vstup type=text name=klucove_slovo value=<?= $klucove_slovo['klucove_slovo'] ?> >  ";
+            bunka.innerHTML = " <input class=formular_vstup type=text name=klucove_slovo value=<?php  $klucove_slovo['klucove_slovo'] ?> >  ";
 
             return false;
         }
@@ -40,14 +40,14 @@
 
 <div id="administracia" >
     <img src="resources/ikony/user.png"> <?php echo $pouzivatel['meno'] ?> 
-    <a  class= "modry_odkaz" href="uvod/odhlasit"> <img src="resources/ikony/exit.png"> </a>
+    <a  class= "tucny_odkaz" href="uvod/odhlasit"> <img src="resources/ikony/exit.png"> </a>
 
 </div>
 
 
 <div id="navigacia">
-    <a class="modry_odkaz" href="uvod"> DATALEO </a> >>
-    <a class="modry_odkaz" href="zdroje"> Moja knižnica </a> >> Pridanie nového zdroja
+    <a class="tucny_odkaz" href="uvod"> DATALEO </a> >>
+    <a class="tucny_odkaz" href="zdroje"> Moja knižnica </a> >> Pridanie nového zdroja
 </div>
 
 
@@ -55,6 +55,7 @@
 <div id="editor">
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="zdroj_id" value="<?= $zdroj['zdroj_id'] ?>"/>
+        <input type="hidden" name="id" value="<?=$autor_zdroj['id']?>"/>
         <input type="hidden" name="autor_id" value="<?= $autor['autor_id'] ?>"/>
         <input type="hidden" name="klucove_slovo_id" value="<?= $klucove_slovo['klucove_slovo_id'] ?>"/>
         <input type="hidden" name="okruh_id" value="<?= $okruh['okruh_id'] ?>"/>
@@ -625,7 +626,7 @@
                 </td></tr> 
 
             <tr>  <td><input class= "potvrdzovacie_tlacidlo" type="submit" value="Pridať" /></td></tr>
-            <tr><td><input class= "modry_odkaz"  type="reset" value="Zmazať"></td></tr>
+            <tr><td><input class= "tucny_odkaz"  type="reset" value="Zmazať"></td></tr>
         </table>  
     </form>
 </div>

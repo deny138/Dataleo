@@ -23,9 +23,6 @@ class VypisZdrojov {
                         . 'WHERE `zdroj_id`=?', array($id));
     }
     
-    
-    
-
    
     /*
      * vrati vsetky zdroje spolu s autorom, budu sa vypisovat ako zoznam pre daneho pouzivatela
@@ -33,7 +30,7 @@ class VypisZdrojov {
      */
 
     public function vratZdrojeSautorom($pouzivatel_id, $zoradit) {
-        return Db::dotazVsetky('SELECT z.zdroj_id,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
+        return Db::dotazVsetky('SELECT az.id, z.zdroj_id,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
                         . '`miesto_vydania`, `vydavatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
                         . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka`, '
                         . 'a.autor_id, `titul_pred`,`meno`,`priezvisko`,`titul_po` '
@@ -49,19 +46,15 @@ class VypisZdrojov {
         return Db::dotazVsetky('SELECT `titul_pred`,`meno`,`priezvisko`, `titul_po` FROM `autor` AS a'
                         . ' JOIN `autor_zdroj` AS az ON a.autor_id = az.autor_id WHERE `zdroj_id`=?', array($id));
     }
+    
+    
+    public function vratIdAutora($titul_pred,$meno,$priezvisko,$titul_po) {
+        return Db::dotazJeden('SELECT `autor_id` FROM `autor`  WHERE `titul_pred`=? AND `meno`=? AND `priezvisko`=? AND `titul_po`=? ', array($titul_pred,$meno,$priezvisko,$titul_po));
+    }
 
-    public function vratIdAutoraPodlaTitulPred($titul_pred){
-       return Db::dotazVsetky('SELECT `autor_id` FROM `autor` WHERE `titul_pred`=? ', array($titul_pred));
-    } 
-    public function vratIdAutoraPodlaMena($meno){
-       return Db::dotazVsetky('SELECT `autor_id` FROM `autor` WHERE  `meno`=?  ', array($meno));
-    } 
-    public function vratIdAutoraPodlaPriezviska($priezvisko){
-       return Db::dotazVsetky('SELECT `autor_id` FROM `autor` WHERE `priezvisko`=? ', array($priezvisko));
-    } 
-    public function vratIdAutoraPodlaTitulPo($titul_po){
-       return Db::dotazVsetky('SELECT `autor_id` FROM `autor` WHERE `titul_po`=? ', array($titul_po));
-    } 
+    public function vratIdZdrojAutorPodlaUdajov($autor_id,$zdroj_id){
+        return Db::dotazJeden('SELECT `id` FROM `autor_zdroj`  WHERE `autor_id`=? AND `zdroj_id`=?  ', array($autor_id,$zdroj_id));
+    }
     
     /*
      * metoda na vypis klucovych slov pre DANY ZDROJ,kedze ich moze byt viac 
@@ -165,10 +158,17 @@ class VypisZdrojov {
      * metoda ulozi do prepojovvacej tabulky udaje o zdroji a klucovom slove
      */
 
-    public function ulozZdrojAutor($autor_zdroj) {
+    public function ulozZdrojAutor($id,$autor_zdroj) {
+        if (!$id) {
         Db::vloz('autor_zdroj', $autor_zdroj);
+         } else {
+            Db::zmen('autor_zdroj', $autor_zdroj, 'WHERE `id`=?', array($id));
+        }
     }
-
+    
+    
+    
+    
     /*
      * metoda ulozi do prepojovvacej tabulky udaje o zdroji a klucovom slove
      */

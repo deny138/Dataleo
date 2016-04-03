@@ -1,12 +1,12 @@
 <div id="administracia" >
     <img src="resources/ikony/user.png"> <?php echo $pouzivatel['meno'] ?> 
-    <a  class= "modry_odkaz" href="uvod/odhlasit"> <img src="resources/ikony/exit.png"> </a>
+    <a  class= "tucny_odkaz" href="uvod/odhlasit"> <img src="resources/ikony/exit.png"> </a>
 
 </div>
 
 
 <div id="navigacia">
-    <a class="modry_odkaz" href="uvod"> DATALEO </a>  >> Moja knižnica
+    <a class="tucny_odkaz" href="uvod"> DATALEO </a>  >> Moja knižnica
 </div>
 
 
@@ -27,24 +27,33 @@
             </td>
 
             <th class="zdroje">
-                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=nazov">  Názov diela</b </a>
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=nazov">  Zdroj ID</b </a>
             </th>
             <th class="zdroje">
-                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=meno">  Meno autora</b </a>
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=nazov">  Autor ID</b> </a>
+            </th>
+            <th class="zdroje">
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=nazov">  Zdroj autor ID<b> </a>
+            </th>
+            <th class="zdroje">
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=nazov">  Názov diela</b> </a>
+            </th>
+            <th class="zdroje">
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=meno">  Meno autora</b> </a>
 
             </th>
             <th class="zdroje">
-                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=priezvisko">  Priezvisko autora</b </a>
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=priezvisko">  Priezvisko autora</b> </a>
 
             </th>
             <th class="zdroje">
-                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=priezvisko">  Rok vydania</b </a>
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=priezvisko">  Rok vydania</b> </a>
             </th>
             <th class="zdroje">
-                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=datum_pridania"> Dátum pridania</b </a>
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=datum_pridania"> Dátum pridania</b> </a>
             </th>
             <th class="zdroje">
-                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=hodnotenie">  Hodnotenie</b </a>
+                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=hodnotenie">  Hodnotenie</b> </a>
             </th>
 
             <?php foreach ($zdroje as $zdroj) : ?>
@@ -59,7 +68,31 @@
                     <a href="http://localhost/editor/<?= $zdroj['zdroj_id']; ?>/odstranit"><img src="resources/ikony/delete.png"></a>
                 </td>
                 <td>
-                    <a class="cierny_odkaz_podciarknuty" href="http://localhost/zobrazenie?zdroj_id=<?= $zdroj['zdroj_id']; ?>"> <?= $zdroj['nazov']; ?></a>
+                    <?php
+                    if (!$zdroj['zdroj_id'])
+                        echo"-";
+                    else
+                        echo $zdroj['zdroj_id'];
+                    ?> 
+                </td>
+                <td>
+                    <?php
+                    if (!$zdroj['autor_id'])
+                        echo"-";
+                    else
+                        echo $zdroj['autor_id'];
+                    ?> 
+                </td>
+                <td>
+                    <?php
+                    if (!$zdroj['id'])
+                        echo"-";
+                    else
+                        echo $zdroj['id'];
+                    ?> 
+                </td>
+                <td>
+                    <a class="tucny_odkaz" href="http://localhost/zobrazenie?zdroj_id=<?= $zdroj['zdroj_id']; ?>"> <?= $zdroj['nazov']; ?></a>
                 </td>
                 <td>
                     <?php
@@ -105,12 +138,7 @@
             </tr>
         <?php endforeach ?>
     </table>
-
+    
 </div>
 
-
-
-
-
-
-
+    
