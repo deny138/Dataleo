@@ -1,38 +1,57 @@
 <head>
     <script type="text/javascript">
 
-        function pridajSlovo() {
-            var radku = document.getElementById('slova').rows.length;
-            var radek = document.getElementById('slova').insertRow(radku);
-            var bunka = radek.insertCell(0);
-            bunka.innerHTML = " <input class=formular_vstup type=text name=klucove_slovo value=<?php  $klucove_slovo['klucove_slovo'] ?> >  ";
-
+        function pridajAutora() {
+            var radku = document.getElementById('autor').rows.length;
+            var radek = document.getElementById('autor').insertRow(radku);
+            var bunka1 = radek.insertCell(0);
+            var bunka2 = radek.insertCell(1);
+            var bunka3 = radek.insertCell(2);
+            var bunka4 = radek.insertCell(3);
+            var bunka5 = radek.insertCell(4);
+            bunka1.innerHTML = "<tr> <td> <input class=formular_vstup placeholder=titul type=text name=titul_pred value=<?php $autor['titul_pred'] ?>> </td>";
+            bunka2.innerHTML = "<td><input class=formular_vstup placeholder=meno type=text name=meno value=<?php $autor['meno'] ?>> </td>";
+            bunka3.innerHTML = "<td> <input class=formular_vstup type=text placeholder=priezvisko name=priezvisko value=<?php $autor['priezvisko'] ?>> </td>";
+            bunka4.innerHTML = "<td> <input class = formular_vstup type=text placeholder=titul name=titul_po value=<?php $autor['titul_po'] ?>> </td></tr>";
+            bunka5.innerHTML = "  <input type=button onclick=odstranAutora(this) value=x>  ";
             return false;
         }
-        function odstranSlovo(el) {
-            var polozka = el.parentNode;
-            polozka.parentNode.removeChild(polozka);
+
+        function odstranAutora(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("autor").deleteRow(i);
         }
+
         function pridajOkruh() {
             var radku = document.getElementById('okruhy').rows.length;
             var radek = document.getElementById('okruhy').insertRow(radku);
             var bunka = radek.insertCell(0);
-            bunka.innerHTML = "<input class=formular_vstup type=text name=cosi[] value=>";
+            var bunka1 = radek.insertCell(1);
+            var bunka2 = radek.insertCell(2);
+            bunka.innerHTML = " <input class=formular_vstup type=text placeholder=okruh_" + (radku - 1) + " name=nazov_okruhu_" + (radku - 1) + "  >  ";
+            bunka1.innerHTML = "  <input type=button onclick=pridajOkruh() value=+ />      ";
+            bunka2.innerHTML = "  <input type=button onclick=odstranOkruh(this) value=x>  ";
             return false;
         }
-        function pridajDruh() {
-            var radku = document.getElementById('druhy').rows.length;
-            var radek = document.getElementById('druhy').insertRow(radku);
+
+        function odstranOkruh(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("okruhy").deleteRow(i);
+        }
+
+        function pridajSlovo() {
+            var radku = document.getElementById('slova').rows.length;
+            var radek = document.getElementById('slova').insertRow(radku);
             var bunka = radek.insertCell(0);
-            bunka.innerHTML = "<input class=formular_vstup type=text name=cosi[] value=>";
+            var bunka2 = radek.insertCell(1);
+            bunka.innerHTML = " <input class=formular_vstup type=text name=klucove_slovo value=<?php $klucove_slovo['klucove_slovo'] ?> >  ";
+            bunka2.innerHTML = "  <input type=button onclick=odstranSlovo(this) value=x>  ";
             return false;
         }
-        function pridajAutora() {
-            var radku = document.getElementById('autor').rows.length;
-            var radek = document.getElementById('autor').insertRow(radku);
-            var bunka = radek.insertCell(0);
-            bunka.innerHTML = "<input class=formular_vstup type=text name=cosi[] value=>";
-            return false;
+
+        function odstranSlovo(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("slova").deleteRow(i);
         }
     </script>
 </head>
@@ -41,7 +60,6 @@
 <div id="administracia" >
     <img src="resources/ikony/user.png"> <?php echo $pouzivatel['meno'] ?> 
     <a  class= "tucny_odkaz" href="uvod/odhlasit"> <img src="resources/ikony/exit.png"> </a>
-
 </div>
 
 
@@ -53,9 +71,10 @@
 
 
 <div id="editor">
+
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="zdroj_id" value="<?= $zdroj['zdroj_id'] ?>"/>
-        <input type="hidden" name="id" value="<?=$autor_zdroj['id']?>"/>
+        <input type="hidden" name="id" value="<?= $autor_zdroj['id'] ?>"/>
         <input type="hidden" name="autor_id" value="<?= $autor['autor_id'] ?>"/>
         <input type="hidden" name="klucove_slovo_id" value="<?= $klucove_slovo['klucove_slovo_id'] ?>"/>
         <input type="hidden" name="okruh_id" value="<?= $okruh['okruh_id'] ?>"/>
@@ -64,20 +83,17 @@
 
 
 
+
+
         <table id= "autor" border="0" align="justify" >
             <tr> <td> Autor:  <td></tr>
             <tr>     <td><input class="formular_vstup" placeholder="titul" type="text" name="titul_pred" value="<?= $autor['titul_pred'] ?>" autofocus/> </td>
-                <td><input class="formular_vstup" placeholder="meno" type="text" name="meno" value="<?= $autor['meno'] ?>" autofocus/> </td>
+                <td><input class="formular_vstup" placeholder="meno" type="text" name="meno" value="<?= $autor['meno'] ?>" /> </td>
                 <td><input class="formular_vstup" type="text" placeholder="priezvisko" name="priezvisko" value="<?= $autor['priezvisko'] ?>"/> </td>
-                <td><input class="formular_vstup" type="text" placeholder="titul" name="titul_po" value="<?= $autor['titul_po'] ?>" autofocus/> </td>
+                <td><input class="formular_vstup" type="text" placeholder="titul" name="titul_po" value="<?= $autor['titul_po'] ?>" /> </td>
                 <td> <input type="button" onclick="pridajAutora()" value="+"  />    </td>           
                 <td> <input type="button" onclick="pridajAutora(this)" value="x"  />    </td></tr>
         </table>
-
-
-
-
-
 
         <table id="druhy" border="0" align="justify" >
             <tr> <td> Druh zdroja-navyber:</td> </tr>
@@ -516,19 +532,43 @@
 
 
 
-
         <table id="okruhy" border="0" align="justify">
-            <tr> <td> Okruh- TODO to co s autorom:  </td></tr>
-            <tr><td><input class="formular_vstup" type="text" name="nazov_okruhu" value="<?= $okruh['nazov_okruhu'] ?>"/></td>
-                <td> <input type="button" onclick="pridajOkruh()" value="+" />    </td>           
-                <td> <input type="button" onclick="odstranOkruh(this)" value="x"  />    </td>   </tr>    
+            <tr> <td> Okruh: </td></tr>
+
+            <?php if (isset($okruh[0]['nazov_okruhu'])): ?>
+                <tr><td><input class="formular_vstup" type="text" placeholder="okruh_0" name="nazov_okruhu_0" value="<?= $okruh[0]['nazov_okruhu'] ?>"/></td>
+                <?php else: ?>
+                <tr><td><input class="formular_vstup" type="text" placeholder="okruh_0" name="nazov_okruhu_0" /></td>
+                <?php endif; ?>
+
+                <td> <input type="button" onclick="pridajOkruh()" value="+" />    </td>
+
+                <?php print_r($okruh); ?>
+                <?php
+                for ($i = 1; $i <= 100; $i++) {
+                    if (isset($okruh[$i])) {
+                        ?>
+
+
+                    <tr><td> <input type="text" class="formular_vstup"   placeholder="okruh_<?= $i ?>" name="nazov_okruhu_<?= $i ?>"  value="<?= $okruh[$i]['nazov_okruhu'] ?>" /></td>
+                        <td> <input type="button" onclick="pridajOkruh()" value="+" />    </td>
+                        <td><input type=button onclick=odstranOkruh(this) value=x> </td>
+
+                    <?php };
+                };
+                ?>
+
+
+
         </table>
 
+
+
         <table id="slova" border="0" align="justify" >
-            <tr> <td>Kľúčové slová- TODO to co s autorom:</td>  </tr>
+            <tr> <td>Kľúčové slová:</td>  </tr>
             <tr> <td>      <input class="formular_vstup" type="text" name="klucove_slovo" value="<?= $klucove_slovo['klucove_slovo'] ?> "/></td>  
                 <td> <input type="button" onclick="pridajSlovo()" value="+"  />    </td>           
-                <td> <input type="button" onclick="odstranSlovo(this)" value="x"  />    </td>  </tr>         
+
         </table>
 
         <table  border="0" align="justify">
@@ -572,48 +612,48 @@
 
             <tr> <td> Hodnotenie - vyber:</td></tr>
             <td> <select name="hodnotenie" class="formular_vstup">
-                    <?php if (($zdroj['hodnotenie']) == 1): ?>
+<?php if (($zdroj['hodnotenie']) == 1): ?>
                         <option value="1" selected> 1 - výborné </option>
                         <option value="2" > 2 - veľmi dobré </option>
                         <option value="3" > 3 - dobré </option>
                         <option value="4" >4 - uspokojivé </option>
                         <option value="5" > 5 - zlé </option>
 
-                    <?php elseif (($zdroj['hodnotenie']) == 2): ?>
+<?php elseif (($zdroj['hodnotenie']) == 2): ?>
                         <option value="2" selected> 2 - veľmi dobré </option>
                         <option value="1" > 1 - výborné </option>
                         <option value="3" > 3 - dobré </option>
                         <option value="4" >4 - uspokojivé </option>
                         <option value="5" > 5 - zlé </option>
 
-                    <?php elseif (($zdroj['hodnotenie']) == 3): ?>
+<?php elseif (($zdroj['hodnotenie']) == 3): ?>
                         <option value="3" selected> 3 - dobré </option>
                         <option value="1" > 1 - výborné </option>
                         <option value="2" > 2 - veľmi dobré </option>
                         <option value="4" >4 - uspokojivé </option>
                         <option value="5" > 5 - zlé </option>
 
-                    <?php elseif (($zdroj['hodnotenie']) == 4): ?>
+<?php elseif (($zdroj['hodnotenie']) == 4): ?>
                         <option value="4" selected>4 - uspokojivé </option>
                         <option value="1" > 1 - výborné </option>
                         <option value="2" > 2 - veľmi dobré </option>
                         <option value="3" > 3 - dobré </option>
                         <option value="5" > 5 - zlé </option>
 
-                    <?php elseif (($zdroj['hodnotenie']) == 5): ?>
+<?php elseif (($zdroj['hodnotenie']) == 5): ?>
                         <option value="1" > 1 - výborné </option>
                         <option value="2" > 2 - veľmi dobré </option>
                         <option value="3" > 3 - dobré </option>
                         <option value="4" >4 - uspokojivé </option>
                         <option value="5" selected> 5 - zlé </option>
 
-                    <?php else: ?>
+<?php else: ?>
                         <option value="1" > 1 - výborné </option>
                         <option value="2" > 2 - veľmi dobré </option>
                         <option value="3" > 3 - dobré </option>
                         <option value="4" >4 - uspokojivé </option>
                         <option value="5" > 5 - zlé </option>
-                    <?php endif ?>
+<?php endif ?>
                 </select>
             </td></tr> 
 

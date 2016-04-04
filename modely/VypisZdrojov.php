@@ -89,6 +89,12 @@ class VypisZdrojov {
     public function vratIdOkruhu($okruh) {
         return Db::dotazJeden('SELECT `okruh_id` FROM `okruh` WHERE `nazov_okruhu`=?', array($okruh));
     }
+    
+    public function vratIdZdrojOkruhPodlaUdajov($zdroj_id,$okruh_id){
+        return Db::dotazJeden('SELECT `zdroj_okruh_id` FROM `zdroj_okruh`  WHERE `zdroj_id`=? AND `okruh_id`=?  ', array($zdroj_id,$okruh_id));
+    }
+    
+   
 
     /*
      * ak nieje zadane ID zdroja tak vlozime zdroj ako novy s nasledujucim id/autoincrement
@@ -165,9 +171,6 @@ class VypisZdrojov {
             Db::zmen('autor_zdroj', $autor_zdroj, 'WHERE `id`=?', array($id));
         }
     }
-    
-    
-    
     
     /*
      * metoda ulozi do prepojovvacej tabulky udaje o zdroji a klucovom slove
