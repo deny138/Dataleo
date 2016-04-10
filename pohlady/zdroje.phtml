@@ -25,16 +25,7 @@
             </td>
             <td>
             </td>
-
-            <th class="zdroje">
-                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=nazov">  Zdroj ID</b </a>
-            </th>
-            <th class="zdroje">
-                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=nazov">  Autor ID</b> </a>
-            </th>
-            <th class="zdroje">
-                <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=nazov">  Zdroj autor ID<b> </a>
-            </th>
+          
             <th class="zdroje">
                 <a  class="biely_odkaz_bez_podciarknutia" href="http://localhost/zdroje?zoradit=nazov">  Názov diela</b> </a>
             </th>
@@ -67,30 +58,8 @@
                 <td>
                     <a href="http://localhost/editor/<?= $zdroj['zdroj_id']; ?>/odstranit"><img src="resources/ikony/delete.png"></a>
                 </td>
-                <td>
-                    <?php
-                    if (!$zdroj['zdroj_id'])
-                        echo"-";
-                    else
-                        echo $zdroj['zdroj_id'];
-                    ?> 
-                </td>
-                <td>
-                    <?php
-                    if (!$zdroj['autor_id'])
-                        echo"-";
-                    else
-                        echo $zdroj['autor_id'];
-                    ?> 
-                </td>
-                <td>
-                    <?php
-                    if (!$zdroj['id'])
-                        echo"-";
-                    else
-                        echo $zdroj['id'];
-                    ?> 
-                </td>
+               
+
                 <td>
                     <a class="tucny_odkaz" href="http://localhost/zobrazenie?zdroj_id=<?= $zdroj['zdroj_id']; ?>"> <?= $zdroj['nazov']; ?></a>
                 </td>
@@ -133,12 +102,11 @@
                     else
                         echo $zdroj['hodnotenie'];
                     ?> 
-                    
+
 
             </tr>
         <?php endforeach ?>
     </table>
-    
+
 </div>
 
-    

@@ -94,6 +94,11 @@ class VypisZdrojov {
         return Db::dotazJeden('SELECT `zdroj_okruh_id` FROM `zdroj_okruh`  WHERE `zdroj_id`=? AND `okruh_id`=?  ', array($zdroj_id,$okruh_id));
     }
     
+    public function vratIdZdrojSlovoPodlaUdajov($zdroj_id,$klucove_slovo_id){
+        return Db::dotazJeden('SELECT `zdroj_klucove_slovo_id` FROM `zdroj_klucove_slovo`  WHERE `zdroj_id`=? AND `klucove_slovo_id`=?  ', array($zdroj_id,$klucove_slovo_id));
+    }
+    
+    
    
 
     /*
