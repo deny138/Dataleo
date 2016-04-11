@@ -30,13 +30,12 @@ class ZdrojeKontroler extends Kontroler {
         //vytvorenie novej instancie ktora nam umozni vypis zdrojov
         $vypisZdrojov = new VypisZdrojov();
         //metoda ktora vrati zdroje pre vypis  zoznamu vsetkych zdrojov pouzivatela, ktory je proihlaseny
-        $zdroje = $vypisZdrojov->vratZdrojeSautorom($pouzivatelovo_id, $zoradit);
+        $zdroje = $vypisZdrojov->vratZdrojeBezAutora($pouzivatelovo_id, $zoradit);
         $zdroje_ukazka = $vypisZdrojov->vratZdrojPodlaZdrojId($id);
         $autori = $vypisZdrojov->vratAutorov($id);
         $slovicka = $vypisZdrojov->vratKlucoveSlova($id);
         $okruhy = $vypisZdrojov->vratOkruhy($id);
-        // echo ('<br><br>');
-        //echo count($zdroje);
+      
 
       
         
@@ -44,7 +43,7 @@ class ZdrojeKontroler extends Kontroler {
             $this->presmeruj('Prazdno');
         }
 
-        $this->hlavicka['titulok'] = 'Moje zdroje';
+        $this->hlavicka['titulok'] = 'Knižnica';
 
         $this->data['zdroje'] = $zdroje; //aby sa dalo v pohlade pracovat s premennou zdroje
         $this->data['zdroje_ukazka'] = $zdroje_ukazka; //aby sa dalo v pohlade pracovat s premennou zdroje

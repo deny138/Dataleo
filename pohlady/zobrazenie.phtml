@@ -10,8 +10,263 @@
     <a class="tucny_odkaz" href="uvod"> DATALEO </a>  >> <a class="tucny_odkaz" href="zdroje">Moja knižnica </a>>> <?= $zdroje_ukazka['nazov']; ?>
 </div>
 
+ <?php $cesta_k_suboru = 'uploads/' . $zdroje_ukazka['zdroj_id'] . '.pdf'; ?>
+
+
+
+
+<div id="ukazkaZdroja">
+    <table class="ukazka" border="0">
+
+         <tr class="ukazka">
+           <td class="tucne">Nazov: </td> <?php
+            if (!$zdroje_ukazka['nazov']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['nazov'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+
+         <tr class="ukazka">
+            <td class="tucne">Podnazov: </td> <?php
+            if (!$zdroje_ukazka['podnazov']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['podnazov'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+        
+          <tr class="ukazka">
+            <td class="tucne">Druh zdroja: </td> <?php
+            if (!$zdroje_ukazka['druh_zdroja']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                 if ($zdroje_ukazka['druh_zdroja'] == 'kniha') echo 'Kniha';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'cast_knihy') echo 'Časť knihy';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'periodikum') echo 'Periodikum';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'clanok') echo 'Článok';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'zbornik') echo 'Zborník';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'prispevok_v_zborniku') echo 'Príspevok v zborníku';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'akademicka_praca') echo 'Akademická práca';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'elektronicka_kniha') echo 'Elektronická kniha';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'cast_elektronickej_knihy') echo 'Časť elektronickej knihy';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'elektronicke_periodikum') echo 'Elektronické periodikum';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'elektronicky_clanok') echo 'Elektronický článok';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'elektronicky_zbornik') echo 'Elektronický zborník';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'elektronicka_akademicka_praca') echo 'Elektronická akademická práca';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'elektronicky_prispevok_v_zborniku') echo 'Elektronický príspevok v zborníku';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'web') echo 'Web';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'webova_stranka') echo 'Webová stránka';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'prispevok_na_webe') echo 'Príspevok na webe';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'iny_dokument') echo 'Iný dokument';
+                        if ($zdroje_ukazka['druh_zdroja'] == 'nepublikovany_dokument') echo 'Nepublikovaný dokument';
+                echo "</td>";
+            }
+            ?>
+        </tr>
+
+        <tr class="ukazka">
+            <td class="tucne">Autor/i: </td> <?php
+            if (!$autori) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+            }
+            foreach ($autori as $autor):
+                ?>
+                <?= $autor['titul_pred'] . " " . $autor['meno'] . " " . $autor['priezvisko'] . " " . $autor['titul_po'] . "<br>"; ?>
+            <?php endforeach ?>
+        </tr>
+
+        <tr class="ukazka">
+            <td class="tucne">Okruh/y: </td> <?php
+            if (!$okruhy) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+            }
+            foreach ($okruhy as $okruh):
+                ?>
+                <?= $okruh['nazov_okruhu']; ?>
+            <?php endforeach ?>
+        </tr>
+        
+        <tr class="ukazka">
+            <td class="tucne">Klucove slova: </td> <?php
+            if (!$slovicka) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+            }
+            foreach ($slovicka as $slovicko):
+                ?>
+                <?= $slovicko['klucove_slovo']; ?>
+            <?php endforeach ?>
+        </tr>
+
+         <tr class="ukazka">
+            <td class="tucne">Vydanie: </td> <?php
+            if (!$zdroje_ukazka['vydanie']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['vydanie'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+
+        <tr class="ukazka">
+            <td class="tucne">Miesto vydania: </td> <?php
+            if (!$zdroje_ukazka['miesto_vydania']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['miesto_vydania'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+        <tr class="ukazka">
+            <td class="tucne">Nakladatelstvo: </td> <?php
+            if (!$zdroje_ukazka['vydavatelstvo']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['vydavatelstvo'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+        <tr class="ukazka">
+            <td class="tucne">Rok_vydania: </td> <?php
+            if (!$zdroje_ukazka['rok_vydania']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['rok_vydania'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+        <tr class="ukazka">
+            <td class="tucne">ISBN: </td> <?php
+            if (!$zdroje_ukazka['isbn']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['isbn'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+        <tr class="ukazka">
+            <td class="tucne">ISSN: </td> <?php
+            if (!$zdroje_ukazka['issn']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['issn'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+         <tr class="ukazka">
+           <td class="tucne">DOI: </td> <?php
+            if (!$zdroje_ukazka['doi']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['doi'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+         <tr class="ukazka">
+            <td class="tucne">Pocet stran: </td> <?php
+            if (!$zdroje_ukazka['strany']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['strany'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+         <tr class="ukazka">
+           <td class="tucne">URL adresa: </td> <?php
+            if (!$zdroje_ukazka['url']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['url'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+        <tr class="ukazka">
+            <td class="tucne">Datum aktualizacie: </td> <?php
+            if (!$zdroje_ukazka['datum_aktualizacie']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['datum_aktualizacie'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+        <tr class="ukazka">
+            <td class="tucne">Datum pridania: </td> <?php
+            if (!$zdroje_ukazka['datum_pridania']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['datum_pridania'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+        <tr class="ukazka">
+            <td class="tucne">Hodnotenie: </td> <?php
+            if (!$zdroje_ukazka['hodnotenie']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['hodnotenie'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+        <tr class="ukazka">
+            <td class="tucne">Poznamka: </td> <?php
+            if (!$zdroje_ukazka['poznamka']) {
+                echo "<td>-</td>";
+            } else {
+                echo "<td>";
+                echo $zdroje_ukazka['poznamka'];
+                echo "</td>";
+            }
+            ?>
+        </tr>
+
+    </table>
+    <a class="potvrdzovacie_tlacidlo" href="http://localhost/editor/<?= $_GET['zdroj_id'] ?>"> Editovať</a>
+    <a class="potvrdzovacie_tlacidlo" href="http://localhost/editor/<?= $_GET['zdroj_id'] ?>/odstranit"> Vymazať </a>
+    
+    <?php if (file_exists($cesta_k_suboru)): ?>
+        <a class="potvrdzovacie_tlacidlo" href="http://localhost/<?= $cesta_k_suboru ?>"> Stiahnuť </a>
+    <?php endif ?>
+</div>
+
 <div id="pdf">
-    <?php $cesta_k_suboru = 'uploads/' . $zdroje_ukazka['zdroj_id'] . '.pdf'; ?>
+   
     <?php if (file_exists($cesta_k_suboru)): ?>
         <object  data=<?= $cesta_k_suboru ?> width="650" height="800" >
             <p>Tento webový prehliadač nepodporuje PDF plugin.  <a href="http://localhost/<?= $cesta_k_suboru ?>">Kliknite sem pre externé zobrazenie.</a>
@@ -28,268 +283,6 @@
         Ukážka zdroja neexistuje.
     <?php endif; ?>
 
-</div>
-
-
-
-
-<div id="ukazkaZdroja">
-    <table  border="0">
-
-
-        <tr>
-            <td>Autor/i: </td> <?php
-            if (!$autori) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-            }
-            foreach ($autori as $autor):
-                ?>
-                <?= $autor['titul_pred'] . " " . $autor['meno'] . " " . $autor['priezvisko'] . " " . $autor['titul_po'] . "<br>"; ?>
-            <?php endforeach ?>
-        </tr>
-
-        <tr>
-            <td>Okruh/y: </td> <?php
-            if (!$okruhy) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-            }
-            foreach ($okruhy as $okruh):
-                ?>
-                <?= $okruh['nazov_okruhu']; ?>
-            <?php endforeach ?>
-        </tr>
-
-        <tr>
-            <td>Zdroj ID: </td> <?php
-            if (!$zdroje_ukazka['zdroj_id']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['zdroj_id'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-
-        <tr>
-            <td> Pouzivatel ID: </td> <?php
-            if (!$zdroje_ukazka['pouzivatel_id']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['pouzivatel_id'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-
-        <tr>
-            <td> Druh zdroja: </td> <?php
-            if (!$zdroje_ukazka['druh_zdroja']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['druh_zdroja'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-
-        <tr>
-            <td>Nazov: </td> <?php
-            if (!$zdroje_ukazka['nazov']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['nazov'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-
-        <tr>
-            <td>Podnazov: </td> <?php
-            if (!$zdroje_ukazka['podnazov']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['podnazov'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-
-        <tr>
-            <td>Vydanie: </td> <?php
-            if (!$zdroje_ukazka['vydanie']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['vydanie'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-
-        <tr>
-            <td>Miesto vydania: </td> <?php
-            if (!$zdroje_ukazka['miesto_vydania']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['miesto_vydania'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-        <tr>
-            <td>Nakladatelstvo: </td> <?php
-            if (!$zdroje_ukazka['vydavatelstvo']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['vydavatelstvo'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-        <tr>
-            <td>Rok_vydania: </td> <?php
-            if (!$zdroje_ukazka['rok_vydania']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['rok_vydania'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-        <tr>
-            <td>ISBN: </td> <?php
-            if (!$zdroje_ukazka['isbn']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['isbn'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-        <tr>
-            <td>ISSN: </td> <?php
-            if (!$zdroje_ukazka['issn']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['issn'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-        <tr>
-            <td>DOI: </td> <?php
-            if (!$zdroje_ukazka['doi']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['doi'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-        <tr>
-            <td>Pocet stran: </td> <?php
-            if (!$zdroje_ukazka['strany']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['strany'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-        <tr>
-            <td>URL adresa: </td> <?php
-            if (!$zdroje_ukazka['url']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['url'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-        <tr>
-            <td>Datum aktualizacie: </td> <?php
-            if (!$zdroje_ukazka['datum_aktualizacie']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['datum_aktualizacie'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-        <tr>
-            <td>Datum pridania: </td> <?php
-            if (!$zdroje_ukazka['datum_pridania']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['datum_pridania'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-        <tr>
-            <td>Hodnotenie: </td> <?php
-            if (!$zdroje_ukazka['hodnotenie']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['hodnotenie'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-        <tr>
-            <td>Poznamka: </td> <?php
-            if (!$zdroje_ukazka['poznamka']) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-                echo $zdroje_ukazka['poznamka'];
-                echo "</td>";
-            }
-            ?>
-        </tr>
-
-        <tr>
-            <td>Klucove slova: </td> <?php
-            if (!$slovicka) {
-                echo "<td>-</td>";
-            } else {
-                echo "<td>";
-            }
-            foreach ($slovicka as $slovicko):
-                ?>
-                <?= $slovicko['klucove_slovo']; ?>
-            <?php endforeach ?>
-        </tr>
-
-
-
-    </table>
-    <a class="potvrdzovacie_tlacidlo" href="http://localhost/editor/<?= $_GET['zdroj_id'] ?>"> Editovať</a>
-    <a class="potvrdzovacie_tlacidlo" href="http://localhost/editor/<?= $_GET['zdroj_id'] ?>/odstranit"> Vymazať </a>
-    
-    <?php if (file_exists($cesta_k_suboru)): ?>
-        <a class="potvrdzovacie_tlacidlo" href="http://localhost/<?= $cesta_k_suboru ?>"> Stiahnuť </a>
-    <?php endif ?>
 </div>
 
 

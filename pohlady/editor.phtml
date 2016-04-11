@@ -80,9 +80,12 @@
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="zdroj_id" value="<?= $zdroj['zdroj_id'] ?>"/>
         <input type="hidden" name="id" value="<?= $autor_zdroj['id'] ?>"/>
-        <input type="hidden" name="autor_id" value="<?= $autor['autor_id'] ?>"/>
-        <input type="hidden" name="klucove_slovo_id" value="<?= $klucove_slovo['klucove_slovo_id'] ?>"/>
-        <input type="hidden" name="okruh_id" value="<?= $okruh['okruh_id'] ?>"/>
+        
+        <!-- tu bolo pridane _0, moze to sposobit chybu? -->
+        <input type="hidden" name="autor_id" value="<?= $autor['autor_id_0'] ?>"/>
+        <input type="hidden" name="klucove_slovo_id" value="<?= $klucove_slovo['klucove_slovo_id_0'] ?>"/>
+        <input type="hidden" name="okruh_id" value="<?= $okruh['okruh_id_0'] ?>"/>
+        
         <input type="hidden" name="pouzivatel_id" value="<?= $zdroj['pouzivatel_id'] ?>"/>
         <input type="hidden" name="datum_pridania" value="<?= $zdroj['datum_pridania'] ?>"/>
 
@@ -90,8 +93,8 @@
 
 
 
-        <table id= "autor" border="0" align="justify" >
-            <tr> <td> Autor:  <td></tr>
+        <table id= "autor" class="autor" border="0" align="center" >
+            <tr>  Autor:  </tr>
             <?php if (((isset($autor[0]['titul_pred'])) OR ( isset($autor[0]['meno'])) OR ( isset($autor[0]['priezvisko'])) OR ( isset($autor[0]['titul_po']))) == true): ?> 
                 <?php if (isset($autor[0]['titul_pred'])): ?>
                     <tr><td><input class="formular_vstup" placeholder="titul_0" type="text" name="titul_pred_0" value="<?= $autor[0]['titul_pred'] ?>" autofocus/> </td>
@@ -108,7 +111,6 @@
                     <?php endif; ?>
 
                 <?php else: ?>
-                    <?php echo 'nieje zadany 0 autor' ?>
                 <tr><td><input class="formular_vstup" placeholder="titul_0" type="text" name="titul_pred_0" /> </td>
                     <td><input class="formular_vstup" placeholder="meno" type="text" name="meno_0"  /> </td>
                     <td><input class="formular_vstup" type="text" placeholder="priezvisko" name="priezvisko_0" /> </td>
@@ -146,14 +148,62 @@
                 };
                 ?>
         </table>
+        
+        <table id="okruhy" border="0" align="center">
+            <tr> <td> Okruhy: </td></tr>
 
-        <table id="druhy" border="0" align="justify" >
+            <?php if (isset($okruh[0]['nazov_okruhu'])): ?>
+                <tr><td><input class="formular_vstup" type="text" placeholder="okruh_0" name="nazov_okruhu_0" value="<?= $okruh[0]['nazov_okruhu'] ?>"/></td>
+                <?php else: ?>
+                <tr><td><input class="formular_vstup" type="text" placeholder="okruh_0" name="nazov_okruhu_0" /></td>
+                <?php endif; ?>
+                <td> <input type="button" onclick="pridajOkruh()" value="+" />    </td>
+                <?php
+                for ($j = 1; $j <= 100; $j++) {
+                    if (isset($okruh[$j])) {
+                        ?>
+                    <tr><td> <input type="text" class="formular_vstup"   placeholder="okruh_<?= $j ?>" name="nazov_okruhu_<?= $j ?>"  value="<?= $okruh[$j]['nazov_okruhu'] ?>" /></td>
+                        <td> <input type="button" onclick="pridajOkruh()" value="+" />    </td>
+                        <td><input type=button onclick=odstranOkruh(this) value=x> </td>
+
+                        <?php
+                    };
+                };
+                ?>
+        </table>
+
+
+
+        <table id="slova" border="0" align="center">
+            <tr> <td> Kľúčové slová: </td></tr>
+
+            <?php if (isset($klucove_slovo[0]['klucove_slovo'])): ?>
+                <tr><td><input class="formular_vstup" type="text" placeholder="klucove_slovo_0" name="klucove_slovo_0" value="<?= $klucove_slovo[0]['klucove_slovo'] ?>"/></td>
+                <?php else: ?>
+                <tr><td><input class="formular_vstup" type="text" placeholder="klucove_slovo_0" name="klucove_slovo_0" /></td>
+                <?php endif; ?>
+                <td> <input type="button" onclick="pridajSlovo()" value="+" />    </td>
+                <?php
+                for ($i = 1; $i <= 10; $i++) {
+                    if (isset($klucove_slovo[$i])) {
+                        ?>
+                    <tr><td> <input type="text" class="formular_vstup"   placeholder="klucove_slovo<?= $i ?>" name="klucove_slovo_<?= $i ?>"  value="<?= $klucove_slovo[$i]['klucove_slovo'] ?>" /></td>
+                        <td> <input type="button" onclick="pridajSlovo()" value="+" />    </td>
+                        <td><input type=button onclick=odstranSlovo(this) value=x> </td>
+
+                        <?php
+                    };
+                };
+                ?>
+        </table>
+
+        <table id="druhy" border="0" align="center" >
             <tr> <td> Druh zdroja-navyber:</td> </tr>
             <td> <select name="druh_zdroja" class="formular_vstup"  >
 
                     <?php if (($zdroj['druh_zdroja']) == "kniha"): ?>
                         <option value="kniha" selected> Kniha </option>
-                        <option value="cast_klihy" > Časť knihy </option>
+                        <option value="cast_knihy" > Časť knihy </option>
                         <option value="periodikum" > Periodikum </option>
                         <option value="clanok" > Článok </option>
                         <option value="zbornik" > Zborník </option>
@@ -559,7 +609,7 @@
 
                     <?php else: ?>
                         <option value="kniha" > Kniha </option>
-                        <option value="cast_klihy"  > Časť knihy </option>
+                        <option value="cast_knihy"  > Časť knihy </option>
                         <option value="periodikum" > Periodikum </option>
                         <option value="clanok" > Článok </option>
                         <option value="zbornik" > Zborník </option>
@@ -584,61 +634,13 @@
 
 
 
-        <table id="okruhy" border="0" align="justify">
-            <tr> <td> Okruh: </td></tr>
-
-            <?php if (isset($okruh[0]['nazov_okruhu'])): ?>
-                <tr><td><input class="formular_vstup" type="text" placeholder="okruh_0" name="nazov_okruhu_0" value="<?= $okruh[0]['nazov_okruhu'] ?>"/></td>
-                <?php else: ?>
-                <tr><td><input class="formular_vstup" type="text" placeholder="okruh_0" name="nazov_okruhu_0" /></td>
-                <?php endif; ?>
-                <td> <input type="button" onclick="pridajOkruh()" value="+" />    </td>
-                <?php print_r($okruh); ?>
-                <?php
-                for ($j = 1; $j <= 100; $j++) {
-                    if (isset($okruh[$j])) {
-                        ?>
-                    <tr><td> <input type="text" class="formular_vstup"   placeholder="okruh_<?= $j ?>" name="nazov_okruhu_<?= $j ?>"  value="<?= $okruh[$j]['nazov_okruhu'] ?>" /></td>
-                        <td> <input type="button" onclick="pridajOkruh()" value="+" />    </td>
-                        <td><input type=button onclick=odstranOkruh(this) value=x> </td>
-
-                        <?php
-                    };
-                };
-                ?>
-        </table>
+        
 
 
-
-        <table id="slova" border="0" align="justify">
-            <tr> <td> Klucove slova: </td></tr>
-
-            <?php if (isset($klucove_slovo[0]['klucove_slovo'])): ?>
-                <tr><td><input class="formular_vstup" type="text" placeholder="klucove_slovo_0" name="klucove_slovo_0" value="<?= $klucove_slovo[0]['klucove_slovo'] ?>"/></td>
-                <?php else: ?>
-                <tr><td><input class="formular_vstup" type="text" placeholder="klucove_slovo_0" name="klucove_slovo_0" /></td>
-                <?php endif; ?>
-                <td> <input type="button" onclick="pridajSlovo()" value="+" />    </td>
-                <?php print_r($klucove_slovo); ?>
-                <?php
-                for ($i = 1; $i <= 10; $i++) {
-                    if (isset($klucove_slovo[$i])) {
-                        ?>
-                    <tr><td> <input type="text" class="formular_vstup"   placeholder="klucove_slovo<?= $i ?>" name="klucove_slovo_<?= $i ?>"  value="<?= $klucove_slovo[$i]['klucove_slovo'] ?>" /></td>
-                        <td> <input type="button" onclick="pridajSlovo()" value="+" />    </td>
-                        <td><input type=button onclick=odstranSlovo(this) value=x> </td>
-
-                        <?php
-                    };
-                };
-                ?>
-        </table>
+        <table  border="0" align="center">
 
 
-        <table  border="0" align="justify">
-
-
-            <tr> <td> Nazov:</td></tr>
+            <tr> <td> Názov:</td></tr>
             <td><input class="formular_vstup" type="text" name="nazov" value="<?= $zdroj['nazov'] ?> "/> </td></tr>
 
             <tr><td> Podnázov:</td></tr>

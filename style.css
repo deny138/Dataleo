@@ -26,7 +26,7 @@ body {
     padding: 0;
     line-height: 1.42857143;
     color: #333;
-    
+
     background-repeat: repeat;
     background-attachment: fixed;
     background-image: url(resources/pozadia//pozadie_zdroje.jpg);
@@ -58,11 +58,11 @@ body {
     width: 100%;
     clear: both;
     min-height:800px;
-    
+
 }
 #administracia {
     border: 0px solid black;
-    height: auto;
+    height: 20px;
     width: 50%;
     text-align: right;
     float:right;
@@ -72,7 +72,7 @@ body {
 #navigacia{
     padding-top: 1%;
     border: 0px solid black;
-    height: auto;
+    height: 20px;
     width: 49%;
     text-align: left;
     padding-left:  1%;
@@ -85,7 +85,7 @@ body {
     // -moz-box-shadow: 1px 2px 10px 0px #444444;/* definícia pre gecko jadro Firefoxu*/
     // box-shadow: 1px 2px 10px 0px #444444;/* CSS3 definícia pre všetky prehliadače */
     float:left;
-    width:8%;
+    width:10%;
     min-height: 500px;
     text-align: left;
     margin: 1% 1% 1% 1%;
@@ -96,7 +96,7 @@ body {
     //border: 1px solid black;
     //border-style:   outset;
     min-height: 600px;
-    // width:auto;
+    //width:50%;
     float:left;
     margin: 1% 1% 1% 1%;
     padding: 1% 1% 1% 1%;
@@ -105,8 +105,8 @@ body {
 
 #ukazkaZdroja{
     float:left;
-    // border: 1px solid black;
-    width:35%;
+    //border: 1px solid black;
+    width:700px;
     min-height: 500px;
     padding: 1% 1% 1% 1%;
     margin: 1% 1% 1% 1%;
@@ -115,7 +115,7 @@ body {
 #pdf{
     float:left;
     //border: 1px solid black;
-    min-height: 500px;
+    // min-height: 500px;
     padding: 1% 1% 1% 1%;
     margin: 1% 1% 1% 1%;
 }
@@ -123,7 +123,7 @@ body {
 #editor{ 
     padding-top: 100px;
     text-align: center;
-    padding-left: 15%;
+
 }
 
 #pata {
@@ -137,6 +137,7 @@ body {
     //padding: 10px ;
     text-align: right;
     color: #999;
+    padding: 1px 10px 1px 1px;
 }
 
 #chyba{
@@ -234,7 +235,30 @@ body {
     background-color: #1c91a8;
     border-color: #1c91a8;
     color: #fff;
+
 }
+
+.tlacidlo_plus{
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    color: #008080;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+    letter-spacing: 1px;
+    display: inline-block;
+    // font-size: 150%;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.tlacidlo_plus:hover{
+    color:#333;
+}
+
+
 
 .tucny_odkaz{
     color: #333;
@@ -247,6 +271,15 @@ body {
 
 .tucny_odkaz:hover{
     color: #167385;
+}
+
+#tucne{
+    color: #333;
+    background: none;
+    border: none;
+    margin: 5px 5px 5px 0px;
+    font-weight: bold;
+    text-decoration: none; 
 }
 
 .cierny_odkaz_podciarknuty{
@@ -263,16 +296,52 @@ th.zdroje{
     background-color: #333;
     color: white;
     font-size:100%;
-    padding: 10px;
+    padding: 15px;
+
+
 }
 
-tr, td {
+td.zdroje{
     text-align: left;
-    padding: 5px;
 }
 
-th.ukazka_nadpis{
-    color: #333;
-    font-size: 130%;
+td {
+    text-align: center;
+    padding: 5px;
+    line-height: 1.7;
 }
+
+
+table.zdroje{
+    width: 80%;
+    vertical-align: central;
+    padding-top: 30px;
+}
+
+table.ukazka {
+    border-collapse: collapse;
+    width: 100%;
+    // border: 1px solid tan;
+}
+
+td.tucne {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid tan;
+    font-weight: bold; 
+}
+
+tr.ukazka {
+    border-bottom: 1px solid tan;
+
+}
+
+tr.ukazka:hover{background-color:tan}
+
+
+
+
+
+
+
 

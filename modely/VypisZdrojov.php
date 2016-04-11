@@ -23,6 +23,7 @@ class VypisZdrojov {
                         . 'WHERE `zdroj_id`=?', array($id));
     }
     
+    
    
     /*
      * vrati vsetky zdroje spolu s autorom, budu sa vypisovat ako zoznam pre daneho pouzivatela
@@ -36,6 +37,13 @@ class VypisZdrojov {
                         . 'a.autor_id, `titul_pred`,`meno`,`priezvisko`,`titul_po` '
                         . 'FROM `zdroj` AS z  LEFT JOIN autor_zdroj AS az ON az.zdroj_id = z.zdroj_id  '
                         . 'LEFT JOIN `autor` AS a ON a.autor_id=az.autor_id WHERE `pouzivatel_id`=? ORDER BY ? ASC', array($pouzivatel_id, $zoradit));
+    }
+    
+    
+    public function vratZdrojeBezAutora($pouzivatel_id, $zoradit) {
+        return Db::dotazVsetky('SELECT `zdroj_id`,`pouzivatel_id`,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
+                        . '`miesto_vydania`, `vydavatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
+                        . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka` FROM `zdroj`WHERE `pouzivatel_id`=? ORDER BY ? ASC', array($pouzivatel_id, $zoradit));
     }
 
     /*
@@ -194,6 +202,18 @@ class VypisZdrojov {
         Db::dotaz('DELETE FROM zdroj_okruh WHERE zdroj_id=?', array($id));
         Db::dotaz('DELETE FROM zdroj_klucove_slovo WHERE zdroj_id=?', array($id));
         Db::dotaz('DELETE FROM zdroj WHERE zdroj_id=?', array($id));
+    }
+    
+    public function vymazZprepajacejOkruhy($zdroj_id){
+        Db::dotaz('DELETE FROM zdroj_okruh WHERE zdroj_id=?', array($zdroj_id));
+    }
+    
+    public function vymazZprepajacejSlova($zdroj_id){
+        Db::dotaz('DELETE FROM zdroj_klucove_slovo WHERE zdroj_id=?', array($zdroj_id));
+    }
+    
+    public function vymazZprepajacejAutora($zdroj_id){
+        Db::dotaz('DELETE FROM autor_zdroj WHERE zdroj_id=?', array($zdroj_id));
     }
 
     /*

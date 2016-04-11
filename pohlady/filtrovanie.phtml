@@ -1,0 +1,36 @@
+<div id="administracia" >
+    <img src="resources/ikony/user.png"> <?php echo $pouzivatel['meno'] ?> 
+    <a  class= "tucny_odkaz" href="uvod/odhlasit"> <img src="resources/ikony/exit.png"> </a>
+</div>
+
+
+<div id="navigacia">
+    <a class="tucny_odkaz" href="uvod"> DATALEO </a> >>
+    <a class="tucny_odkaz" href="zdroje"> Moja knižnica </a> >> Filtrovanie zdrojov podľa zadaného parametra</div>
+
+<form method="post">
+    <table  border="0" align="left" >
+
+        <td>  <select  name="filtrovanie" class="formular_vstup"  >
+            <option value="f_nazov" selected> Názov </option>
+            <option value="f_podnazov" > Podnázov </option>
+            <option value="f_druh" > Druh </option>
+            <option value="f_vydanie" > Vydanie </option>
+            <option value="f_miesto_vydania" > Miesto vydania </option>
+            <option value="f_vydavatelstvo" > Vydavateľstvo </option>
+            <option value="f_rok_vydania" > Rok vydania </option>
+            <option value="f_isbn" > ISBN </option>
+            <option value="f_issn" > ISSN </option>
+            <option value="f_doi" > DOI </option>
+            <option value="f_strany" > Strany</option>
+            <option value="f_url" > URL </option>
+            <option value="f_datum_aktualizacie" > Dátum aktualizácie </option>
+            <option value="f_datum_pridania" > Dátum pridania </option>
+            <option value="f_hodnotenie" > Hodnotenie </option>
+            </select></td>
+        <td><input class="formular_vstup" type="text" placeholder= "parameter filtrovania" name="parameter_filtrovania" /></td>
+        <td> <input class="potvrdzovacie_tlacidlo" type="submit" value="Filtrovať" /> </td></tr>
+    </table>
+</form> 
+
+
