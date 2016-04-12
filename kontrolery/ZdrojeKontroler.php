@@ -35,6 +35,9 @@ class ZdrojeKontroler extends Kontroler {
         $autori = $vypisZdrojov->vratAutorov($id);
         $slovicka = $vypisZdrojov->vratKlucoveSlova($id);
         $okruhy = $vypisZdrojov->vratOkruhy($id);
+        //vsetky okruhy
+        $vsetky_okruhy=$vypisZdrojov->vratVsetkyOkruhy($pouzivatelovo_id);
+        $vsetky_slova=$vypisZdrojov->vratVsetkySlova($pouzivatelovo_id);
       
 
       
@@ -50,6 +53,8 @@ class ZdrojeKontroler extends Kontroler {
         $this->data['autori'] = $autori; //aby sa dalo v pohlade pracovat s premennou zdroje
         $this->data['slovicka'] = $slovicka; //aby sa dalo v pohlade pracovat s premennou zdroje
         $this->data['okruhy'] = $okruhy; //aby sa dalo v pohlade pracovat s premennou zdroje
+        $this->data['vsetky_okruhy'] = $vsetky_okruhy; 
+        $this->data['vsetky_slova'] = $vsetky_slova; 
         $this->data['pouzivatel'] = $pouzivatel; //prenesie do pohladu zdroje pole pouzivatel ktore obsahuje vsetky udaje z tabulky pouzivatel
         $this->pohlad = 'zdroje';
     }

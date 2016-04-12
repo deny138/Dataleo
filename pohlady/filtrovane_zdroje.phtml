@@ -1,3 +1,5 @@
+
+
 <div id="administracia" >
     <img src="resources/ikony/user.png"> <?php echo $pouzivatel['meno'] ?> 
     <a  class= "tucny_odkaz" href="uvod/odhlasit"> <img src="resources/ikony/exit.png"> </a>
@@ -7,7 +9,7 @@
 
 <div id="navigacia">
     <a class="tucny_odkaz" href="uvod"> DATALEO </a>  >> 
-     <a class="tucny_odkaz" href="zdroje"> Moja knižnica </a> >> Filtrované zdroje
+    <a class="tucny_odkaz" href="zdroje"> Moja knižnica </a> >> Filtrované zdroje
 </div>
 
 
@@ -16,14 +18,14 @@
     <a class="tlacidlo_plus" href="editor"> Pridať nový zdroj</a> <br>
     <a class="tlacidlo_plus" href="filtrovanie"> Filtrovanie zdrojov</a> <br>
 
-   
+
 
 </div>
 
 
 
 
-<div id="tabulka_zdrojov">
+<div id="tabulkaZdrojov">
 
     <table class="zdroje">
         <tr>
@@ -53,7 +55,7 @@
             <td>
             </td>
         </tr>
-<?php foreach ($zdroje as $zdroj) : ?>
+        <?php foreach ($zdroje as $zdroj) : ?>
             <tr class="zdroje">
 
 
@@ -117,20 +119,20 @@
                     ?> 
                 </td>
                 <td class="zdroje">
-    <?php
-    if (!$zdroj['datum_pridania'])
-        echo"-";
-    else
-        echo $zdroj['datum_pridania'];
-    ?> 
+                    <?php
+                    if (!$zdroj['datum_pridania'])
+                        echo"-";
+                    else
+                        echo $zdroj['datum_pridania'];
+                    ?> 
                 </td>
                 <td class="zdroje">
-            <?php
-            if (!$zdroj['hodnotenie'])
-                echo"-";
-            else
-                echo $zdroj['hodnotenie'];
-            ?> 
+                    <?php
+                    if (!$zdroj['hodnotenie'])
+                        echo"-";
+                    else
+                        echo $zdroj['hodnotenie'];
+                    ?> 
 
                 <td class="ikonky">
                     <a href="http://localhost/zobrazenie?zdroj_id=<?= $zdroj['zdroj_id']; ?>"><img src="resources/ikony/show.png"></a>
@@ -145,7 +147,7 @@
 
 
             </tr>
-<?php endforeach ?>
+        <?php endforeach ?>
     </table>
 
 </div>

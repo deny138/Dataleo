@@ -15,14 +15,37 @@
     <a class="tlacidlo_plus" href="editor"> Pridať nový zdroj</a> <br>
     <a class="tlacidlo_plus" href="filtrovanie"> Filtrovanie zdrojov</a> <br>
 
-   
+
+
+    Okruhy:  <?php
+    if ($vsetky_okruhy) {
+    foreach ($vsetky_okruhy as $ok):
+        ?>
+        <a class="tlacidlo_plus" href="http://localhost/filtrovanie?podla=okruh&filter=<?=$ok['okruh_id']?>"><?= $ok['nazov_okruhu'] ."<br><br>"; ?></a>
+    <?php endforeach ?>
+    <?php }?>
+
+
+
+
+<td class="tucne">Kľúčové slová: </td> <?php
+    if (!$vsetky_slova) {
+        echo "<td>-</td>";
+    } else {
+        echo "<td>";
+    }
+    foreach ($vsetky_slova as $sl):
+        ?>
+<a class="tlacidlo_plus" href="http://localhost/filtrovanie?podla=slovo&filter=<?=$sl['klucove_slovo_id']?>"><?= $sl['klucove_slovo'] ."<br><br>"; ?></a>
+    <?php endforeach ?>
+</tr>
+
 
 </div>
 
 
 
-
-<div id="tabulka_zdrojov">
+<div id="tabulkaZdrojov">
 
     <table class="zdroje">
         <tr>
@@ -52,7 +75,7 @@
             <td>
             </td>
         </tr>
-<?php foreach ($zdroje as $zdroj) : ?>
+        <?php foreach ($zdroje as $zdroj) : ?>
             <tr class="zdroje">
 
 
@@ -116,20 +139,20 @@
                     ?> 
                 </td>
                 <td class="zdroje">
-    <?php
-    if (!$zdroj['datum_pridania'])
-        echo"-";
-    else
-        echo $zdroj['datum_pridania'];
-    ?> 
+                    <?php
+                    if (!$zdroj['datum_pridania'])
+                        echo"-";
+                    else
+                        echo $zdroj['datum_pridania'];
+                    ?> 
                 </td>
                 <td class="zdroje">
-            <?php
-            if (!$zdroj['hodnotenie'])
-                echo"-";
-            else
-                echo $zdroj['hodnotenie'];
-            ?> 
+                    <?php
+                    if (!$zdroj['hodnotenie'])
+                        echo"-";
+                    else
+                        echo $zdroj['hodnotenie'];
+                    ?> 
 
                 <td class="ikonky">
                     <a href="http://localhost/zobrazenie?zdroj_id=<?= $zdroj['zdroj_id']; ?>"><img src="resources/ikony/show.png"></a>
@@ -144,7 +167,7 @@
 
 
             </tr>
-<?php endforeach ?>
+        <?php endforeach ?>
     </table>
 
 </div>

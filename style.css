@@ -90,13 +90,14 @@ body {
     text-align: left;
     margin: 1% 1% 1% 1%;
     padding: 1% 1% 1% 1%;
+      padding-top: 50px;
 }
 
 #tabulkaZdrojov {
     //border: 1px solid black;
     //border-style:   outset;
     min-height: 600px;
-    //width:50%;
+    width:80%;
     float:left;
     margin: 1% 1% 1% 1%;
     padding: 1% 1% 1% 1%;
@@ -313,7 +314,7 @@ td {
 
 
 table.zdroje{
-    width: 80%;
+    width: 100%;
     vertical-align: central;
     padding-top: 30px;
 }

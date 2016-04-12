@@ -90,6 +90,16 @@ class VypisZdrojov {
         return Db::dotazVsetky('SELECT `nazov_okruhu` FROM `okruh` AS o'
                         . ' JOIN `zdroj_okruh` AS zo ON o.okruh_id = zo.okruh_id WHERE `zdroj_id`=?', array($id));
     }
+    //tieto 2 funkcie su pre prve okno, kde su odkazy na filtrovanie podla  okruhu a slova
+     public function vratVsetkyOkruhy($pouzivatel_id) {
+        return Db::dotazVsetky('SELECT o.nazov_okruhu, o.okruh_id FROM `okruh` AS o LEFT JOIN `zdroj_okruh` AS zo ON o.okruh_id = zo.okruh_id'
+                . ' LEFT JOIN `zdroj` AS z ON z.zdroj_id = zo.zdroj_id WHERE `pouzivatel_id` = ?',array($pouzivatel_id));
+    }
+    
+     public function vratVsetkySlova($pouzivatel_id) {
+        return Db::dotazVsetky('SELECT o.klucove_slovo, o.klucove_slovo_id FROM `klucove_slova` AS o LEFT JOIN `zdroj_klucove_slovo` AS zo ON o.klucove_slovo_id = zo.klucove_slovo_id'
+                . ' LEFT JOIN `zdroj` AS z ON z.zdroj_id = zo.zdroj_id WHERE `pouzivatel_id` = ?',array($pouzivatel_id));
+    }
     /*
      * vrati ID okruhu
      */
