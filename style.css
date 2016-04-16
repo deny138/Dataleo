@@ -8,6 +8,8 @@
 
 }
 */
+
+
 .sprava {
     //border: 1px solid #9DC2F8;
     background: #008080;
@@ -90,7 +92,12 @@ body {
     text-align: left;
     margin: 1% 1% 1% 1%;
     padding: 1% 1% 1% 1%;
-      padding-top: 50px;
+    padding-top: 50px;
+     
+}
+
+table.prve_okno{
+  //  border: 1px solid #aebdc1;
 }
 
 #tabulkaZdrojov {
@@ -107,7 +114,7 @@ body {
 #ukazkaZdroja{
     float:left;
     //border: 1px solid black;
-    width:700px;
+    width:500px;
     min-height: 500px;
     padding: 1% 1% 1% 1%;
     margin: 1% 1% 1% 1%;
@@ -122,8 +129,10 @@ body {
 }
 
 #editor{ 
-    padding-top: 100px;
-    text-align: center;
+    padding-top: 50px;
+    text-align: left;
+    padding-left: 50px;
+    padding-right: 50px;
 
 }
 
@@ -338,6 +347,29 @@ tr.ukazka {
 }
 
 tr.ukazka:hover{background-color:tan}
+
+table.autor, table.info_zdroj{
+   // border : 1px solid  #999;
+    border-spacing:  0.5rem;
+    text-align: left;
+}
+
+th.autor, th.okruhy, th.slova, th.druhy, th.info_zdroj{
+    //background-color: #aaa;
+    border-bottom : 1px solid  #999;
+    border-left : 1px solid  #999;
+}
+
+table.slova,table.okruhy,table.druhy{
+    float: right;
+}
+
+table.pridanie_zdroja_tlacidla{
+    float:right;
+    clear:both;
+}
+
+
 
 
 

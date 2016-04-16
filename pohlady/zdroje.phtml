@@ -11,34 +11,34 @@
 
 
 <div id="prveOkno">
-   <!--  <a  href="editor"> <img src="resources/ikony/add.png"></a> -->
-    <a class="tlacidlo_plus" href="editor"> Pridať nový zdroj</a> <br>
-    <a class="tlacidlo_plus" href="filtrovanie"> Filtrovanie zdrojov</a> <br>
+  
+    <table class="prve_okno" > 
+        <tr><td><a class="tlacidlo_plus" href="editor"><img src="resources/ikony/pridat.png"></a></td>
+          <td><a class="tlacidlo_plus" href="editor"> Pridať </a> </td></tr>
+        <tr><td><a class="tlacidlo_plus" href="filtrovanie">  <img src="resources/ikony/filter.png"></a></td>
+          <td ><a class="tlacidlo_plus" href="filtrovanie"> Filtrovať </a></td></tr>
+    </table>
 
 
-
-    Okruhy:  <?php
+    <br>
+    Okruhy: <br> <br> <?php
     if ($vsetky_okruhy) {
-    foreach ($vsetky_okruhy as $ok):
-        ?>
-        <a class="tlacidlo_plus" href="http://localhost/filtrovanie?podla=okruh&filter=<?=$ok['okruh_id']?>"><?= $ok['nazov_okruhu'] ."<br><br>"; ?></a>
-    <?php endforeach ?>
-    <?php }?>
+        foreach ($vsetky_okruhy as $ok):
+            ?>
+            <a class="tlacidlo_plus" href="http://localhost/filtrovanie?podla=okruh&filter=<?= $ok['okruh_id'] ?>"><?= $ok['nazov_okruhu'] . "<br>"; ?></a>
+        <?php endforeach ?>
+    <?php } ?>
 
 
 
 
-<td class="tucne">Kľúčové slová: </td> <?php
-    if (!$vsetky_slova) {
-        echo "<td>-</td>";
-    } else {
-        echo "<td>";
-    }
-    foreach ($vsetky_slova as $sl):
-        ?>
-<a class="tlacidlo_plus" href="http://localhost/filtrovanie?podla=slovo&filter=<?=$sl['klucove_slovo_id']?>"><?= $sl['klucove_slovo'] ."<br><br>"; ?></a>
-    <?php endforeach ?>
-</tr>
+    <br>Kľúčové slová: <br><br><?php
+    if ($vsetky_slova) {
+        foreach ($vsetky_slova as $sl):
+            ?>
+            <a class="tlacidlo_plus" href="http://localhost/filtrovanie?podla=slovo&filter=<?= $sl['klucove_slovo_id'] ?>"><?= $sl['klucove_slovo'] . "<br>"; ?></a>
+        <?php endforeach ?>
+    <?php } ?>
 
 
 </div>
@@ -161,7 +161,7 @@
                     <a href="http://localhost/editor/<?= $zdroj['zdroj_id']; ?>/edituj"><img src="resources/ikony/edit.png"></a>
                 </td>
                 <td class="ikonky">
-                    <a href="http://localhost/editor/<?= $zdroj['zdroj_id']; ?>/odstranit"><img src="resources/ikony/delete.png"></a>
+                    <a href="http://localhost/editor/<?= $zdroj['zdroj_id']; ?>/odstranit"  onclick="return confirm('Naozaj chcete zmazať zdroj?');"><img src="resources/ikony/delete.png"></a>
                 </td>
 
 

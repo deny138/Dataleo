@@ -124,6 +124,6 @@ class Filtrovanie {
         return DB::dotazVsetky('SELECT z.zdroj_id,`pouzivatel_id`,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
                         . '`miesto_vydania`, `vydavatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
                         . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka` FROM `zdroj` as z'
-                . ' JOIN `zdroj_klucove_slovo` as zo ON z.zdroj_id=zo.zdroj_id WHERE `klucove_slovo_id` = ? AND `pouzivatel_id` = ?', array($parameter,$pouzivatel));
+                . ' JOIN `zdroj_klucove_slovo` as zo ON z.zdroj_id=zo.zdroj_id  WHERE `klucove_slovo_id` = ? AND `pouzivatel_id` = ?', array($parameter,$pouzivatel));
     }
 }

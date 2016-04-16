@@ -12,13 +12,14 @@ class FiltrovanieKontroler extends Kontroler {
 
         if (!empty($_GET['podla'])) {
             $podla = $_GET['podla'];
-            if ($podla == 'okruh') {
+            
+             if ($podla == 'okruh') {
                 $kliknute_na_okruh = $_GET['filter'];
                 $zdroje = $filtrovanie->FiltrujPodlaOhruhu($kliknute_na_okruh, $pouzivatelovo_id);
                 $this->data['zdroje'] = $zdroje;
                 $this->pohlad = 'filtrovane_zdroje';
             }
-            if ($podla == 'slovo') {
+             if ($podla == 'slovo') {
                 $kliknute_na_slovo = $_GET['filter'];
                 $zdroje = $filtrovanie->FiltrujPodlaSlova($kliknute_na_slovo, $pouzivatelovo_id);
                 $this->data['zdroje'] = $zdroje;
@@ -59,8 +60,6 @@ class FiltrovanieKontroler extends Kontroler {
                 $zdroje = $filtrovanie->FiltrujPodlaDatumuPridania($parameter_filtrovania, $pouzivatelovo_id);
             if ($podla_coho_filtrovat == 'f_hodnotenie')
                 $zdroje = $filtrovanie->FiltrujPodlaHodnotenia($parameter_filtrovania, $pouzivatelovo_id);
-            echo '<br>podla: ' . $podla_coho_filtrovat;
-            echo '<br>param: ' . $parameter_filtrovania;
 
             $this->data['zdroje'] = $zdroje;
             $this->pohlad = 'filtrovane_zdroje';
