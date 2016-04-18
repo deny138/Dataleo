@@ -8,7 +8,7 @@ class VypisZdrojov {
     public function vratZdroje() {
         return Db::dotazVsetky('SELECT `zdroj_id`,`pouzivatel_id`,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
                         . '`miesto_vydania`, `vydavatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
-                        . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka` FROM `zdroj`');
+                        . '`strany`,`url`,`datum_vydania`,`nosic`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka` FROM `zdroj`');
     }
 
     /*
@@ -17,9 +17,9 @@ class VypisZdrojov {
 
     public function vratZdrojPodlaZdrojId($id) {
 
-        return DB::dotazJeden('SELECT `zdroj_id`,`pouzivatel_id`,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
+        return DB::dotazJeden('SELECT `zdroj_id`,`pouzivatel_id`,`druh_zdroja`, `nazov`,`podnazov`,`prispevok`,`zodpovednost`, `vydanie`,'
                         . '`miesto_vydania`, `vydavatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
-                        . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka` FROM `zdroj`'
+                        . '`strany`,`od`,`do`,`url`,`datum_vydania`,`datum_aktualizacie`,`datum_pridania`,`nosic`, `hodnotenie`, `poznamka`,`citacia` FROM `zdroj`'
                         . 'WHERE `zdroj_id`=?', array($id));
     }
     
@@ -31,9 +31,9 @@ class VypisZdrojov {
      */
 
     public function vratZdrojeSautorom($pouzivatel_id, $zoradit) {
-        return Db::dotazVsetky('SELECT az.id, z.zdroj_id,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
+        return Db::dotazVsetky('SELECT az.id, z.zdroj_id,`druh_zdroja`, `nazov`,`podnazov`,`prispevok`,`zodpovednost`, `vydanie`,'
                         . '`miesto_vydania`, `vydavatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
-                        . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka`, '
+                        . '`strany`,`od`,`do`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka`, '
                         . 'a.autor_id, `titul_pred`,`meno`,`priezvisko`,`titul_po` '
                         . 'FROM `zdroj` AS z  LEFT JOIN autor_zdroj AS az ON az.zdroj_id = z.zdroj_id  '
                         . 'LEFT JOIN `autor` AS a ON a.autor_id=az.autor_id WHERE `pouzivatel_id`=? ORDER BY ? ASC', array($pouzivatel_id, $zoradit));
@@ -43,7 +43,8 @@ class VypisZdrojov {
     public function vratZdrojeBezAutora($pouzivatel_id, $zoradit) {
         return Db::dotazVsetky('SELECT `zdroj_id`,`pouzivatel_id`,`druh_zdroja`, `nazov`,`podnazov`, `vydanie`,'
                         . '`miesto_vydania`, `vydavatelstvo`, `rok_vydania`, `isbn`, `issn`,`doi`,'
-                        . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka` FROM `zdroj`WHERE `pouzivatel_id`=? ORDER BY ? ASC', array($pouzivatel_id, $zoradit));
+                        . '`strany`,`url`,`datum_aktualizacie`,`datum_pridania`, `hodnotenie`, `poznamka`,`citacia`'
+                . ' FROM `zdroj`WHERE `pouzivatel_id`=? ORDER BY ? ASC', array($pouzivatel_id, $zoradit));
     }
 
     /*

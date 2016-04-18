@@ -1,0 +1,29 @@
+<div id="administracia" >
+    <img src="resources/ikony/user.png"> <?php echo $pouzivatel['meno'] ?> 
+    <a  class= "tucny_odkaz" href="uvod/odhlasit"> <img src="resources/ikony/exit.png"> </a>
+
+</div>
+
+
+<div id="navigacia">
+    <a class="tucny_odkaz" href="uvod"> DATALEO </a>  >>   <a class="tucny_odkaz" href="zdroje"> Moja knižnica </a> >> Zoznam použitej literatúry
+</div>
+
+
+
+
+
+<div id="tabulkaZdrojov">
+
+
+ <?php foreach ($zdroje as $zdroj) {
+ 
+                        echo $zdroj['citacia'];
+                        echo '<br><br>';
+                    
+ }
+ ?>
+</div>
+
+
+

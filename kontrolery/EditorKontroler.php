@@ -27,6 +27,8 @@ class EditorKontroler extends Kontroler {
             'druh_zdroja' => '',
             'nazov' => '',
             'podnazov' => '',
+            'prispevok' => '',
+            'zodpovednost' => '',
             'vydanie' => '',
             'miesto_vydania' => '',
             'vydavatelstvo' => '',
@@ -35,12 +37,16 @@ class EditorKontroler extends Kontroler {
             'issn' => '',
             'doi' => '',
             'strany' => '',
+            'od' => '',
+            'do' => '',
             'url' => '',
-            'datum_aktualizacie' => null,
+            'datum_vydania' => date("Y-m-d"),
+            'datum_aktualizacie' => date("Y-m-d"),
             'datum_pridania' => date("Y-m-d"),
+            'nosic'=>'',
             'hodnotenie' => '',
             'poznamka' => '',
-            
+            'citacia' => '',
         );
 
         $klucove_slovo = array(
@@ -97,14 +103,1404 @@ class EditorKontroler extends Kontroler {
              * vlozenie  ZDROJA do tabulky zdroj
              * ---------------------------------------------------------------------
              */
-
-//vytvorenie klucov, ktore sa zhodouju s udajmi ktora ziskame z $_POST,potom sa priradia k sebe
-            $kluce_zdroj = array('pouzivatel_id', 'druh_zdroja', 'nazov', 'podnazov',
+            //vytvorenie klucov, ktore sa zhodouju s udajmi ktora ziskame z $_POST,potom sa priradia k sebe
+            $kluce_zdroj = array('pouzivatel_id', 'druh_zdroja', 'nazov', 'podnazov', 'prispevok','zodpovednost',
                 'vydanie', 'miesto_vydania', 'vydavatelstvo', 'rok_vydania', 'isbn', 'issn', 'doi',
-                'strany', 'url', 'datum_aktualizacie', 'datum_pridania', 'hodnotenie', 'poznamka',);
-//zlucenie klucov s hodnotami s post- a ich priradenie
+                'strany', 'od', 'do', 'url','datum_vydania','nosic', 'datum_aktualizacie', 'datum_pridania', 'hodnotenie', 'poznamka', 'citacia');
+            //zlucenie klucov s hodnotami s post- a ich priradenie
             $zdroj = array_intersect_key($_POST, array_flip($kluce_zdroj));
-//ulozenie clanku do db
+
+            /*
+             * tu je vytvorenie / vygenerovanie citacie podla zadanych udajov
+             */
+            $druh = $_POST['druh_zdroja'];
+            $citacia = '';
+            //ltrim odstrani medzery z konca
+            //chop zo zaciatku
+            // trim aj zo zaciatku aj  z konca
+            //-----------------------kniha----------------------------
+
+            if ($_POST['druh_zdroja'] == 'kniha') {
+
+                // priezvisko prveho autora
+                if (isset($_POST['priezvisko_0'])) {
+                    $priezvisko = $_POST['priezvisko_0'];
+                    $priezvisko = trim($priezvisko);
+                    if ($priezvisko != "") {
+                        $priezvisko = (StrToUpper($priezvisko)) . ', ';
+                        $citacia = $citacia . $priezvisko;
+                        echo $priezvisko;
+                    }
+                }
+                //meno prveho autora
+                if (isset($_POST['meno_0'])) {
+                    $meno = $_POST['meno_0'];
+                    $meno = trim($meno);
+                    if ($meno != "") {
+                        $meno = StrToUpper($meno[0]) . '., ';
+                        $citacia = $citacia . $meno;
+                        echo $meno;
+                    }
+                }
+
+                //priezvisko druheho autora
+                if (isset($_POST['priezvisko_1'])) {
+                    $priezvisko1 = $_POST['priezvisko_1'];
+                    $priezvisko1 = trim($priezvisko1);
+                    if ($priezvisko1 != "") {
+                        $priezvisko1 = (StrToUpper($priezvisko1)) . ', ';
+                        $citacia = $citacia . $priezvisko1;
+                        echo $priezvisko1;
+                    }
+                }
+
+                //meno druheeho autora
+                if (isset($_POST['meno_1'])) {
+                    $meno1 = $_POST['meno_1'];
+                    $meno1 = trim($meno1);
+                    if ($meno1 != "") {
+                        $meno1 = StrToUpper($meno1[0]) . '., ';
+                        $citacia = $citacia . $meno1;
+                        echo $meno1;
+                    }
+                }
+
+                //nazov zdroja
+                if (isset($_POST['nazov'])) {
+                    $nazov = $_POST['nazov'];
+                    $nazov = trim($nazov);
+                    if ($nazov != "") {
+                        if (isset($_POST['podnazov'])) {
+                            $podnazov = $_POST['podnazov'];
+                            $podnazov = trim($podnazov);
+                            if ($podnazov != "") {
+                                $nazov = ucfirst($nazov) . ': ';
+                            } else {
+                                $nazov = ucfirst($nazov) . '. ';
+                            }
+                        } else {
+                            $nazov = ucfirst($nazov) . '. ';
+                        }
+                        $citacia = $citacia . $nazov;
+                        echo $nazov;
+                    }
+                }
+
+                //podnazov zdroja
+                if (isset($_POST['podnazov'])) {
+                    $podnazov = $_POST['podnazov'];
+                    $podnazov = trim($podnazov);
+                    if ($podnazov != "") {
+                        $podnazov = ucfirst(chop(ltrim($podnazov))) . '. ';
+                        $citacia = $citacia . $podnazov;
+                        echo $podnazov;
+                    }
+                }
+
+                //vydanie zdroja
+                if (isset($_POST['vydanie'])) {
+                    $vydanie = $_POST['vydanie'];
+                    $vydanie = trim($vydanie);
+                    if ($vydanie != "") {
+                        $vydanie = $vydanie . '. vydanie. ';
+                        $citacia = $citacia . $vydanie;
+                        echo $vydanie;
+                    }
+                }
+
+                //miesto vydania
+                if (isset($_POST['miesto_vydania'])) {
+                    $miesto = $_POST['miesto_vydania'];
+                    $miesto = trim($miesto);
+                    if ($miesto != "") {
+                        if (isset($_POST['vydavatelstvo'])) {
+                            $vydavatelstvo = $_POST['vydavatelstvo'];
+                            $vydavatelstvo = trim($vydavatelstvo);
+                            if ($vydavatelstvo != "") {
+
+                                $miesto = ucfirst($miesto) . ': ';
+                            } else {
+                                if (isset($_POST['rok_vydania'])) {
+                                    $rok = $_POST['rok_vydania'];
+                                    $rok = trim($rok);
+                                    if ($rok != "") {
+
+                                        $miesto = ucfirst($miesto) . ': ';
+                                    } else {
+
+                                        $miesto = ucfirst($miesto) . '. ';
+                                    }
+                                }
+                            }
+                        } else {
+                            if (isset($_POST['rok_vydania'])) {
+                                $rok = $_POST['rok_vydania'];
+                                $rok = trim($rok);
+                                if ($rok != "") {
+                                    $miesto = ucfirst($miesto) . ': ';
+                                } else {
+                                    $miesto = ucfirst($miesto) . '. ';
+                                }
+                            }
+                        }
+                        $citacia = $citacia . $miesto;
+                        echo $miesto;
+                    }
+                }
+
+
+
+                //vydavatelstvo
+                if (isset($_POST['vydavatelstvo'])) {
+                    $vydavatelstvo = $_POST['vydavatelstvo'];
+                    $vydavatelstvo = trim($vydavatelstvo);
+                    if ($vydavatelstvo != "") {
+                        if (isset($_POST['rok_vydania'])) {
+                            $rok = $_POST['rok_vydania'];
+                            $rok = trim($rok);
+                            if ($rok != "") {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . ', ';
+                            } else {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                            }
+                        } else {
+                            $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                        }
+                        $citacia = $citacia . $vydavatelstvo;
+                        echo $vydavatelstvo;
+                    }
+                }
+
+
+
+                //rok vydania
+                if (isset($_POST['rok_vydania'])) {
+                    $rok = $_POST['rok_vydania'];
+                    $rok = trim($rok);
+                    if ($rok != "") {
+                        $rok = $rok . '. ';
+                        $citacia = $citacia . $rok;
+                        echo $rok;
+                    }
+                }
+
+                //strany
+                if (isset($_POST['strany'])) {
+                    $strany = $_POST['strany'];
+                    $strany = trim($strany);
+                    if ($strany != "") {
+                        $strany = $strany . ' s. ';
+                        $citacia = $citacia . $strany;
+                        echo $strany;
+                    }
+                }
+
+                //strany
+                if (isset($_POST['isbn'])) {
+                    $isbn = $_POST['isbn'];
+                    $isbn = trim($isbn);
+                    if ($isbn != "") {
+                        $isbn = 'ISBN ' . $isbn . '. ';
+                        $citacia = $citacia . $isbn;
+                        echo $isbn;
+                    }
+                }
+            }
+            
+            //-----------------------elektronicka kniha----------------------------
+
+            if ($_POST['druh_zdroja'] == 'elektronicka_kniha') {
+
+                // priezvisko prveho autora
+                if (isset($_POST['priezvisko_0'])) {
+                    $priezvisko = $_POST['priezvisko_0'];
+                    $priezvisko = trim($priezvisko);
+                    if ($priezvisko != "") {
+                        $priezvisko = (StrToUpper($priezvisko)) . ', ';
+                        $citacia = $citacia . $priezvisko;
+                        echo $priezvisko;
+                    }
+                }
+                //meno prveho autora
+                if (isset($_POST['meno_0'])) {
+                    $meno = $_POST['meno_0'];
+                    $meno = trim($meno);
+                    if ($meno != "") {
+                        $meno = StrToUpper($meno[0]) . '., ';
+                        $citacia = $citacia . $meno;
+                        echo $meno;
+                    }
+                }
+
+               
+
+                //nazov zdroja
+                if (isset($_POST['nazov'])) {
+                    $nazov = $_POST['nazov'];
+                    $nazov = trim($nazov);
+                    if ($nazov != "") {
+                        if (isset($_POST['podnazov'])) {
+                            $podnazov = $_POST['podnazov'];
+                            $podnazov = trim($podnazov);
+                            if ($podnazov != "") {
+                                $nazov = ucfirst($nazov) . ': ';
+                            } else {
+                                $nazov = ucfirst($nazov) . '. ';
+                            }
+                        } else {
+                            $nazov = ucfirst($nazov) . '. ';
+                        }
+                        $citacia = $citacia . $nazov;
+                        echo $nazov;
+                    }
+                }
+
+                //podnazov zdroja
+                if (isset($_POST['podnazov'])) {
+                    $podnazov = $_POST['podnazov'];
+                    $podnazov = trim($podnazov);
+                    if ($podnazov != "") {
+                        $podnazov = ucfirst(chop(ltrim($podnazov))) . '. ';
+                        $citacia = $citacia . $podnazov;
+                        echo $podnazov;
+                    }
+                }
+                //nosic
+                if (isset($_POST['nosic'])) {
+                    $nosic = $_POST['nosic'];
+                    $nosic = trim($nosic);
+                    if ($nosic != "") {
+                       
+                        $nosic = '[' .strtolower($nosic) . ']. ';
+                        $citacia = $citacia . $nosic;
+                        echo $nosic;
+                    }
+                }
+
+                //vydanie zdroja
+                if (isset($_POST['vydanie'])) {
+                    $vydanie = $_POST['vydanie'];
+                    $vydanie = trim($vydanie);
+                    if ($vydanie != "") {
+                        $vydanie = $vydanie . '. vydanie. ';
+                        $citacia = $citacia . $vydanie;
+                        echo $vydanie;
+                    }
+                }
+
+                //miesto vydania
+                if (isset($_POST['miesto_vydania'])) {
+                    $miesto = $_POST['miesto_vydania'];
+                    $miesto = trim($miesto);
+                    if ($miesto != "") {
+                        if (isset($_POST['vydavatelstvo'])) {
+                            $vydavatelstvo = $_POST['vydavatelstvo'];
+                            $vydavatelstvo = trim($vydavatelstvo);
+                            if ($vydavatelstvo != "") {
+
+                                $miesto = ucfirst($miesto) . ': ';
+                            } else {
+                                if (isset($_POST['datum_vydania'])) {
+                                    $rok = $_POST['datum_vydania'];
+                                    $rok = trim($rok);
+                                    if ($rok != "") {
+
+                                        $miesto = ucfirst($miesto) . ': ';
+                                    } else {
+
+                                        $miesto = ucfirst($miesto) . '. ';
+                                    }
+                                }
+                            }
+                        } else {
+                            if (isset($_POST['datum_vydania'])) {
+                                $rok = $_POST['datum_vydania'];
+                                $rok = trim($rok);
+                                if ($rok != "") {
+                                    $miesto = ucfirst($miesto) . ': ';
+                                } else {
+                                    $miesto = ucfirst($miesto) . '. ';
+                                }
+                            }
+                        }
+                        $citacia = $citacia . $miesto;
+                        echo $miesto;
+                    }
+                }
+
+
+
+                //vydavatelstvo
+                if (isset($_POST['vydavatelstvo'])) {
+                    $vydavatelstvo = $_POST['vydavatelstvo'];
+                    $vydavatelstvo = trim($vydavatelstvo);
+                    if ($vydavatelstvo != "") {
+                        if (isset($_POST['datum_vydania'])) {
+                            $rok = $_POST['datum_vydania'];
+                            $rok = trim($rok);
+                            if ($rok != "") {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . ', ';
+                            } else {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                            }
+                        } else {
+                            $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                        }
+                        $citacia = $citacia . $vydavatelstvo;
+                        echo $vydavatelstvo;
+                    }
+                }
+
+
+
+                //datum vydania
+                if (isset($_POST['datum_vydania'])) {
+                    $datum_vydania = $_POST['datum_vydania'];
+                    $datum_vydania = trim($datum_vydania);
+                    if ($datum_vydania != "") {
+                        $datum_vydania = $datum_vydania . '. ';
+                        $citacia = $citacia . $datum_vydania;
+                        echo $rok;
+                    }
+                }
+                
+               
+
+                //datum aktualziacia
+                if (isset($_POST['datum_aktualizacie'])) {
+                    $datum_aktualizacie = $_POST['datum_aktualizacie'];
+                    $datum_aktualizacie = trim($datum_aktualizacie);
+                    if ($datum_aktualizacie != "") {
+                        $datum_aktualizacie = $datum_aktualizacie . '. ';
+                        $citacia = $citacia . $datum_aktualizacie;
+                        echo $datum_aktualizacie;
+                    }
+                }
+                //datum citvania
+                if (isset($_POST['datum_citovania'])) {
+                    $datum_citovania = $_POST['datum_citovania'];
+                    $datum_citovania = trim($datum_citovania);
+                    if ($datum_citovania != "") {
+                        $datum_citovania = '[cit. '.$datum_citovania . ']. ';
+                        $citacia = $citacia . $datum_citovania;
+                        echo $datum_citovania;
+                    }
+                }
+
+              
+                
+                //url
+                if (isset($_POST['url'])) {
+                    $url = $_POST['url'];
+                    $url = trim($url);
+                    if ($url != "") {
+                        $url = 'Dostupné na internete: < ' .$url. ' >. ';
+                        $citacia = $citacia.$url;
+                        echo $url;
+                    }
+                }
+            }
+
+
+
+            //-----------------------kniha cast----------------------------
+
+
+            if ($_POST['druh_zdroja'] == 'cast_knihy') {
+
+                // priezvisko prveho autora
+                if (isset($_POST['priezvisko_0'])) {
+                    $priezvisko = $_POST['priezvisko_0'];
+                    $priezvisko = trim($priezvisko);
+                    if ($priezvisko != "") {
+                        $priezvisko = (StrToUpper($priezvisko)) . ', ';
+                        $citacia = $citacia . $priezvisko;
+                        echo $priezvisko;
+                    }
+                }
+                //meno prveho autora
+                if (isset($_POST['meno_0'])) {
+                    $meno = $_POST['meno_0'];
+                    $meno = trim($meno);
+                    if ($meno != "") {
+                        $meno = StrToUpper($meno[0]) . '., ';
+                        $citacia = $citacia . $meno;
+                        echo $meno;
+                    }
+                }
+
+                //priezvisko druheho autora
+                if (isset($_POST['priezvisko_1'])) {
+                    $priezvisko1 = $_POST['priezvisko_1'];
+                    $priezvisko1 = trim($priezvisko1);
+                    if ($priezvisko1 != "") {
+                        $priezvisko1 = (StrToUpper($priezvisko1)) . ', ';
+                        $citacia = $citacia . $priezvisko1;
+                        echo $priezvisko1;
+                    }
+                }
+
+                //meno druheeho autora
+                if (isset($_POST['meno_1'])) {
+                    $meno1 = $_POST['meno_1'];
+                    $meno1 = trim($meno1);
+                    if ($meno1 != "") {
+                        $meno1 = StrToUpper($meno1[0]) . '., ';
+                        $citacia = $citacia . $meno1;
+                        echo $meno1;
+                    }
+                }
+
+                //nazov zdroja
+                if (isset($_POST['nazov'])) {
+                    $nazov = $_POST['nazov'];
+                    $nazov = trim($nazov);
+                    if ($nazov != "") {
+                        if (isset($_POST['podnazov'])) {
+                            $podnazov = $_POST['podnazov'];
+                            $podnazov = trim($podnazov);
+                            if ($podnazov != "") {
+                                $nazov = ucfirst($nazov) . ': ';
+                            } else {
+                                $nazov = ucfirst($nazov) . '. ';
+                            }
+                        } else {
+                            $nazov = ucfirst($nazov) . '. ';
+                        }
+                        $citacia = $citacia . $nazov;
+                        echo $nazov;
+                    }
+                }
+
+                //podnazov zdroja
+                if (isset($_POST['podnazov'])) {
+                    $podnazov = $_POST['podnazov'];
+                    $podnazov = trim($podnazov);
+                    if ($podnazov != "") {
+                        $podnazov = ucfirst(chop(ltrim($podnazov))) . '. ';
+                        $citacia = $citacia . $podnazov;
+                        echo $podnazov;
+                    }
+                }
+
+                //vydanie zdroja
+                if (isset($_POST['vydanie'])) {
+                    $vydanie = $_POST['vydanie'];
+                    $vydanie = trim($vydanie);
+                    if ($vydanie != "") {
+                        $vydanie = $vydanie . '. vydanie. ';
+                        $citacia = $citacia . $vydanie;
+                        echo $vydanie;
+                    }
+                }
+
+                //miesto vydania
+                if (isset($_POST['miesto_vydania'])) {
+                    $miesto = $_POST['miesto_vydania'];
+                    $miesto = trim($miesto);
+                    if ($miesto != "") {
+                        if (isset($_POST['vydavatelstvo'])) {
+                            $vydavatelstvo = $_POST['vydavatelstvo'];
+                            $vydavatelstvo = trim($vydavatelstvo);
+                            if ($vydavatelstvo != "") {
+
+                                $miesto = ucfirst($miesto) . ': ';
+                            } else {
+                                if (isset($_POST['rok_vydania'])) {
+                                    $rok = $_POST['rok_vydania'];
+                                    $rok = trim($rok);
+                                    if ($rok != "") {
+
+                                        $miesto = ucfirst($miesto) . ': ';
+                                    } else {
+
+                                        $miesto = ucfirst($miesto) . '. ';
+                                    }
+                                }
+                            }
+                        } else {
+                            if (isset($_POST['rok_vydania'])) {
+                                $rok = $_POST['rok_vydania'];
+                                $rok = trim($rok);
+                                if ($rok != "") {
+                                    $miesto = ucfirst($miesto) . ': ';
+                                } else {
+                                    $miesto = ucfirst($miesto) . '. ';
+                                }
+                            }
+                        }
+                        $citacia = $citacia . $miesto;
+                        echo $miesto;
+                    }
+                }
+
+
+
+                //vydavatelstvo
+                if (isset($_POST['vydavatelstvo'])) {
+                    $vydavatelstvo = $_POST['vydavatelstvo'];
+                    $vydavatelstvo = trim($vydavatelstvo);
+                    if ($vydavatelstvo != "") {
+                        if (isset($_POST['rok_vydania'])) {
+                            $rok = $_POST['rok_vydania'];
+                            $rok = trim($rok);
+                            if ($rok != "") {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . ', ';
+                            } else {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                            }
+                        } else {
+                            $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                        }
+                        $citacia = $citacia . $vydavatelstvo;
+                        echo $vydavatelstvo;
+                    }
+                }
+
+
+
+                //rok vydania
+                if (isset($_POST['rok_vydania'])) {
+                    $rok = $_POST['rok_vydania'];
+                    $rok = trim($rok);
+                    if ($rok != "") {
+                        $rok = $rok . '. ';
+                        $citacia = $citacia . $rok;
+                        echo $rok;
+                    }
+                }
+
+                //strany
+                if (isset($_POST['isbn'])) {
+                    $isbn = $_POST['isbn'];
+                    $isbn = trim($isbn);
+                    if ($isbn != "") {
+                        $isbn = 'ISBN ' . $isbn . '. ';
+                        $citacia = $citacia . $isbn;
+                        echo $isbn;
+                    }
+                }
+
+                //rozsah
+                if ((isset($_POST['od'])) && (isset($_POST['do']))) {
+                    $od = $_POST['od'];
+                    $do = $_POST['do'];
+                    $od = trim($od);
+                    $do = trim($do);
+                    if (($od != "") && ($do != "")) {
+                        $rozsah = $od . '-' . $do . '. ';
+                        $citacia = $citacia . $rozsah;
+                        echo $rozsah;
+                    }
+                }
+            }
+            
+            //-----------------------elektronicka kniha cast----------------------------
+
+
+            if ($_POST['druh_zdroja'] == 'cast_elektronickej_knihy') {
+
+                // priezvisko prveho autora
+                if (isset($_POST['priezvisko_0'])) {
+                    $priezvisko = $_POST['priezvisko_0'];
+                    $priezvisko = trim($priezvisko);
+                    if ($priezvisko != "") {
+                        $priezvisko = (StrToUpper($priezvisko)) . ', ';
+                        $citacia = $citacia . $priezvisko;
+                        echo $priezvisko;
+                    }
+                }
+                //meno prveho autora
+                if (isset($_POST['meno_0'])) {
+                    $meno = $_POST['meno_0'];
+                    $meno = trim($meno);
+                    if ($meno != "") {
+                        $meno = StrToUpper($meno[0]) . '., ';
+                        $citacia = $citacia . $meno;
+                        echo $meno;
+                    }
+                }
+
+                
+
+                //nazov zdroja
+                if (isset($_POST['nazov'])) {
+                    $nazov = $_POST['nazov'];
+                    $nazov = trim($nazov);
+                    if ($nazov != "") {
+                        if (isset($_POST['podnazov'])) {
+                            $podnazov = $_POST['podnazov'];
+                            $podnazov = trim($podnazov);
+                            if ($podnazov != "") {
+                                $nazov = ucfirst($nazov) . ': ';
+                            } else {
+                                $nazov = ucfirst($nazov) . '. ';
+                            }
+                        } else {
+                            $nazov = ucfirst($nazov) . '. ';
+                        }
+                        $citacia = $citacia . $nazov;
+                        echo $nazov;
+                    }
+                }
+
+                //podnazov zdroja
+                if (isset($_POST['podnazov'])) {
+                    $podnazov = $_POST['podnazov'];
+                    $podnazov = trim($podnazov);
+                    if ($podnazov != "") {
+                        $podnazov = ucfirst(chop(ltrim($podnazov))) . '. ';
+                        $citacia = $citacia . $podnazov;
+                        echo $podnazov;
+                    }
+                }
+                
+                 //nosic
+                if (isset($_POST['nosic'])) {
+                    $nosic = $_POST['nosic'];
+                    $nosic = trim($nosic);
+                    if ($nosic != "") {
+                       
+                        $nosic = '[' .strtolower($nosic) . ']. ';
+                        $citacia = $citacia . $nosic;
+                        echo $nosic;
+                    }
+                }
+
+
+                //vydanie zdroja
+                if (isset($_POST['vydanie'])) {
+                    $vydanie = $_POST['vydanie'];
+                    $vydanie = trim($vydanie);
+                    if ($vydanie != "") {
+                        $vydanie = $vydanie . '. vydanie. ';
+                        $citacia = $citacia . $vydanie;
+                        echo $vydanie;
+                    }
+                }
+
+                //miesto vydania
+                if (isset($_POST['miesto_vydania'])) {
+                    $miesto = $_POST['miesto_vydania'];
+                    $miesto = trim($miesto);
+                    if ($miesto != "") {
+                        if (isset($_POST['vydavatelstvo'])) {
+                            $vydavatelstvo = $_POST['vydavatelstvo'];
+                            $vydavatelstvo = trim($vydavatelstvo);
+                            if ($vydavatelstvo != "") {
+
+                                $miesto = ucfirst($miesto) . ': ';
+                            } else {
+                                if (isset($_POST['rok_vydania'])) {
+                                    $rok = $_POST['rok_vydania'];
+                                    $rok = trim($rok);
+                                    if ($rok != "") {
+
+                                        $miesto = ucfirst($miesto) . ': ';
+                                    } else {
+
+                                        $miesto = ucfirst($miesto) . '. ';
+                                    }
+                                }
+                            }
+                        } else {
+                            if (isset($_POST['rok_vydania'])) {
+                                $rok = $_POST['rok_vydania'];
+                                $rok = trim($rok);
+                                if ($rok != "") {
+                                    $miesto = ucfirst($miesto) . ': ';
+                                } else {
+                                    $miesto = ucfirst($miesto) . '. ';
+                                }
+                            }
+                        }
+                        $citacia = $citacia . $miesto;
+                        echo $miesto;
+                    }
+                }
+
+
+
+               //vydavatelstvo
+                if (isset($_POST['vydavatelstvo'])) {
+                    $vydavatelstvo = $_POST['vydavatelstvo'];
+                    $vydavatelstvo = trim($vydavatelstvo);
+                    if ($vydavatelstvo != "") {
+                        if (isset($_POST['datum_vydania'])) {
+                            $rok = $_POST['datum_vydania'];
+                            $rok = trim($rok);
+                            if ($rok != "") {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . ', ';
+                            } else {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                            }
+                        } else {
+                            $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                        }
+                        $citacia = $citacia . $vydavatelstvo;
+                        echo $vydavatelstvo;
+                    }
+                }
+
+
+
+                //datum vydania
+                if (isset($_POST['datum_vydania'])) {
+                    $datum_vydania = $_POST['datum_vydania'];
+                    $datum_vydania = trim($datum_vydania);
+                    if ($datum_vydania != "") {
+                        $datum_vydania = $datum_vydania . '. ';
+                        $citacia = $citacia . $datum_vydania;
+                        echo $rok;
+                    }
+                }
+                
+               
+
+                //datum aktualziacia
+                if (isset($_POST['datum_aktualizacie'])) {
+                    $datum_aktualizacie = $_POST['datum_aktualizacie'];
+                    $datum_aktualizacie = trim($datum_aktualizacie);
+                    if ($datum_aktualizacie != "") {
+                        $datum_aktualizacie = $datum_aktualizacie . '. ';
+                        $citacia = $citacia . $datum_aktualizacie;
+                        echo $datum_aktualizacie;
+                    }
+                }
+                //datum citvania
+                if (isset($_POST['datum_citovania'])) {
+                    $datum_citovania = $_POST['datum_citovania'];
+                    $datum_citovania = trim($datum_citovania);
+                    if ($datum_citovania != "") {
+                        $datum_citovania = '[cit. '.$datum_citovania . ']. ';
+                        $citacia = $citacia . $datum_citovania;
+                        echo $datum_citovania;
+                    }
+                }
+
+               //rozsah
+                if ((isset($_POST['od'])) && (isset($_POST['do']))) {
+                    $od = $_POST['od'];
+                    $do = $_POST['do'];
+                    $od = trim($od);
+                    $do = trim($do);
+                    if (($od != "") && ($do != "")) {
+                        $rozsah = $od . '-' . $do . '. ';
+                        $citacia = $citacia . $rozsah;
+                        echo $rozsah;
+                    }
+                }
+                
+                //url
+                if (isset($_POST['url'])) {
+                    $url = $_POST['url'];
+                    $url = trim($url);
+                    if ($url != "") {
+                        $url = 'Dostupné na internete: < ' .$url. ' >. ';
+                        $citacia = $citacia.$url;
+                        echo $url;
+                    }
+                }
+            }
+
+               
+
+               
+            
+            
+            
+            
+             //-----------------------prispevok v zborniku / zbornik ---------------------------
+
+
+            if (($_POST['druh_zdroja'] == 'zbornik') || ($_POST['druh_zdroja'] == 'prispevok_v_zborniku') || ($_POST['druh_zdroja'] == 'clanok') ){
+
+                // priezvisko prveho autora
+                if (isset($_POST['priezvisko_0'])) {
+                    $priezvisko = $_POST['priezvisko_0'];
+                    $priezvisko = trim($priezvisko);
+                    if ($priezvisko != "") {
+                        $priezvisko = (StrToUpper($priezvisko)) . ', ';
+                        $citacia = $citacia . $priezvisko;
+                        echo $priezvisko;
+                    }
+                }
+                //meno prveho autora
+                if (isset($_POST['meno_0'])) {
+                    $meno = $_POST['meno_0'];
+                    $meno = trim($meno);
+                    if ($meno != "") {
+                        $meno = StrToUpper($meno[0]) . '., ';
+                        $citacia = $citacia . $meno;
+                        echo $meno;
+                    }
+                }
+
+                //priezvisko druheho autora
+                if (isset($_POST['priezvisko_1'])) {
+                    $priezvisko1 = $_POST['priezvisko_1'];
+                    $priezvisko1 = trim($priezvisko1);
+                    if ($priezvisko1 != "") {
+                        $priezvisko1 = (StrToUpper($priezvisko1)) . ', ';
+                        $citacia = $citacia . $priezvisko1;
+                        echo $priezvisko1;
+                    }
+                }
+
+                //meno druheeho autora
+                if (isset($_POST['meno_1'])) {
+                    $meno1 = $_POST['meno_1'];
+                    $meno1 = trim($meno1);
+                    if ($meno1 != "") {
+                        $meno1 = StrToUpper($meno1[0]) . '., ';
+                        $citacia = $citacia . $meno1;
+                        echo $meno1;
+                    }
+                }
+                
+                
+                 //nazov prispevku
+                if (isset($_POST['prispevok'])) {
+                    $prispevok = $_POST['prispevok'];
+                    $prispevok = trim($prispevok);
+                    if ($prispevok != "") {
+                        $prispevok = ucfirst(chop(ltrim($prispevok))) . '. ';
+                        $citacia = $citacia . $prispevok;
+                        echo $prispevok;
+                    }
+                }
+                
+                
+                 //nazov prispevku
+                if (isset($_POST['zodpovednost'])) {
+                    $zodpovednost = $_POST['zodpovednost'];
+                    $zodpovednost = trim($zodpovednost);
+                    if ($prispevok != "") {
+                        $zodpovednost = 'In '.ucfirst(chop(ltrim($zodpovednost))) . '. ';
+                        $citacia = $citacia . $zodpovednost;
+                        echo $prispevok;
+                    }
+                }
+
+                //nazov zdroja
+                if (isset($_POST['nazov'])) {
+                    $nazov = $_POST['nazov'];
+                    $nazov = trim($nazov);
+                    if ($nazov != "") {
+                        if (isset($_POST['podnazov'])) {
+                            $podnazov = $_POST['podnazov'];
+                            $podnazov = trim($podnazov);
+                            if ($podnazov != "") {
+                                $nazov = ucfirst($nazov) . ': ';
+                            } else {
+                                $nazov = ucfirst($nazov) . '. ';
+                            }
+                        } else {
+                            $nazov = ucfirst($nazov) . '. ';
+                        }
+                        $citacia = $citacia . $nazov;
+                        echo $nazov;
+                    }
+                }
+
+                //podnazov zdroja
+                if (isset($_POST['podnazov'])) {
+                    $podnazov = $_POST['podnazov'];
+                    $podnazov = trim($podnazov);
+                    if ($podnazov != "") {
+                        $podnazov = ucfirst(chop(ltrim($podnazov))) . '. ';
+                        $citacia = $citacia . $podnazov;
+                        echo $podnazov;
+                    }
+                }
+
+                //vydanie zdroja
+                if (isset($_POST['vydanie'])) {
+                    $vydanie = $_POST['vydanie'];
+                    $vydanie = trim($vydanie);
+                    if ($vydanie != "") {
+                        $vydanie = $vydanie . '. vydanie. ';
+                        $citacia = $citacia . $vydanie;
+                        echo $vydanie;
+                    }
+                }
+
+                //miesto vydania
+                if (isset($_POST['miesto_vydania'])) {
+                    $miesto = $_POST['miesto_vydania'];
+                    $miesto = trim($miesto);
+                    if ($miesto != "") {
+                        if (isset($_POST['vydavatelstvo'])) {
+                            $vydavatelstvo = $_POST['vydavatelstvo'];
+                            $vydavatelstvo = trim($vydavatelstvo);
+                            if ($vydavatelstvo != "") {
+
+                                $miesto = ucfirst($miesto) . ': ';
+                            } else {
+                                if (isset($_POST['rok_vydania'])) {
+                                    $rok = $_POST['rok_vydania'];
+                                    $rok = trim($rok);
+                                    if ($rok != "") {
+
+                                        $miesto = ucfirst($miesto) . ': ';
+                                    } else {
+
+                                        $miesto = ucfirst($miesto) . '. ';
+                                    }
+                                }
+                            }
+                        } else {
+                            if (isset($_POST['rok_vydania'])) {
+                                $rok = $_POST['rok_vydania'];
+                                $rok = trim($rok);
+                                if ($rok != "") {
+                                    $miesto = ucfirst($miesto) . ': ';
+                                } else {
+                                    $miesto = ucfirst($miesto) . '. ';
+                                }
+                            }
+                        }
+                        $citacia = $citacia . $miesto;
+                        echo $miesto;
+                    }
+                }
+
+
+
+                //vydavatelstvo
+                if (isset($_POST['vydavatelstvo'])) {
+                    $vydavatelstvo = $_POST['vydavatelstvo'];
+                    $vydavatelstvo = trim($vydavatelstvo);
+                    if ($vydavatelstvo != "") {
+                        if (isset($_POST['rok_vydania'])) {
+                            $rok = $_POST['rok_vydania'];
+                            $rok = trim($rok);
+                            if ($rok != "") {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . ', ';
+                            } else {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                            }
+                        } else {
+                            $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                        }
+                        $citacia = $citacia . $vydavatelstvo;
+                        echo $vydavatelstvo;
+                    }
+                }
+
+
+
+                //rok vydania
+                if (isset($_POST['rok_vydania'])) {
+                    $rok = $_POST['rok_vydania'];
+                    $rok = trim($rok);
+                    if ($rok != "") {
+                        $rok = $rok . '. ';
+                        $citacia = $citacia . $rok;
+                        echo $rok;
+                    }
+                }
+
+                //strany
+                if (isset($_POST['isbn'])) {
+                    $isbn = $_POST['isbn'];
+                    $isbn = trim($isbn);
+                    if ($isbn != "") {
+                        $isbn = 'ISBN ' . $isbn . '. ';
+                        $citacia = $citacia . $isbn;
+                        echo $isbn;
+                    }
+                }
+
+                //rozsah
+                if ((isset($_POST['od'])) && (isset($_POST['do']))) {
+                    $od = $_POST['od'];
+                    $do = $_POST['do'];
+                    $od = trim($od);
+                    $do = trim($do);
+                    if (($od != "") && ($do != "")) {
+                        $rozsah = $od . '-' . $do . '. ';
+                        $citacia = $citacia . $rozsah;
+                        echo $rozsah;
+                    }
+                }
+            }
+            
+            
+             //-----------------------elektronicky prispevvok v zborniku, elektronicky zbornik, elektronicky clanok ---------------------------
+
+
+            if (($_POST['druh_zdroja'] == 'zbornik') || ($_POST['druh_zdroja'] == 'prispevok_v_zborniku') || ($_POST['druh_zdroja'] == 'clanok')){
+
+                // priezvisko prveho autora
+                if (isset($_POST['priezvisko_0'])) {
+                    $priezvisko = $_POST['priezvisko_0'];
+                    $priezvisko = trim($priezvisko);
+                    if ($priezvisko != "") {
+                        $priezvisko = (StrToUpper($priezvisko)) . ', ';
+                        $citacia = $citacia . $priezvisko;
+                        echo $priezvisko;
+                    }
+                }
+                //meno prveho autora
+                if (isset($_POST['meno_0'])) {
+                    $meno = $_POST['meno_0'];
+                    $meno = trim($meno);
+                    if ($meno != "") {
+                        $meno = StrToUpper($meno[0]) . '., ';
+                        $citacia = $citacia . $meno;
+                        echo $meno;
+                    }
+                }
+
+                //priezvisko druheho autora
+                if (isset($_POST['priezvisko_1'])) {
+                    $priezvisko1 = $_POST['priezvisko_1'];
+                    $priezvisko1 = trim($priezvisko1);
+                    if ($priezvisko1 != "") {
+                        $priezvisko1 = (StrToUpper($priezvisko1)) . ', ';
+                        $citacia = $citacia . $priezvisko1;
+                        echo $priezvisko1;
+                    }
+                }
+
+                //meno druheeho autora
+                if (isset($_POST['meno_1'])) {
+                    $meno1 = $_POST['meno_1'];
+                    $meno1 = trim($meno1);
+                    if ($meno1 != "") {
+                        $meno1 = StrToUpper($meno1[0]) . '., ';
+                        $citacia = $citacia . $meno1;
+                        echo $meno1;
+                    }
+                }
+                
+                
+                 //nazov prispevku
+                if (isset($_POST['prispevok'])) {
+                    $prispevok = $_POST['prispevok'];
+                    $prispevok = trim($prispevok);
+                    if ($prispevok != "") {
+                        $prispevok = ucfirst(chop(ltrim($prispevok))) . '. ';
+                        $citacia = $citacia . $prispevok;
+                        echo $prispevok;
+                    }
+                }
+                
+                
+                 //nazov prispevku
+                if (isset($_POST['zodpovednost'])) {
+                    $zodpovednost = $_POST['zodpovednost'];
+                    $zodpovednost = trim($zodpovednost);
+                    if ($prispevok != "") {
+                        $zodpovednost = 'In '.ucfirst(chop(ltrim($zodpovednost))) . '. ';
+                        $citacia = $citacia . $zodpovednost;
+                        echo $prispevok;
+                    }
+                }
+
+                //nazov zdroja
+                if (isset($_POST['nazov'])) {
+                    $nazov = $_POST['nazov'];
+                    $nazov = trim($nazov);
+                    if ($nazov != "") {
+                        if (isset($_POST['podnazov'])) {
+                            $podnazov = $_POST['podnazov'];
+                            $podnazov = trim($podnazov);
+                            if ($podnazov != "") {
+                                $nazov = ucfirst($nazov) . ': ';
+                            } else {
+                                $nazov = ucfirst($nazov) . '. ';
+                            }
+                        } else {
+                            $nazov = ucfirst($nazov) . '. ';
+                        }
+                        $citacia = $citacia . $nazov;
+                        echo $nazov;
+                    }
+                }
+
+                //podnazov zdroja
+                if (isset($_POST['podnazov'])) {
+                    $podnazov = $_POST['podnazov'];
+                    $podnazov = trim($podnazov);
+                    if ($podnazov != "") {
+                        $podnazov = ucfirst(chop(ltrim($podnazov))) . '. ';
+                        $citacia = $citacia . $podnazov;
+                        echo $podnazov;
+                    }
+                }
+
+                //vydanie zdroja
+                if (isset($_POST['vydanie'])) {
+                    $vydanie = $_POST['vydanie'];
+                    $vydanie = trim($vydanie);
+                    if ($vydanie != "") {
+                        $vydanie = $vydanie . '. vydanie. ';
+                        $citacia = $citacia . $vydanie;
+                        echo $vydanie;
+                    }
+                }
+
+                //miesto vydania
+                if (isset($_POST['miesto_vydania'])) {
+                    $miesto = $_POST['miesto_vydania'];
+                    $miesto = trim($miesto);
+                    if ($miesto != "") {
+                        if (isset($_POST['vydavatelstvo'])) {
+                            $vydavatelstvo = $_POST['vydavatelstvo'];
+                            $vydavatelstvo = trim($vydavatelstvo);
+                            if ($vydavatelstvo != "") {
+
+                                $miesto = ucfirst($miesto) . ': ';
+                            } else {
+                                if (isset($_POST['rok_vydania'])) {
+                                    $rok = $_POST['rok_vydania'];
+                                    $rok = trim($rok);
+                                    if ($rok != "") {
+
+                                        $miesto = ucfirst($miesto) . ': ';
+                                    } else {
+
+                                        $miesto = ucfirst($miesto) . '. ';
+                                    }
+                                }
+                            }
+                        } else {
+                            if (isset($_POST['rok_vydania'])) {
+                                $rok = $_POST['rok_vydania'];
+                                $rok = trim($rok);
+                                if ($rok != "") {
+                                    $miesto = ucfirst($miesto) . ': ';
+                                } else {
+                                    $miesto = ucfirst($miesto) . '. ';
+                                }
+                            }
+                        }
+                        $citacia = $citacia . $miesto;
+                        echo $miesto;
+                    }
+                }
+
+
+
+                //vydavatelstvo
+                if (isset($_POST['vydavatelstvo'])) {
+                    $vydavatelstvo = $_POST['vydavatelstvo'];
+                    $vydavatelstvo = trim($vydavatelstvo);
+                    if ($vydavatelstvo != "") {
+                        if (isset($_POST['rok_vydania'])) {
+                            $rok = $_POST['rok_vydania'];
+                            $rok = trim($rok);
+                            if ($rok != "") {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . ', ';
+                            } else {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                            }
+                        } else {
+                            $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                        }
+                        $citacia = $citacia . $vydavatelstvo;
+                        echo $vydavatelstvo;
+                    }
+                }
+
+
+
+                //rok vydania
+                if (isset($_POST['rok_vydania'])) {
+                    $rok = $_POST['rok_vydania'];
+                    $rok = trim($rok);
+                    if ($rok != "") {
+                        $rok = $rok . '. ';
+                        $citacia = $citacia . $rok;
+                        echo $rok;
+                    }
+                }
+
+                //strany
+                if (isset($_POST['issn'])) {
+                    $issn = $_POST['issn'];
+                    $issn = trim($issn);
+                    if ($issn != "") {
+                        $issn = 'ISSN ' . $issn . '. ';
+                        $citacia = $citacia . $issn;
+                        echo $issn;
+                    }
+                }
+
+                //rozsah
+                if ((isset($_POST['od'])) && (isset($_POST['do']))) {
+                    $od = $_POST['od'];
+                    $do = $_POST['do'];
+                    $od = trim($od);
+                    $do = trim($do);
+                    if (($od != "") && ($do != "")) {
+                        $rozsah = $od . '-' . $do . '. ';
+                        $citacia = $citacia . $rozsah;
+                        echo $rozsah;
+                    }
+                }
+            }
+            
+            
+              //-----------------------akademicka praca ---------------------------
+
+
+            if (($_POST['druh_zdroja'] == 'akademicka_praca') ){
+
+                // priezvisko prveho autora
+                if (isset($_POST['priezvisko_0'])) {
+                    $priezvisko = $_POST['priezvisko_0'];
+                    $priezvisko = trim($priezvisko);
+                    if ($priezvisko != "") {
+                        $priezvisko = (StrToUpper($priezvisko)) . ', ';
+                        $citacia = $citacia . $priezvisko;
+                        echo $priezvisko;
+                    }
+                }
+                //meno prveho autora
+                if (isset($_POST['meno_0'])) {
+                    $meno = $_POST['meno_0'];
+                    $meno = trim($meno);
+                    if ($meno != "") {
+                        $meno = StrToUpper($meno[0]) . '., ';
+                        $citacia = $citacia . $meno;
+                        echo $meno;
+                    }
+                }
+
+                if (isset($_POST['nazov'])) {
+                    $nazov = $_POST['nazov'];
+                    $nazov = trim($nazov);
+                    if ($nazov != "") {
+                        if (isset($_POST['podnazov'])) {
+                            $podnazov = $_POST['podnazov'];
+                            $podnazov = trim($podnazov);
+                            if ($podnazov != "") {
+                                $nazov = ucfirst($nazov) . ': ';
+                            } else {
+                                $nazov = ucfirst($nazov) . '. ';
+                            }
+                        } else {
+                            $nazov = ucfirst($nazov) . '. ';
+                        }
+                        $citacia = $citacia . $nazov;
+                        echo $nazov;
+                    }
+                }
+
+                //podnazov zdroja
+                if (isset($_POST['podnazov'])) {
+                    $podnazov = $_POST['podnazov'];
+                    $podnazov = trim($podnazov);
+                    if ($podnazov != "") {
+                        $podnazov = ucfirst(chop(ltrim($podnazov))) . '. ';
+                        $citacia = $citacia . $podnazov;
+                        echo $podnazov;
+                    }
+                }
+
+            
+
+                //miesto vydania
+                if (isset($_POST['miesto_vydania'])) {
+                    $miesto = $_POST['miesto_vydania'];
+                    $miesto = trim($miesto);
+                    if ($miesto != "") {
+                        if (isset($_POST['vydavatelstvo'])) {
+                            $vydavatelstvo = $_POST['vydavatelstvo'];
+                            $vydavatelstvo = trim($vydavatelstvo);
+                            if ($vydavatelstvo != "") {
+
+                                $miesto = ucfirst($miesto) . ': ';
+                            } else {
+                                if (isset($_POST['rok_vydania'])) {
+                                    $rok = $_POST['rok_vydania'];
+                                    $rok = trim($rok);
+                                    if ($rok != "") {
+
+                                        $miesto = ucfirst($miesto) . ': ';
+                                    } else {
+
+                                        $miesto = ucfirst($miesto) . '. ';
+                                    }
+                                }
+                            }
+                        } else {
+                            if (isset($_POST['rok_vydania'])) {
+                                $rok = $_POST['rok_vydania'];
+                                $rok = trim($rok);
+                                if ($rok != "") {
+                                    $miesto = ucfirst($miesto) . ': ';
+                                } else {
+                                    $miesto = ucfirst($miesto) . '. ';
+                                }
+                            }
+                        }
+                        $citacia = $citacia . $miesto;
+                        echo $miesto;
+                    }
+                }
+
+
+
+                //vydavatelstvo
+                if (isset($_POST['vydavatelstvo'])) {
+                    $vydavatelstvo = $_POST['vydavatelstvo'];
+                    $vydavatelstvo = trim($vydavatelstvo);
+                    if ($vydavatelstvo != "") {
+                        if (isset($_POST['rok_vydania'])) {
+                            $rok = $_POST['rok_vydania'];
+                            $rok = trim($rok);
+                            if ($rok != "") {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . ', ';
+                            } else {
+                                $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                            }
+                        } else {
+                            $vydavatelstvo = ucfirst($vydavatelstvo) . '. ';
+                        }
+                        $citacia = $citacia . $vydavatelstvo;
+                        echo $vydavatelstvo;
+                    }
+                }
+
+
+
+                //rok vydania
+                if (isset($_POST['rok_vydania'])) {
+                    $rok = $_POST['rok_vydania'];
+                    $rok = trim($rok);
+                    if ($rok != "") {
+                        $rok = $rok . '. ';
+                        $citacia = $citacia . $rok;
+                        echo $rok;
+                    }
+                }
+
+                //strany
+                if (isset($_POST['issn'])) {
+                    $issn = $_POST['issn'];
+                    $issn = trim($issn);
+                    if ($issn != "") {
+                        $issn = 'ISSN ' . $issn . '. ';
+                        $citacia = $citacia . $issn;
+                        echo $issn;
+                    }
+                }
+
+            }
+            
+            
+            echo "<br>finalna citacia:" . $citacia;
+            $zdroj['citacia'] = $citacia;
+
+
+
+            /*
+             * ulozenie clanku do DB
+             */
             $vypisZdrojov->ulozZdroj($_POST['zdroj_id'], $zdroj);
 //ziskania posledneho ID kvoli vlozeniu do prepajacej tabulky
             $idPoslednehoVlozenehoZdroja = $vypisZdrojov->posledneId();
